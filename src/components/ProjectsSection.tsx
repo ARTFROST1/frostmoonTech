@@ -205,11 +205,11 @@ const ProjectsSection = () => {
                 <div className="space-y-4">
                   <h4 className="text-xl font-semibold">Технологический стек:</h4>
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="outline">React Native</Badge>
-                    <Badge variant="outline">Yandex Maps</Badge>
-                    <Badge variant="outline">SQLite</Badge>
-                    <Badge variant="outline">TypeScript</Badge>
-                    <Badge variant="outline">Offline-First</Badge>
+                    <Badge variant="outline">Kotlin</Badge>
+                    <Badge variant="outline">Jetpack Compose</Badge>
+                    <Badge variant="outline">Yandex Maps SDK (Android)</Badge>
+                    <Badge variant="outline">Room (SQLite)</Badge>
+                    <Badge variant="outline">Coroutines / Flow</Badge>
                   </div>
                 </div>
 
