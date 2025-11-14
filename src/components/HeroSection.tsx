@@ -72,7 +72,7 @@ const HeroSection = () => {
                 <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Sparkles className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">2</h3>
+                <h3 className="text-2xl font-bold mb-2">2 + </h3>
                 <p className="text-muted-foreground">Готовых проекта</p>
               </CardContent>
             </Card>

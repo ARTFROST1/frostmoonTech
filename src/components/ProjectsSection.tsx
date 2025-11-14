@@ -27,7 +27,7 @@ const ProjectsSection = () => {
             </TabsTrigger>
             <TabsTrigger value="adygyes" className="text-lg py-3">
               <Map className="w-5 h-5 mr-2" />
-              Adygyes
+              adygGIS
             </TabsTrigger>
           </TabsList>
 
@@ -97,11 +97,11 @@ const ProjectsSection = () => {
               <div className="relative">
                 <div className="flex justify-center gap-6">
                   <div className="relative w-[280px] h-[560px]">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-[24px] overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center rounded-[72px] overflow-hidden">
                       <img 
                         src="./images/obrazz_app_screens_1.jpeg"
                         alt="Obrazz экран 1"
-                        className="w-full h-full object-contain rounded-[24px]"
+                        className="w-full h-full object-contain rounded-[72px]"
                       />
                     </div>
                     <img 
@@ -111,11 +111,11 @@ const ProjectsSection = () => {
                     />
                   </div>
                   <div className="relative w-[280px] h-[560px]">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-[24px] overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center rounded-[72px] overflow-hidden">
                       <img 
                         src="./images/obrazz_app_screens_2.jpeg"
                         alt="Obrazz экран 2"
-                        className="w-full h-full object-contain rounded-[24px]"
+                        className="w-full h-full object-contain rounded-[72px]"
                       />
                     </div>
                     <img 
@@ -173,7 +173,7 @@ const ProjectsSection = () => {
                     <Badge className="bg-accent/10 text-accent">Tourism</Badge>
                     <Badge className="bg-primary/10 text-primary">Maps</Badge>
                   </div>
-                  <h3 className="text-3xl font-bold">Adygyes — Туристический гид</h3>
+                  <h3 className="text-3xl font-bold">adygGIS — Туристический гид</h3>
                   <p className="text-lg text-muted-foreground">
                     Интерактивная карта достопримечательностей Республики Адыгея с 
                     оффлайн-режимом и умной системой кэширования.
@@ -230,11 +230,11 @@ const ProjectsSection = () => {
               <div className="relative">
                 <div className="flex justify-center gap-6">
                   <div className="relative w-[280px] h-[560px]">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-[24px] overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center rounded-[72px] overflow-hidden">
                       <img 
                         src="./images/adygyes_map_screens_1.png"
-                        alt="Adygyes экран 1"
-                        className="w-full h-full object-contain rounded-[24px]"
+                        alt="adygGIS экран 1"
+                        className="w-full h-full object-contain rounded-[72px]"
                       />
                     </div>
                     <img 
@@ -244,11 +244,11 @@ const ProjectsSection = () => {
                     />
                   </div>
                   <div className="relative w-[280px] h-[560px]">
-                    <div className="absolute inset-0 flex items-center justify-center rounded-[24px] overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center rounded-[72px] overflow-hidden">
                       <img 
                         src="./images/adygyes_map_screens_2.jpeg"
-                        alt="Adygyes экран 2"
-                        className="w-full h-full object-contain rounded-[24px]"
+                        alt="adygGIS экран 2"
+                        className="w-full h-full object-contain rounded-[72px]"
                       />
                     </div>
                     <img 

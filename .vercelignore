@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# VCS
+.git/
+.gitignore
+.gitattributes
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+
+# Build cache & outputs
+.dist/
+dist-ssr/
+.cache/
+.tmp/
+.temp/
+.eslintcache
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project folders not needed for deploy
+supabase/
+examples/
+uploaded_files/

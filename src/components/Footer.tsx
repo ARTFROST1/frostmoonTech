@@ -72,7 +72,7 @@ const Footer = () => {
                 Obrazz — Умный гардероб
               </a>
               <a href="#projects" className="block text-sm text-muted-foreground hover:text-primary transition-colors" onClick={(e) => handleAnchorClick(e, '#projects')}>
-                Adygyes — Туристический гид
+                adygGIS — Туристический гид
               </a>
             </div>
           </div>

@@ -91,7 +91,7 @@ const UniversitySection = () => {
             alt="Студенты за работой" 
             className="w-full h-96 object-cover rounded-2xl shadow-lg"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent rounded-2xl flex items-end">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl flex items-end">
             <div className="p-8">
               <h3 className="text-2xl font-bold text-white mb-2">
                 Место, где рождаются идеи
