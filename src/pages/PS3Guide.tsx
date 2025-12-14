@@ -17,11 +17,12 @@ const PS3Guide = () => {
           >
             📄 Открыть PDF в новой вкладке
           </a>
-          {/* PDF Iframe - responsive height */}
+          {/* PDF Iframe - responsive height with lazy loading */}
           <iframe
             src="/PS3_Система_Активация_Гайд.pdf#view=FitH"
             className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[75vh] border-0"
             title="PS3 Activation Guide PDF"
+            loading="lazy"
           />
         </div>
 
@@ -31,7 +32,8 @@ const PS3Guide = () => {
           <video
             controls
             className="w-full rounded-lg"
-            preload="metadata"
+            preload="none"
+            playsInline
           >
             <source src="/Как_активировать_HEN_на_PS3.mp4" type="video/mp4" />
             Ваш браузер не поддерживает видео тег.

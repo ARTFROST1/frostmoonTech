@@ -17,11 +17,12 @@ const PS4Guide = () => {
           >
             📄 Открыть PDF в новой вкладке
           </a>
-          {/* PDF Iframe - responsive height */}
+          {/* PDF Iframe - responsive height with lazy loading */}
           <iframe
             src="/Hen_Активация_Игровое_Руководство.pdf#view=FitH"
             className="w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[75vh] border-0"
             title="PS4 HEN Activation Game Guide PDF"
+            loading="lazy"
           />
         </div>
 
@@ -31,7 +32,8 @@ const PS4Guide = () => {
           <video
             controls
             className="w-full rounded-lg"
-            preload="metadata"
+            preload="none"
+            playsInline
           >
             <source src="/Активация_Hen_на_PS4.mp4" type="video/mp4" />
             Ваш браузер не поддерживает видео тег.
