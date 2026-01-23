@@ -1,7 +1,6 @@
 import type React from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { ArrowRight, Sparkles, Users, Code2 } from 'lucide-react';
+import { ArrowRight, Code2 } from 'lucide-react';
 
 const HeroSection = () => {
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
@@ -13,89 +12,109 @@ const HeroSection = () => {
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center hero-gradient pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center space-y-8">
-          {/* Main heading */}
-          <div className="space-y-4 animate-slide-up">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
-              Создаем будущее
+    <section id="home" className="min-h-screen flex items-center justify-center pt-16 relative overflow-hidden">
+      {/* Subtle gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-secondary/[0.02]" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+        <div className="text-center space-y-12">
+          {/* Main heading - более минималистичный */}
+          <div className="space-y-6 animate-slide-up">
+            <p className="text-sm font-medium tracking-[0.2em] uppercase text-muted-foreground">
+              Студенческая IT-команда АГУ
+            </p>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tight">
+              Создаем
               <br />
-              <span className="text-gradient">вместе с вами</span>
+              <span className="text-gradient">будущее</span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-              Мы — команда студентов-разработчиков, которая превращает идеи в реальные продукты. 
-              Присоединяйтесь к нашему сообществу единомышленников!
+            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto font-light leading-relaxed">
+              Превращаем идеи в реальные продукты.
+              Присоединяйтесь к команде единомышленников.
             </p>
           </div>
 
-          {/* Big QR Code */}
-          <div className="mt-10 flex justify-center animate-slide-up" style={{ animationDelay: '0.15s' }}>
+          {/* Two QR Codes side by side */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 md:gap-16 animate-slide-up" style={{ animationDelay: '0.15s' }}>
+            {/* QR Code - MaykopTech Channel */}
             <a
               href="https://t.me/MaykopTech"
               target="_blank"
               rel="noopener noreferrer"
-              className="group"
+              className="group flex flex-col items-center gap-4"
             >
-              <img
-                src="/images/qr-maykoptech.png"
-                alt="QR-код Telegram @MaykopTech"
-                className="w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] group-hover:scale-[1.02] transition-transform"
-                loading="eager"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-              />
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <img
+                  src="/images/qr-maykoptech.png"
+                  alt="QR-код Telegram @MaykopTech"
+                  className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] rounded-2xl group-hover:scale-[1.02] transition-all duration-300"
+                  loading="eager"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+              </div>
+            </a>
+
+            {/* Divider */}
+            <div className="hidden sm:block w-px h-48 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="block sm:hidden h-px w-32 bg-gradient-to-r from-transparent via-border to-transparent" />
+
+            {/* QR Code - ArtFrost Personal */}
+            <a
+              href="https://t.me/ArtFrost"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-4"
+            >
+              <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-br from-secondary/10 to-accent/10 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <img
+                  src="/images/qr-artfrost.jpeg"
+                  alt="QR-код Telegram @ArtFrost"
+                  className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px] rounded-2xl group-hover:scale-[1.02] transition-all duration-300"
+                  loading="eager"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+              </div>
             </a>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
-            <Button size="lg" className="tech-button text-lg px-8 py-6" asChild>
+          {/* CTA Buttons - minimal style */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up" style={{ animationDelay: '0.3s' }}>
+            <Button size="lg" className="tech-button text-base px-8 h-14 rounded-full" asChild>
               <a href="https://t.me/MaykopTech" target="_blank" rel="noopener noreferrer">
-                <Users className="w-5 h-5 mr-2" />
-                Присоединиться к команде
-                <ArrowRight className="w-5 h-5 ml-2" />
+                Присоединиться
+                <ArrowRight className="w-4 h-4 ml-2" />
               </a>
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+            <Button size="lg" variant="ghost" className="text-base px-8 h-14 rounded-full hover:bg-muted/50" asChild>
               <a href="#projects" onClick={(e) => handleAnchorClick(e, '#projects')}>
-                <Code2 className="w-5 h-5 mr-2" />
-                Посмотреть проекты
+                <Code2 className="w-4 h-4 mr-2" />
+                Наши проекты
               </a>
             </Button>
           </div>
 
-          {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 animate-slide-up">
-            <Card className="interactive-card card-gradient border-0">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Sparkles className="w-6 h-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">2 + </h3>
-                <p className="text-muted-foreground">Готовых проекта</p>
-              </CardContent>
-            </Card>
-
-            <Card className="interactive-card card-gradient border-0">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-6 h-6 text-secondary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">∞</h3>
-                <p className="text-muted-foreground">Возможностей для роста</p>
-              </CardContent>
-            </Card>
-
-            <Card className="interactive-card card-gradient border-0">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Code2 className="w-6 h-6 text-accent" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">100%</h3>
-                <p className="text-muted-foreground">Страсти к разработке</p>
-              </CardContent>
-            </Card>
+          {/* Minimal stats */}
+          <div className="flex items-center justify-center gap-12 md:gap-20 pt-8 animate-slide-up" style={{ animationDelay: '0.45s' }}>
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold">10+</p>
+              <p className="text-sm text-muted-foreground mt-1">Проекта</p>
+            </div>
+            <div className="w-px h-12 bg-border" />
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold">∞</p>
+              <p className="text-sm text-muted-foreground mt-1">Возможностей</p>
+            </div>
+            <div className="w-px h-12 bg-border" />
+            <div className="text-center">
+              <p className="text-3xl md:text-4xl font-bold">100%</p>
+              <p className="text-sm text-muted-foreground mt-1">Энтузиазма</p>
+            </div>
           </div>
         </div>
       </div>

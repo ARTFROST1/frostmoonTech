@@ -1,120 +1,91 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
-  GraduationCap, 
   Trophy, 
   Users, 
   Lightbulb, 
   Building, 
   Award,
   Rocket,
-  Heart
+  ArrowUpRight
 } from 'lucide-react';
 
 const UniversitySection = () => {
   const advantages = [
     {
       icon: Building,
-      title: "Сильные партнеры",
-      description: "Сотрудничество с ведущими IT-компаниями и стартапами региона",
-      color: "text-primary"
+      title: "Партнеры",
+      description: "IT-компании и стартапы"
     },
     {
       icon: Trophy,
-      title: "Соревнования и хакатоны",
-      description: "Регулярные конкурсы программирования и инновационные хакатоны",
-      color: "text-secondary"
+      title: "Хакатоны",
+      description: "Конкурсы и соревнования"
     },
     {
       icon: Users,
-      title: "Активное сообщество",
-      description: "Студенческие клубы, IT-кружки и проектные команды",
-      color: "text-accent"
+      title: "Сообщество",
+      description: "IT-клубы и проекты"
     },
     {
       icon: Lightbulb,
-      title: "Поддержка инициатив",
-      description: "Университет поддерживает студенческие проекты и стартапы",
-      color: "text-primary"
+      title: "Инициативы",
+      description: "Поддержка стартапов"
     },
     {
       icon: Award,
-      title: "Современное оборудование",
-      description: "Лаборатории с новейшим оборудованием и программным обеспечением",
-      color: "text-secondary"
+      title: "Оборудование",
+      description: "Современные лаборатории"
     },
     {
       icon: Rocket,
-      title: "Карьерные возможности",
-      description: "Стажировки в крупных компаниях и помощь в трудоустройстве",
-      color: "text-accent"
-    }
-  ];
-
-  const events = [
-    {
-      title: "IT-хакатон 2024",
-      description: "48 часов непрерывной разработки инновационных решений",
-      date: "Декабрь 2024"
-    },
-    {
-      title: "Неделя программирования",
-      description: "Мастер-классы от ведущих разработчиков индустрии",
-      date: "Январь 2025"
-    },
-    {
-      title: "Startup Weekend",
-      description: "Создание стартапа за выходные с менторской поддержкой",
-      date: "Февраль 2025"
+      title: "Карьера",
+      description: "Стажировки и работа"
     }
   ];
 
   return (
-    <section id="university" className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">Наш университет</Badge>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Почему стоит учиться <span className="text-gradient">с нами</span>
+    <section id="university" className="section-padding">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-2xl mb-16">
+          <p className="text-sm font-medium tracking-[0.15em] uppercase text-muted-foreground mb-4">
+            Университет
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
+            Почему <span className="text-gradient">АГУ</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Университет — это не просто место учебы, это экосистема для развития, 
-            творчества и реализации самых смелых идей.
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Экосистема для развития, творчества и реализации идей.
           </p>
         </div>
 
         {/* Hero Image */}
-        <div className="relative mb-16">
+        <div className="relative mb-20 rounded-2xl overflow-hidden">
           <img 
             src="./images/university_teamwork_1.jpeg" 
             alt="Студенты за работой" 
-            className="w-full h-96 object-cover rounded-2xl shadow-lg"
+            className="w-full h-80 md:h-96 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl flex items-end">
-            <div className="p-8">
-              <h3 className="text-2xl font-bold text-white mb-2">
-                Место, где рождаются идеи
-              </h3>
-              <p className="text-white/90">
-                Современные аудитории, лаборатории и пространства для коллаборации
-              </p>
-            </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 p-8">
+            <h3 className="text-2xl font-bold text-white mb-2">
+              Место для идей
+            </h3>
+            <p className="text-white/80 text-sm max-w-md">
+              Современные пространства для учебы и коллаборации
+            </p>
           </div>
         </div>
 
-        {/* Advantages Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* Advantages Grid - compact */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-20">
           {advantages.map((advantage, index) => (
-            <Card key={index} className="interactive-card card-gradient border-0">
-              <CardHeader>
-                <div className={`w-12 h-12 bg-current/10 rounded-full flex items-center justify-center mb-4 ${advantage.color}`}>
-                  <advantage.icon className={`w-6 h-6 ${advantage.color}`} />
-                </div>
-                <CardTitle className="text-lg">{advantage.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
+            <Card key={index} className="bg-muted/30 border-0 hover:bg-muted/50 transition-colors">
+              <CardContent className="p-5 text-center">
+                <advantage.icon className="w-5 h-5 mx-auto mb-3 text-foreground/70" />
+                <h4 className="font-medium text-sm mb-1">{advantage.title}</h4>
+                <p className="text-xs text-muted-foreground">
                   {advantage.description}
                 </p>
               </CardContent>
@@ -122,82 +93,35 @@ const UniversitySection = () => {
           ))}
         </div>
 
-        {/* Statistics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+        {/* Stats - minimal */}
+        <div className="flex flex-wrap justify-center gap-16 mb-20">
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">50+</div>
-            <div className="text-muted-foreground">IT-проектов в год</div>
+            <p className="text-4xl md:text-5xl font-bold">50+</p>
+            <p className="text-sm text-muted-foreground mt-2">Проектов в год</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-secondary mb-2">200+</div>
-            <div className="text-muted-foreground">Студентов в IT-сообществе</div>
+            <p className="text-4xl md:text-5xl font-bold">200+</p>
+            <p className="text-sm text-muted-foreground mt-2">Студентов IT</p>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-accent mb-2">15+</div>
-            <div className="text-muted-foreground">Партнерских компаний</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-primary mb-2">90%</div>
-            <div className="text-muted-foreground">Трудоустройство выпускников</div>
+            <p className="text-4xl md:text-5xl font-bold">90%</p>
+            <p className="text-sm text-muted-foreground mt-2">Трудоустройство</p>
           </div>
         </div>
 
-        {/* Upcoming Events */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-bold text-center mb-8">Ближайшие мероприятия</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {events.map((event, index) => (
-              <Card key={index} className="interactive-card">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg">{event.title}</CardTitle>
-                    <Badge variant="outline">{event.date}</Badge>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">
-                    {event.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-
-        {/* Community Testimonial */}
-        <Card className="bg-gradient-to-r from-primary/10 to-secondary/10 border-0">
-          <CardContent className="p-8 text-center">
-            <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart className="w-8 h-8 text-primary" />
-            </div>
-            <blockquote className="text-xl font-medium mb-4">
-              "В университете я нашел не просто знания, а настоящую команду единомышленников. 
-              Здесь поддерживают любые инициативы и помогают воплощать самые смелые идеи в жизнь."
-            </blockquote>
-            <cite className="text-muted-foreground">
-              — Студент 3 курса, основатель IT-стартапа
-            </cite>
-          </CardContent>
-        </Card>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <h3 className="text-2xl font-bold mb-4">Готовы стать частью нашего сообщества?</h3>
-          <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Присоединяйтесь к нам и откройте для себя мир возможностей в IT. 
-            Мы поможем вам развить навыки и найти свое место в индустрии.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="tech-button" asChild>
+        {/* CTA - simple */}
+        <div className="text-center">
+          <div className="inline-flex flex-col sm:flex-row gap-3">
+            <Button size="lg" className="rounded-full" asChild>
               <a href="https://www.adygnet.ru/" target="_blank" rel="noopener noreferrer">
-                <GraduationCap className="w-5 h-5 mr-2" />
                 Узнать о поступлении
+                <ArrowUpRight className="w-4 h-4 ml-2" />
               </a>
             </Button>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="ghost" className="rounded-full" asChild>
               <a href="https://t.me/MaykopTech" target="_blank" rel="noopener noreferrer">
-                <Users className="w-5 h-5 mr-2" />
-                Присоединиться к сообществу
+                Присоединиться
+                <ArrowUpRight className="w-4 h-4 ml-2" />
               </a>
             </Button>
           </div>
