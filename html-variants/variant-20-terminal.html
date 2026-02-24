@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Presentation - АГУ</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #050505;
+            color: #33ff00;
+            font-family: 'VT323', 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 2rem;
+            height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+            font-size: 2.5rem;
+            line-height: 1.3;
+            text-shadow: 0 0 4px rgba(51, 255, 0, 0.4);
+        }
+
+        .crt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 49;
+            position: absolute;
+            pointer-events: none;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(51,255,0,0.1) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.3;
+            animation: scan 6s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+
+        #terminal {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-top: 15vh;
+            height: 100%;
+            display: block;
+            position: relative;
+            z-index: 10;
+        }
+
+        .prompt {
+            color: #00ffcc;
+        }
+
+        .output {
+            color: #33ff00;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 0.5em;
+            height: 1em;
+            background-color: #33ff00;
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 0.1em;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .qr-box {
+            width: 250px;
+            height: 250px;
+            border: 2px dashed #33ff00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
+            background: rgba(51, 255, 0, 0.05);
+            box-shadow: 0 0 15px rgba(51, 255, 0, 0.2);
+        }
+
+        .controls-hint {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 2rem;
+            font-size: 1.2rem;
+            color: #004400;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .progress {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 2rem;
+            font-size: 1.2rem;
+            color: #004400;
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="crt"></div>
+    <div class="scanline"></div>
+    <div id="terminal"></div>
+    <div class="progress" id="progress">1/12</div>
+    <div class="controls-hint">Space / Arrows / Click to navigate</div>
+
+    <script>
+        const slides = [
+            { cmd: "./run_presentation.sh", out: "Артемий Морозов & Салим Сокуров\n\n[System Ready]" },
+            { cmd: "whoami", out: "АГУ • Прикладная математика • 2 курс" },
+            { cmd: "cat history.txt", out: "Год назад мы были обычными первокурсниками." },
+            { cmd: "sudo apt install knowledge", out: "Reading package lists... Done\nBuilding dependency tree... Done\n\nУниверситет задал курс. Мы подхватили инициативу." },
+            { cmd: "ls -la ./projects", out: "total 24\ndrwxr-xr-x  4 user user 4096 Feb 23 10:00 .\ndrwxr-xr-x 20 user user 4096 Feb 23 09:00 ..\n-rwxr-xr-x  1 user user 8192 Feb 23 10:01 obrazz.exe\n-rwxr-xr-x  1 user user 4096 Feb 23 10:02 adyggis.sh\ndrwxr-xr-x  2 user user 4096 Feb 23 10:03 other_projects" },
+            { cmd: "./obrazz.exe", out: "Умный гардероб с ИИ.\n\nStack: React Native, Supabase" },
+            { cmd: "./adyggis.sh", out: "Интерактивная карта Адыгеи.\n\nStack: Kotlin, Yandex Maps" },
+            { cmd: "tree ./other_projects", out: "other_projects/\n├── Telegram-боты\n└── веб-сайты\n\n2 directories, 0 files" },
+            { cmd: "echo \"Никто за нас ничего не сделал. Но АГУ дал нам всё.\"", out: "Никто за нас ничего не сделал. Но АГУ дал нам всё." },
+            { cmd: "cat why_agu.json", out: "{\n  \"Сообщество\": true,\n  \"Хакатоны\": true,\n  \"Стажировки\": true\n}" },
+            { cmd: "ping @MaykopTech", out: "PING MaykopTech (127.0.0.1): 56 data bytes\n64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.042 ms\n\n[QR_CODE_PLACEHOLDER]" },
+            { cmd: "exit", out: "Поступайте в АГУ 😎\n\nlogout\nConnection to agu.local closed." }
+        ];
+
+        const terminal = document.getElementById('terminal');
+        const progress = document.getElementById('progress');
+        let currentSlide = 0;
+        let isTyping = false;
+        let typeTimeout;
+
+        function renderSlide(index) {
+            clearTimeout(typeTimeout);
+            isTyping = true;
+            terminal.innerHTML = '';
+            progress.textContent = `${index + 1}/${slides.length}`;
+            
+            const slide = slides[index];
+            const promptPrefix = "user@agu:~$ ";
+            const cmdText = `${slide.cmd}\n`;
+            const outText = slide.out;
+            
+            let i = 0;
+            let j = 0;
+            
+            const promptSpan = document.createElement('span');
+            promptSpan.className = 'prompt';
+            promptSpan.textContent = promptPrefix;
+            terminal.appendChild(promptSpan);
+            
+            const outSpan = document.createElement('span');
+            outSpan.className = 'output';
+            terminal.appendChild(outSpan);
+            
+            let currentTextNode = document.createTextNode('');
+            outSpan.appendChild(currentTextNode);
+            
+            const cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            cursor.innerHTML = '█';
+            terminal.appendChild(cursor);
+
+            function typeChar() {
+                if (i < cmdText.length) {
+                    promptSpan.textContent += cmdText.charAt(i);
+                    i++;
+                    typeTimeout = setTimeout(typeChar, 40);
+                } else if (i === cmdText.length) {
+                    i++; // Move to next phase
+                    typeTimeout = setTimeout(typeChar, 300); // Pause before output
+                } else if (j < outText.length) {
+                    if (outText.substring(j).startsWith('[QR_CODE_PLACEHOLDER]')) {
+                        const qrDiv = document.createElement('div');
+                        qrDiv.className = 'qr-box';
+                        qrDiv.innerHTML = '<span>QR CODE</span><br><span>@MaykopTech</span>';
+                        outSpan.appendChild(qrDiv);
+                        j += '[QR_CODE_PLACEHOLDER]'.length;
+                        
+                        currentTextNode = document.createTextNode('');
+                        outSpan.appendChild(currentTextNode);
+                        
+                        typeTimeout = setTimeout(typeChar, 20);
+                        return;
+                    }
+                    currentTextNode.nodeValue += outText.charAt(j);
+                    j++;
+                    typeTimeout = setTimeout(typeChar, 20);
+                } else {
+                    isTyping = false;
+                }
+            }
+            
+            typeChar();
+        }
+
+        function completeSlide() {
+            clearTimeout(typeTimeout);
+            isTyping = false;
+            
+            const slide = slides[currentSlide];
+            terminal.innerHTML = '';
+            
+            const promptSpan = document.createElement('span');
+            promptSpan.className = 'prompt';
+            promptSpan.textContent = `user@agu:~$ ${slide.cmd}\n`;
+            terminal.appendChild(promptSpan);
+            
+            const outSpan = document.createElement('span');
+            outSpan.className = 'output';
+            
+            if (slide.out.includes('[QR_CODE_PLACEHOLDER]')) {
+                const parts = slide.out.split('[QR_CODE_PLACEHOLDER]');
+                outSpan.appendChild(document.createTextNode(parts[0]));
+                
+                const qrDiv = document.createElement('div');
+                qrDiv.className = 'qr-box';
+                qrDiv.innerHTML = '<span>QR CODE</span><br><span>@MaykopTech</span>';
+                outSpan.appendChild(qrDiv);
+                
+                if (parts[1]) {
+                    outSpan.appendChild(document.createTextNode(parts[1]));
+                }
+            } else {
+                outSpan.textContent = slide.out;
+            }
+            
+            terminal.appendChild(outSpan);
+            
+            const cursor = document.createElement('span');
+            cursor.className = 'cursor';
+            cursor.innerHTML = '█';
+            terminal.appendChild(cursor);
+        }
+
+        function nextSlide() {
+            if (isTyping) {
+                completeSlide(); // Skip typing animation if clicked/pressed during typing
+            } else if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                renderSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                renderSlide(currentSlide);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        document.addEventListener('click', () => {
+            nextSlide();
+        });
+
+        // Start presentation
+        renderSlide(0);
+    </script>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>День открытых дверей АГУ 2026 — FrostmoonTech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green: #22C55E;
+            --green-dim: #16a34a;
+            --green-glow: rgba(34, 197, 94, 0.15);
+            --bg: #FAFAFA;
+            --bg-code: #1E1E2E;
+            --bg-code-light: #F1F5F9;
+            --text: #1E293B;
+            --text-muted: #64748B;
+            --text-code: #E2E8F0;
+            --border: #E2E8F0;
+            --keyword: #C084FC;
+            --string: #22C55E;
+            --property: #60A5FA;
+            --bracket: #FCD34D;
+            --comment: #64748B;
+            --number: #F97316;
+            --mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --sans: 'Inter', system-ui, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--green); border-radius: 4px; }
+
+        /* ── Selection ── */
+        ::selection {
+            background: var(--green);
+            color: #fff;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-logo .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: var(--green);
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 0.85rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            letter-spacing: -0.01em;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+            background: var(--green-glow);
+        }
+
+        .nav-hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ── Sections ── */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ── Section Title ── */
+        .section-title {
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--comment);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title .slash {
+            color: var(--green);
+        }
+
+        /* ── Animated elements ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up-delay-1 { transition-delay: 0.1s; }
+        .fade-up-delay-2 { transition-delay: 0.2s; }
+        .fade-up-delay-3 { transition-delay: 0.3s; }
+        .fade-up-delay-4 { transition-delay: 0.4s; }
+        .fade-up-delay-5 { transition-delay: 0.5s; }
+
+        /* ── HERO Section ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 64px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--green-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .terminal-block {
+            background: var(--bg-code);
+            border-radius: 12px;
+            padding: 0;
+            text-align: left;
+            display: inline-block;
+            width: 100%;
+            max-width: 640px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255,255,255,0.05) inset;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #FF5F57; }
+        .terminal-dot.yellow { background: #FEBC2E; }
+        .terminal-dot.green { background: #28C840; }
+
+        .terminal-title {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-left: 8px;
+        }
+
+        .terminal-body {
+            padding: 1.5rem 1.75rem;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            line-height: 2;
+        }
+
+        .terminal-line {
+            opacity: 0;
+            animation: typeIn 0.4s ease forwards;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.3s; }
+        .terminal-line:nth-child(2) { animation-delay: 0.6s; }
+        .terminal-line:nth-child(3) { animation-delay: 1.0s; }
+        .terminal-line:nth-child(4) { animation-delay: 1.3s; }
+        .terminal-line:nth-child(5) { animation-delay: 1.7s; }
+        .terminal-line:nth-child(6) { animation-delay: 2.0s; }
+
+        @keyframes typeIn {
+            from { opacity: 0; transform: translateX(-8px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .prompt {
+            color: var(--green);
+            user-select: none;
+        }
+
+        .command {
+            color: var(--bracket);
+        }
+
+        .output {
+            color: var(--text-code);
+            padding-left: 1.2rem;
+        }
+
+        .output .accent {
+            color: var(--green);
+        }
+
+        .output .muted {
+            color: var(--comment);
+        }
+
+        .hero-tagline {
+            margin-top: 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease 2.5s forwards;
+        }
+
+        .hero-tagline em {
+            font-style: normal;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* ── JOURNEY Section ── */
+        .journey {
+            background: #fff;
+        }
+
+        .journey-content {
+            max-width: 720px;
+        }
+
+        .journey-text {
+            font-size: 1.15rem;
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        .code-comment-block {
+            background: var(--bg-code);
+            border-radius: 10px;
+            padding: 1.25rem 1.75rem;
+            font-family: var(--mono);
+            font-size: 1rem;
+            color: var(--green);
+            border-left: 3px solid var(--green);
+            position: relative;
+        }
+
+        .code-comment-block .slashes {
+            color: var(--comment);
+        }
+
+        /* ── PROJECTS Section ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-code);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        .project-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .file-icon {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            background: var(--green);
+            opacity: 0.7;
+        }
+
+        .file-name {
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .project-card-body {
+            padding: 1.5rem 1.75rem;
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            line-height: 2;
+        }
+
+        .prop-key {
+            color: var(--property);
+        }
+
+        .prop-string {
+            color: var(--string);
+        }
+
+        .prop-bracket {
+            color: var(--bracket);
+        }
+
+        .prop-type {
+            color: var(--keyword);
+        }
+
+        .prop-value {
+            color: var(--text-code);
+        }
+
+        .prop-comment {
+            color: var(--comment);
+            font-style: italic;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+            padding-left: 1.2rem;
+        }
+
+        .tech-tag {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .projects-also {
+            font-family: var(--mono);
+            font-size: 0.9rem;
+            color: var(--comment);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .projects-also .highlight {
+            color: var(--text);
+        }
+
+        /* ── UNIVERSITY Section ── */
+        .university {
+            background: #fff;
+        }
+
+        .uni-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 3rem;
+        }
+
+        .uni-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .uni-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--green);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .uni-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .uni-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 8px 32px var(--green-glow);
+        }
+
+        .uni-card-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .uni-card-title {
+            font-family: var(--mono);
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.35rem;
+        }
+
+        .uni-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .uni-quote {
+            text-align: center;
+            font-family: var(--mono);
+            font-size: 1.3rem;
+            color: var(--text);
+            padding: 2rem;
+            background: var(--bg-code);
+            border-radius: 12px;
+        }
+
+        .uni-quote .eq {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .uni-quote .str {
+            color: var(--string);
+        }
+
+        /* ── CTA Section ── */
+        .cta {
+            text-align: center;
+            padding-bottom: 4rem;
+        }
+
+        .cta-terminal {
+            background: var(--bg-code);
+            border-radius: 12px;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: var(--mono);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-terminal .prompt {
+            color: var(--green);
+        }
+
+        .cta-terminal .cmd {
+            color: var(--bracket);
+        }
+
+        .cta-terminal .arg {
+            color: var(--text-code);
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 2rem;
+            background: var(--bg-code-light);
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .qr-icon {
+            font-size: 2.5rem;
+            opacity: 0.4;
+        }
+
+        .cta-message {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .cta-message .emoji {
+            font-size: 1.3rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+
+        footer .green {
+            color: var(--green);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.25rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: rgba(250, 250, 250, 0.97);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 1px solid var(--border);
+                gap: 0;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .nav-hamburger {
+                display: flex;
+            }
+
+            .terminal-body {
+                font-size: 0.78rem;
+                padding: 1rem 1.25rem;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .uni-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .uni-quote {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+
+            .cta-terminal {
+                font-size: 0.95rem;
+                padding: 0.85rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .uni-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .terminal-body {
+                font-size: 0.72rem;
+                padding: 0.85rem 1rem;
+            }
+
+            .nav-inner {
+                padding: 0 1.25rem;
+            }
+        }
+
+        /* ── Pulse animation on scroll for green elements ── */
+        @keyframes pulseGreen {
+            0%, 100% { box-shadow: 0 0 0 0 var(--green-glow); }
+            50% { box-shadow: 0 0 20px 4px var(--green-glow); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════ NAVIGATION ═══════════ -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">
+                frostmoon<span style="color: var(--green)">Tech</span><span class="cursor"></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Главная</a></li>
+                <li><a href="#journey">Путь</a></li>
+                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#university">АГУ</a></li>
+                <li><a href="#cta">Контакты</a></li>
+            </ul>
+            <button class="nav-hamburger" id="hamburger" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="terminal-block">
+                <div class="terminal-header">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
+                    <span class="terminal-title">frostmoon@agu — zsh</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="prompt">❯ </span><span class="command">whoami</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="output"><span class="accent">Артемий Морозов</span> <span class="muted">&amp;</span> <span class="accent">Салим Сокуров</span></span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">❯ </span><span class="command">university</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="output">АГУ <span class="muted">•</span> 2 курс <span class="muted">•</span> Прикладная математика</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="prompt">❯ </span><span class="command">event</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="output">День открытых дверей <span class="accent">2026</span></span>
+                    </div>
+                </div>
+            </div>
+            <p class="hero-tagline">Мы — студенты, которые <em>пишут код</em> и <em>создают продукты</em></p>
+        </div>
+    </section>
+
+    <!-- ═══════════ JOURNEY ═══════════ -->
+    <section class="journey" id="journey">
+        <div class="container">
+            <h2 class="section-title fade-up">
+                <span class="slash">//</span> Наш путь
+            </h2>
+            <div class="journey-content">
+                <p class="journey-text fade-up fade-up-delay-1">
+                    Год назад мы были обычными первокурсниками — не знали, куда двигаться. Университет задал курс. 
+                    Мы подхватили инициативу. За год — два мобильных приложения, сайты, Telegram-боты.
+                </p>
+                <div class="code-comment-block fade-up fade-up-delay-2">
+                    <span class="slashes">//</span> АГУ дал направление. Мы написали код.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ PROJECTS ═══════════ -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2 class="section-title fade-up">
+                <span class="slash">//</span> Проекты
+            </h2>
+            <div class="projects-grid">
+                <!-- Project 1: Obrazz -->
+                <div class="project-card fade-up fade-up-delay-1">
+                    <div class="project-card-header">
+                        <div class="file-icon"></div>
+                        <span class="file-name">obrazz.config.yml</span>
+                    </div>
+                    <div class="project-card-body">
+                        <div><span class="prop-key">project</span><span class="prop-value">: </span><span class="prop-string">"Obrazz"</span></div>
+                        <div><span class="prop-key">type</span><span class="prop-value">: </span><span class="prop-string">"Мобильное приложение"</span></div>
+                        <div><span class="prop-key">description</span><span class="prop-value">: </span><span class="prop-string">"Персональный стилист с ИИ.<br>&nbsp;&nbsp;Цифровой гардероб, AI-подборка образов."</span></div>
+                        <div style="margin-top: 4px;">
+                            <span class="prop-key">stack</span><span class="prop-value">: </span><span class="prop-bracket">[</span>
+                        </div>
+                        <div class="tag-row">
+                            <span class="tech-tag">React Native</span>
+                            <span class="tech-tag">Expo</span>
+                            <span class="tech-tag">Supabase</span>
+                            <span class="tech-tag">TypeScript</span>
+                        </div>
+                        <div><span class="prop-bracket">]</span></div>
+                    </div>
+                </div>
+
+                <!-- Project 2: adygGIS -->
+                <div class="project-card fade-up fade-up-delay-2">
+                    <div class="project-card-header">
+                        <div class="file-icon" style="background: var(--keyword);"></div>
+                        <span class="file-name">adyggis.config.yml</span>
+                    </div>
+                    <div class="project-card-body">
+                        <div><span class="prop-key">project</span><span class="prop-value">: </span><span class="prop-string">"adygGIS"</span></div>
+                        <div><span class="prop-key">type</span><span class="prop-value">: </span><span class="prop-string">"Мобильное приложение"</span></div>
+                        <div><span class="prop-key">description</span><span class="prop-value">: </span><span class="prop-string">"Карты достопримечательностей Адыгеи.<br>&nbsp;&nbsp;Оффлайн-режим."</span></div>
+                        <div style="margin-top: 4px;">
+                            <span class="prop-key">stack</span><span class="prop-value">: </span><span class="prop-bracket">[</span>
+                        </div>
+                        <div class="tag-row">
+                            <span class="tech-tag">Kotlin</span>
+                            <span class="tech-tag">Jetpack Compose</span>
+                            <span class="tech-tag">Yandex Maps</span>
+                            <span class="tech-tag">Room</span>
+                        </div>
+                        <div><span class="prop-bracket">]</span></div>
+                    </div>
+                </div>
+            </div>
+            <p class="projects-also fade-up fade-up-delay-3">
+                <span class="prop-comment">// а также:</span> <span class="highlight">Telegram-боты</span>, <span class="highlight">веб-сайты</span>, <span class="highlight">другие проекты</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════ UNIVERSITY ═══════════ -->
+    <section class="university" id="university">
+        <div class="container">
+            <h2 class="section-title fade-up">
+                <span class="slash">//</span> Почему АГУ
+            </h2>
+            <div class="uni-grid">
+                <div class="uni-card fade-up fade-up-delay-1">
+                    <div class="uni-card-icon">👥</div>
+                    <div class="uni-card-title">Сообщество</div>
+                    <div class="uni-card-desc">Активные студенты и преподаватели, готовые помочь и поддержать</div>
+                </div>
+                <div class="uni-card fade-up fade-up-delay-1">
+                    <div class="uni-card-icon">🤝</div>
+                    <div class="uni-card-title">IT-партнёры</div>
+                    <div class="uni-card-desc">Связи с IT-компаниями и реальные проекты уже на первых курсах</div>
+                </div>
+                <div class="uni-card fade-up fade-up-delay-2">
+                    <div class="uni-card-icon">🏆</div>
+                    <div class="uni-card-title">Хакатоны</div>
+                    <div class="uni-card-desc">Регулярные соревнования — проверяй идеи и прокачивай навыки</div>
+                </div>
+                <div class="uni-card fade-up fade-up-delay-2">
+                    <div class="uni-card-icon">🖥️</div>
+                    <div class="uni-card-title">Оборудование</div>
+                    <div class="uni-card-desc">Современные лаборатории и инфраструктура для разработки</div>
+                </div>
+                <div class="uni-card fade-up fade-up-delay-3">
+                    <div class="uni-card-icon">🚀</div>
+                    <div class="uni-card-title">Стажировки</div>
+                    <div class="uni-card-desc">Возможности стажировок в IT-компаниях региона и за его пределами</div>
+                </div>
+                <div class="uni-card fade-up fade-up-delay-3">
+                    <div class="uni-card-icon">🧭</div>
+                    <div class="uni-card-title">Менторство</div>
+                    <div class="uni-card-desc">Наставники из индустрии, которые направляют и делятся опытом</div>
+                </div>
+            </div>
+            <div class="uni-quote fade-up fade-up-delay-4">
+                АГУ <span class="eq">===</span> <span class="str">экосистема для идей</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════ CTA ═══════════ -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <h2 class="section-title fade-up" style="text-align:center;">
+                <span class="slash">//</span> Присоединяйтесь
+            </h2>
+            <div class="cta-terminal fade-up fade-up-delay-1">
+                <span class="prompt">❯ </span><span class="cmd">join</span> <span class="arg">@MaykopTech</span>
+            </div>
+            <div class="fade-up fade-up-delay-2">
+                <div class="qr-placeholder">
+                    <div class="qr-icon">⣿</div>
+                    <span>QR-код • 250×250</span>
+                </div>
+            </div>
+            <p class="cta-message fade-up fade-up-delay-3">
+                Поступайте в АГУ — начните писать свою историю <span class="emoji">😎</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer>
+        <span class="green">&lt;</span>frostmoonTech <span class="green">/&gt;</span> &nbsp;•&nbsp; АГУ 2026
+    </footer>
+
+    <!-- ═══════════ SCRIPTS ═══════════ -->
+    <script>
+        // ── Nav scroll effect ──
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // ── Hamburger ──
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ── Intersection Observer for fade-up animations ──
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -60px 0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up, .section-title').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ── Active nav link highlight ──
+        const sections = document.querySelectorAll('section');
+        const navAnchors = document.querySelectorAll('.nav-links a');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navAnchors.forEach(a => {
+                        a.style.color = '';
+                        a.style.background = '';
+                        if (a.getAttribute('href') === '#' + id) {
+                            a.style.color = 'var(--green)';
+                            a.style.background = 'var(--green-glow)';
+                        }
+                    });
+                }
+            });
+        }, { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+
+        sections.forEach(s => sectionObserver.observe(s));
+    </script>
+</body>
+</html>

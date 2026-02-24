@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создаем будущее — АГУ 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-main: #111111;
+            --text-muted: #666666;
+            --accent: #000000;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 4rem;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* Gallery Layouts */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .gallery-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            width: 100%;
+        }
+
+        .artwork {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .artwork img {
+            max-height: 65vh;
+            max-width: 100%;
+            object-fit: contain;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            background: #fff;
+            padding: 1rem; /* White frame effect */
+        }
+
+        .artwork.no-frame img {
+            padding: 0;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-radius: 4px;
+        }
+
+        .plaque {
+            margin-top: 2rem;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .plaque-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .plaque-desc {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .plaque-meta {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+        }
+
+        /* Typography Slides */
+        .text-slide {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .text-slide h2 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .text-slide p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Specific Slide Adjustments */
+        .diptych img {
+            max-height: 55vh;
+        }
+
+        .qr-code img {
+            max-height: 30vh;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .list-plaque {
+            text-align: left;
+            border-left: 1px solid #ddd;
+            padding-left: 2rem;
+            margin-left: 2rem;
+        }
+
+        .list-plaque ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+        }
+
+        .list-plaque li {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+
+        .list-plaque li::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+
+        /* Navigation & UI */
+        .progress-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+        }
+
+        .counter {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+
+        .nav-hint {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ccc;
+            z-index: 100;
+        }
+
+        .logo-mark {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-muted);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logo-mark">Exhibition 2026</div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <div class="gallery-container">
+            <div class="artwork">
+                <img src="../public/images/university_teamwork_1.jpeg" alt="Teamwork">
+            </div>
+            <div class="plaque">
+                <h1 class="plaque-title">Создаем будущее</h1>
+                <div class="plaque-desc">Артемий Морозов & Салим Сокуров</div>
+                <div class="plaque-meta">День открытых дверей АГУ 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Who we are -->
+    <div class="slide">
+        <div class="gallery-row">
+            <div class="plaque" style="text-align: left; max-width: 400px;">
+                <h2 class="plaque-title" style="font-size: 2rem;">Кто мы?</h2>
+                <div class="plaque-desc" style="margin-top: 1rem;">
+                    Студенты 2 курса, направление «Прикладная математика», АГУ.<br><br>
+                    Мы не просто учимся, мы создаем реальные продукты, которые решают настоящие задачи.
+                </div>
+            </div>
+            <div class="artwork">
+                <img src="../public/images/university_campus_collaboration_20251114_202320.png" alt="Campus Collaboration">
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: The Start -->
+    <div class="slide">
+        <div class="text-slide">
+            <h2>Начало пути</h2>
+            <p>Год назад мы были обычными первокурсниками. Мы не знали, куда двигаться, не разбирались в современных технологиях и только искали свое место в IT-мире.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: The Catalyst -->
+    <div class="slide">
+        <div class="text-slide">
+            <h2 style="font-size: 3rem;">Катализатор</h2>
+            <p>Университет задал курс. Мы подхватили инициативу.<br>Никто за нас ничего не сделал, но АГУ дал нам всё необходимое для мощного старта: знания, среду и поддержку.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Projects Overview -->
+    <div class="slide">
+        <div class="gallery-container">
+            <div class="artwork no-frame">
+                <img src="../public/images/tech_innovation_1.jpeg" alt="Tech Innovation" style="max-height: 50vh;">
+            </div>
+            <div class="plaque">
+                <h2 class="plaque-title" style="font-size: 2rem;">Результат первого года</h2>
+                <div class="plaque-desc">За один год мы с нуля создали 2 полноценных мобильных приложения, несколько Telegram-ботов и веб-сайтов.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Project 1 (Obrazz) -->
+    <div class="slide">
+        <div class="gallery-container">
+            <div class="gallery-row diptych" style="gap: 2rem;">
+                <div class="artwork no-frame">
+                    <img src="../public/images/obrazz_app_screens_1.jpeg" alt="Obrazz Screen 1">
+                </div>
+                <div class="artwork no-frame">
+                    <img src="../public/images/obrazz_app_screens_2.jpeg" alt="Obrazz Screen 2">
+                </div>
+            </div>
+            <div class="plaque">
+                <h2 class="plaque-title" style="font-size: 2rem;">Obrazz — Умный гардероб</h2>
+                <div class="plaque-desc">Персональный стилист с ИИ. Цифровой гардероб, AI-подборка образов, автоматическое удаление фона.</div>
+                <div class="plaque-meta">Стек: React Native, Expo, Supabase</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Project 2 (adygGIS) -->
+    <div class="slide">
+        <div class="gallery-row">
+            <div class="artwork no-frame">
+                <img src="../public/images/adygyes_map_screens_1.png" alt="adygGIS Screen">
+            </div>
+            <div class="plaque" style="text-align: left; max-width: 400px;">
+                <h2 class="plaque-title" style="font-size: 2rem;">adygGIS</h2>
+                <div class="plaque-desc" style="margin-top: 1rem;">
+                    Туристический гид и интерактивная карта Адыгеи.<br><br>
+                    Оффлайн-режим, умное кэширование данных, построение уникальных маршрутов.
+                </div>
+                <div class="plaque-meta" style="margin-top: 2rem;">Стек: Kotlin, Jetpack Compose, Yandex Maps</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: More Projects -->
+    <div class="slide">
+        <div class="text-slide">
+            <h2 style="font-size: 3rem;">Непрерывный опыт</h2>
+            <p>Telegram-боты, веб-сайты и пет-проекты.<br>Каждый новый проект — это вызов, бессонные ночи и бесценный опыт, который делает нас лучше.</p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Why AGU -->
+    <div class="slide">
+        <div class="gallery-row">
+            <div class="artwork">
+                <img src="../public/images/university_teamwork_2.webp" alt="AGU Ecosystem">
+            </div>
+            <div class="list-plaque">
+                <h2 class="plaque-title" style="font-size: 2rem;">Почему АГУ?</h2>
+                <div class="plaque-desc">Это не просто ВУЗ, это экосистема.</div>
+                <ul>
+                    <li>Сильное IT-сообщество</li>
+                    <li>Партнёрства с тех-компаниями</li>
+                    <li>Регулярные Хакатоны</li>
+                    <li>Современное оборудование</li>
+                    <li>Реальные стажировки</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: The Message -->
+    <div class="slide">
+        <div class="text-slide">
+            <h2 style="font-size: 3.5rem; line-height: 1.2;">АГУ — это место, где ваши идеи становятся реальностью.</h2>
+            <p style="margin-top: 2rem; font-size: 1.5rem;">Если вы готовы действовать.</p>
+        </div>
+    </div>
+
+    <!-- Slide 11: CTA -->
+    <div class="slide">
+        <div class="gallery-container">
+            <h2 class="plaque-title" style="font-size: 2.5rem; margin-bottom: 3rem;">Присоединяйтесь к комьюнити</h2>
+            <div class="gallery-row" style="gap: 4rem;">
+                <div class="artwork qr-code">
+                    <img src="../public/images/qr-maykoptech.png" alt="QR MaykopTech">
+                    <div class="plaque-meta" style="margin-top: 1.5rem;">@MaykopTech</div>
+                </div>
+                <div class="artwork qr-code">
+                    <img src="../public/images/qr-artfrost.jpeg" alt="QR ArtFrost">
+                    <div class="plaque-meta" style="margin-top: 1.5rem;">@ArtFrost</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Final -->
+    <div class="slide">
+        <div class="text-slide">
+            <h2 style="font-size: 4rem;">Поступайте в АГУ.</h2>
+            <p style="font-size: 1.5rem; margin-top: 1rem;">Будете такими же крутыми 😎</p>
+        </div>
+    </div>
+
+    <!-- UI Elements -->
+    <div class="progress-container">
+        <div class="counter"><span id="current-slide">01</span> / 12</div>
+    </div>
+    <div class="nav-hint">Click / Space / Arrows</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const currentSlideEl = document.getElementById('current-slide');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            // Update counter (pad with zero)
+            currentSlideEl.textContent = (currentSlide + 1).toString().padStart(2, '0');
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                prevSlide();
+            }
+        });
+
+        // Click navigation (right half = next, left half = prev)
+        document.addEventListener('click', (e) => {
+            const clickX = e.clientX;
+            const screenWidth = window.innerWidth;
+            
+            if (clickX > screenWidth / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>

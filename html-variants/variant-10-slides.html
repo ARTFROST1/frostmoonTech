@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>День открытых дверей 2026 — АГУ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --accent: #2563EB;
+      --accent-light: #DBEAFE;
+      --accent-dark: #1E40AF;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --radius: 16px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+
+    /* ─── Slides ─── */
+    .slide {
+      height: 100vh;
+      width: 100%;
+      scroll-snap-align: start;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 3rem 2rem;
+    }
+
+    .slide-inner {
+      max-width: 960px;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .slide.visible .slide-inner {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide:nth-child(even) {
+      background: var(--bg-alt);
+    }
+
+    /* ─── Dot Navigation ─── */
+    .dot-nav {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 100;
+    }
+
+    .dot-nav a {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      display: block;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    .dot-nav a.active {
+      background: var(--accent);
+      transform: scale(1.35);
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    .dot-nav a:hover {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    /* ─── Typography ─── */
+    .slide-title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+
+    .slide-title span {
+      color: var(--accent);
+    }
+
+    .slide-subtitle {
+      font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .slide-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ─── Slide 1: Title ─── */
+    .title-slide .slide-title {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .title-authors {
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .title-meta {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    .title-divider {
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 1.8rem auto;
+    }
+
+    /* ─── Slide 3: Journey ─── */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      margin: 2.5rem 0;
+      text-align: left;
+    }
+
+    .journey-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .journey-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.7rem;
+      color: var(--accent);
+    }
+
+    .journey-card p {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .journey-quote {
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-style: italic;
+      color: var(--accent-dark);
+      background: var(--accent-light);
+      border-radius: 12px;
+      padding: 1.2rem 2rem;
+      margin-top: 2rem;
+      font-weight: 500;
+    }
+
+    /* ─── Bullet List ─── */
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .bullet-list li {
+      background: var(--accent-light);
+      color: var(--accent-dark);
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+    }
+
+    .tech-stack {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    .tech-stack span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ─── Slide 6: More Projects ─── */
+    .projects-trio {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      min-width: 180px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.12);
+    }
+
+    .project-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ─── Slide 7: Why AGU Grid ─── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .why-item {
+      background: var(--bg);
+      border-radius: var(--radius);
+      padding: 1.6rem 1.2rem;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .why-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .why-icon {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .why-item h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ─── Slide 8: CTA ─── */
+    .qr-placeholder {
+      width: 250px;
+      height: 250px;
+      background: var(--accent-light);
+      border: 3px dashed var(--accent);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem auto;
+      font-size: 1rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cta-text {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .cta-text strong {
+      color: var(--text);
+    }
+
+    .cta-emoji {
+      font-size: 2.5rem;
+      margin-top: 1rem;
+      display: block;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      .journey-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .projects-trio {
+        gap: 1rem;
+      }
+
+      .project-card {
+        min-width: 150px;
+        padding: 1.5rem;
+      }
+
+      .dot-nav {
+        right: 14px;
+        gap: 10px;
+      }
+
+      .dot-nav a {
+        width: 10px;
+        height: 10px;
+      }
+
+      .slide {
+        padding: 2rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .why-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bullet-list {
+        gap: 0.6rem;
+      }
+
+      .bullet-list li {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dot Navigation -->
+  <nav class="dot-nav" aria-label="Навигация по слайдам">
+    <a href="#slide-1" class="active" aria-label="Слайд 1"></a>
+    <a href="#slide-2" aria-label="Слайд 2"></a>
+    <a href="#slide-3" aria-label="Слайд 3"></a>
+    <a href="#slide-4" aria-label="Слайд 4"></a>
+    <a href="#slide-5" aria-label="Слайд 5"></a>
+    <a href="#slide-6" aria-label="Слайд 6"></a>
+    <a href="#slide-7" aria-label="Слайд 7"></a>
+    <a href="#slide-8" aria-label="Слайд 8"></a>
+  </nav>
+
+  <!-- SLIDE 1: Title -->
+  <section class="slide title-slide" id="slide-1">
+    <div class="slide-inner">
+      <div class="slide-label">Адыгейский государственный университет</div>
+      <h1 class="slide-title">День открытых дверей <span>2026</span></h1>
+      <div class="title-divider"></div>
+      <p class="title-authors">Артемий Морозов &amp; Салим Сокуров</p>
+      <p class="title-meta">2 курс • Прикладная математика • АГУ</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: About Us -->
+  <section class="slide" id="slide-2">
+    <div class="slide-inner">
+      <div class="slide-label">О нас</div>
+      <h2 class="slide-title">Кто мы?</h2>
+      <p class="slide-subtitle">Студенты второго курса, которые за один год прошли путь<br />от новичков до разработчиков реальных продуктов</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: The Journey -->
+  <section class="slide" id="slide-3">
+    <div class="slide-inner">
+      <div class="slide-label">Путь</div>
+      <h2 class="slide-title">Наш путь</h2>
+      <div class="journey-grid">
+        <div class="journey-card">
+          <h3>⏳ Год назад</h3>
+          <p>Не знали, куда двигаться. Не разбирались в технологиях.</p>
+        </div>
+        <div class="journey-card">
+          <h3>🚀 Сегодня</h3>
+          <p>Два мобильных приложения. Сайты. Telegram-боты.</p>
+        </div>
+      </div>
+      <div class="journey-quote">«АГУ дал направление — мы написали код»</div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: Obrazz -->
+  <section class="slide" id="slide-4">
+    <div class="slide-inner">
+      <div class="slide-label">Проект №1</div>
+      <h2 class="slide-title">Obrazz — <span>Умный гардероб</span></h2>
+      <p class="slide-subtitle">Персональный стилист с ИИ</p>
+      <ul class="bullet-list">
+        <li>AI-подборка образов</li>
+        <li>Цифровой гардероб</li>
+        <li>Автоудаление фона</li>
+        <li>Drag &amp; drop редактор</li>
+      </ul>
+      <p class="tech-stack"><span>React Native</span> • <span>Expo</span> • <span>Supabase</span> • <span>TypeScript</span></p>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: adygGIS -->
+  <section class="slide" id="slide-5">
+    <div class="slide-inner">
+      <div class="slide-label">Проект №2</div>
+      <h2 class="slide-title">adygGIS — <span>Карты Адыгеи</span></h2>
+      <p class="slide-subtitle">Интерактивная карта достопримечательностей</p>
+      <ul class="bullet-list">
+        <li>Yandex Maps</li>
+        <li>Оффлайн-режим</li>
+        <li>Умное кэширование</li>
+        <li>Построение маршрутов</li>
+      </ul>
+      <p class="tech-stack"><span>Kotlin</span> • <span>Jetpack Compose</span> • <span>Yandex Maps</span> • <span>Room</span></p>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: More Projects -->
+  <section class="slide" id="slide-6">
+    <div class="slide-inner">
+      <div class="slide-label">Ещё</div>
+      <h2 class="slide-title">А ещё мы создали</h2>
+      <div class="projects-trio">
+        <div class="project-card">
+          <div class="project-icon">🤖</div>
+          <h3>Telegram-боты</h3>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">🌐</div>
+          <h3>Веб-сайты</h3>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">✨</div>
+          <h3>И многое другое</h3>
+        </div>
+      </div>
+      <p class="slide-subtitle">Каждый проект — это новый опыт и новые навыки</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: Why AGU -->
+  <section class="slide" id="slide-7">
+    <div class="slide-inner">
+      <div class="slide-label">Университет</div>
+      <h2 class="slide-title">Почему <span>АГУ</span></h2>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-icon">👥</div>
+          <h3>Сообщество</h3>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🤝</div>
+          <h3>IT-партнёры</h3>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🏆</div>
+          <h3>Хакатоны</h3>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🖥️</div>
+          <h3>Оборудование</h3>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">💼</div>
+          <h3>Стажировки</h3>
+        </div>
+        <div class="why-item">
+          <div class="why-icon">🎓</div>
+          <h3>Менторство</h3>
+        </div>
+      </div>
+      <p class="slide-subtitle">Экосистема для реализации ваших идей</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: Final CTA -->
+  <section class="slide" id="slide-8">
+    <div class="slide-inner">
+      <div class="slide-label">@MaykopTech</div>
+      <h2 class="slide-title">Присоединяйтесь!</h2>
+      <div class="qr-placeholder">QR-код<br />@MaykopTech</div>
+      <div class="cta-text">
+        <p><strong>Подписывайтесь на Telegram</strong> — делимся опытом и проектами</p>
+        <p style="margin-top:0.6rem"><strong>Поступайте в АГУ</strong> — будете такими же крутыми</p>
+        <span class="cta-emoji">😎</span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (() => {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot-nav a');
+
+      /* ── IntersectionObserver: animate in & update dots ── */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              const id = entry.target.id;
+              dots.forEach((d) => d.classList.remove('active'));
+              const activeDot = document.querySelector(`.dot-nav a[href="#${id}"]`);
+              if (activeDot) activeDot.classList.add('active');
+            }
+          });
+        },
+        { threshold: 0.45 }
+      );
+
+      slides.forEach((s) => observer.observe(s));
+
+      /* ── First slide visible immediately ── */
+      slides[0].classList.add('visible');
+
+      /* ── Keyboard navigation ── */
+      let currentIndex = 0;
+
+      const scrollToSlide = (index) => {
+        if (index < 0 || index >= slides.length) return;
+        currentIndex = index;
+        slides[index].scrollIntoView({ behavior: 'smooth' });
+      };
+
+      document.addEventListener('keydown', (e) => {
+        /* Update currentIndex from active dot */
+        dots.forEach((d, i) => {
+          if (d.classList.contains('active')) currentIndex = i;
+        });
+
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') {
+          e.preventDefault();
+          scrollToSlide(currentIndex + 1);
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          e.preventDefault();
+          scrollToSlide(currentIndex - 1);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          scrollToSlide(0);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          scrollToSlide(slides.length - 1);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

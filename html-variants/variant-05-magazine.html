@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СОЗДАТЕЛИ — День открытых дверей АГУ 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #4338CA;
+            --accent-light: #EEF2FF;
+            --accent-mid: #C7D2FE;
+            --black: #0F0F0F;
+            --gray-dark: #374151;
+            --gray-mid: #6B7280;
+            --gray-light: #F3F4F6;
+            --white: #FFFFFF;
+            --serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--sans);
+            color: var(--black);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* === NAV === */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        nav.scrolled {
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: var(--serif);
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            text-decoration: none;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1.5px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--black);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* === SECTIONS COMMON === */
+        section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-label {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-weight: 900;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.15;
+            color: var(--black);
+            margin-bottom: 2rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 2rem 0;
+        }
+
+        /* === HERO === */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 7rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+            transform: none;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(67, 56, 202, 0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        #hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -150px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(67, 56, 202, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-overline {
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-weight: 900;
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.4s forwards;
+        }
+
+        .hero-title span {
+            display: block;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 0.35em;
+            letter-spacing: 0.04em;
+            color: var(--gray-mid);
+            margin-top: 0.5rem;
+        }
+
+        .hero-authors {
+            font-family: var(--serif);
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.6s forwards;
+        }
+
+        .hero-meta {
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeUp 0.8s 0.8s forwards;
+        }
+
+        .hero-meta strong {
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .hero-year {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.5rem 1.6rem;
+            border: 1.5px solid var(--black);
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--black);
+            opacity: 0;
+            animation: fadeUp 0.8s 1s forwards;
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s 1.2s forwards;
+        }
+
+        .hero-scroll-hint span {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: var(--gray-mid);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === STORY === */
+        #story {
+            padding: 8rem 0;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .story-left {
+            position: sticky;
+            top: 120px;
+        }
+
+        .pull-quote {
+            font-family: var(--serif);
+            font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 1.3;
+            color: var(--accent);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .pull-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent);
+        }
+
+        .story-body {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: var(--gray-dark);
+            max-width: 600px;
+        }
+
+        .story-body .drop-cap::first-letter {
+            font-family: var(--serif);
+            font-size: 4rem;
+            font-weight: 900;
+            float: left;
+            line-height: 0.8;
+            margin-right: 0.6rem;
+            margin-top: 0.15rem;
+            color: var(--accent);
+        }
+
+        /* === PROJECTS === */
+        #projects {
+            padding: 8rem 0;
+            background: var(--gray-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            padding: 2.5rem;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-number {
+            font-family: var(--serif);
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(67, 56, 202, 0.08);
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .project-name {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--black);
+            margin-bottom: 0.3rem;
+        }
+
+        .project-subtitle {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--gray-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .stack-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.8rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 2px;
+        }
+
+        .projects-strip {
+            margin-top: 2.5rem;
+            padding: 1.5rem 2rem;
+            background: var(--white);
+            border-left: 4px solid var(--accent);
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--gray-dark);
+        }
+
+        /* === UNIVERSITY === */
+        #university {
+            padding: 8rem 0;
+            background: var(--accent-light);
+            position: relative;
+        }
+
+        #university::before {
+            content: '"';
+            position: absolute;
+            top: 2rem;
+            right: 4rem;
+            font-family: var(--serif);
+            font-size: 20rem;
+            font-weight: 900;
+            color: rgba(67, 56, 202, 0.05);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .uni-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin: 3rem 0 4rem;
+        }
+
+        .uni-col {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .uni-col::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent);
+            opacity: 0.3;
+        }
+
+        .uni-col h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .uni-col p {
+            font-size: 0.95rem;
+            color: var(--gray-dark);
+            line-height: 1.6;
+        }
+
+        .uni-big-quote {
+            font-family: var(--serif);
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 700;
+            font-style: italic;
+            text-align: center;
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+
+        /* === CTA === */
+        #cta {
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-family: var(--serif);
+            font-weight: 900;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            color: var(--black);
+            margin-bottom: 3rem;
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 2rem;
+            background: var(--gray-light);
+            border: 2px dashed var(--accent-mid);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .qr-placeholder:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .qr-placeholder .qr-icon {
+            width: 48px;
+            height: 48px;
+            opacity: 0.4;
+        }
+
+        .qr-placeholder span {
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+        }
+
+        .cta-handle {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .cta-sub {
+            font-size: 1.2rem;
+            color: var(--gray-dark);
+        }
+
+        /* === FOOTER === */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: var(--gray-mid);
+            letter-spacing: 0.04em;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 900px) {
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-left {
+                position: static;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .uni-columns {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title {
+                font-size: clamp(3rem, 16vw, 5rem);
+            }
+
+            .container {
+                padding: 0 1.2rem;
+            }
+
+            #story, #projects, #university, #cta {
+                padding: 5rem 0;
+            }
+
+            .project-card {
+                padding: 1.8rem;
+            }
+
+            .project-number {
+                font-size: 3rem;
+            }
+        }
+
+        /* === STAGGERED CHILDREN === */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 0.1s; }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 0.2s; }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 0.3s; }
+        .stagger-children.visible > *:nth-child(5) { transition-delay: 0.4s; }
+        .stagger-children.visible > *:nth-child(6) { transition-delay: 0.5s; }
+
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">Создатели</a>
+            <ul class="nav-links">
+                <li><a href="#story">История</a></li>
+                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#university">АГУ</a></li>
+                <li><a href="#cta">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-overline">День открытых дверей • АГУ</div>
+        <h1 class="hero-title">
+            СОЗДАТЕЛИ
+            <span>история двух студентов</span>
+        </h1>
+        <p class="hero-authors">Артемий Морозов &amp; Салим Сокуров</p>
+        <p class="hero-meta">
+            Студенты 2 курса • Прикладная математика • АГУ
+        </p>
+        <div class="hero-year">День открытых дверей 2026</div>
+        <div class="hero-scroll-hint">
+            <span>Листайте</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section id="story">
+        <div class="container">
+            <span class="section-label">Глава I</span>
+            <h2 class="section-title">ОТ НУЛЯ ДО ПРОДУКТА</h2>
+            <div class="story-grid">
+                <div class="story-left">
+                    <blockquote class="pull-quote">
+                        «Никто за нас ничего не сделал»
+                    </blockquote>
+                </div>
+                <div class="story-body">
+                    <p class="drop-cap">Год назад мы были обычными первокурсниками — не знали, куда двигаться, не разбирались в технологиях. Но университет дал нам направление и окружение. Мы подхватили инициативу — и&nbsp;за один год создали два мобильных приложения, несколько сайтов и&nbsp;Telegram-ботов.</p>
+                    <div class="divider"></div>
+                    <p>АГУ дал нам всё, чтобы мы смогли сделать это сами.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <span class="section-label">Глава II</span>
+            <h2 class="section-title">ПРОЕКТЫ</h2>
+            <div class="projects-grid stagger-children">
+                <!-- Obrazz -->
+                <div class="project-card">
+                    <div class="project-number">01</div>
+                    <h3 class="project-name">Obrazz</h3>
+                    <p class="project-subtitle">Умный гардероб</p>
+                    <p class="project-desc">Персональный стилист с&nbsp;ИИ. Цифровой гардероб, AI-подборка образов, автоудаление фона, drag&nbsp;&amp;&nbsp;drop редактор.</p>
+                    <div class="project-stack">
+                        <span class="stack-tag">React Native</span>
+                        <span class="stack-tag">Expo</span>
+                        <span class="stack-tag">Supabase</span>
+                        <span class="stack-tag">TypeScript</span>
+                    </div>
+                </div>
+                <!-- adygGIS -->
+                <div class="project-card">
+                    <div class="project-number">02</div>
+                    <h3 class="project-name">adygGIS</h3>
+                    <p class="project-subtitle">Карты Адыгеи</p>
+                    <p class="project-desc">Интерактивная карта достопримечательностей Адыгеи. Оффлайн-режим, умное кэширование, маршруты.</p>
+                    <div class="project-stack">
+                        <span class="stack-tag">Kotlin</span>
+                        <span class="stack-tag">Jetpack Compose</span>
+                        <span class="stack-tag">Yandex Maps</span>
+                        <span class="stack-tag">Room</span>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-strip">
+                А также: Telegram-боты &bull; Веб-сайты &bull; И многое другое
+            </div>
+        </div>
+    </section>
+
+    <!-- UNIVERSITY -->
+    <section id="university">
+        <div class="container">
+            <span class="section-label">Глава III</span>
+            <h2 class="section-title">ПОЧЕМУ АГУ</h2>
+            <div class="uni-columns stagger-children">
+                <div class="uni-col">
+                    <h3>Сообщество</h3>
+                    <p>IT-партнёры, менторы и активное студенческое комьюнити, которое помогает расти.</p>
+                </div>
+                <div class="uni-col">
+                    <h3>Хакатоны</h3>
+                    <p>Современное оборудование, регулярные хакатоны и соревнования для практики.</p>
+                </div>
+                <div class="uni-col">
+                    <h3>Стажировки</h3>
+                    <p>Поддержка идей, реальные стажировки и возможность воплотить проект в жизнь.</p>
+                </div>
+            </div>
+            <div class="divider" style="margin: 0 auto 2rem;"></div>
+            <p class="uni-big-quote">«АГУ — экосистема, где идеи становятся реальностью»</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="container">
+            <h2 class="cta-title">ПРИСОЕДИНЯЙТЕСЬ</h2>
+            <div class="qr-placeholder">
+                <svg class="qr-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="3" height="3"/>
+                    <line x1="21" y1="14" x2="21" y2="14.01"/>
+                    <line x1="21" y1="21" x2="21" y2="21.01"/>
+                    <line x1="17" y1="18" x2="21" y2="18"/>
+                </svg>
+                <span>QR-код</span>
+            </div>
+            <p class="cta-handle">@MaykopTech</p>
+            <p class="cta-sub">Поступайте в АГУ 😎</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Создатели — Артемий Морозов &amp; Салим Сокуров • АГУ</p>
+    </footer>
+
+    <script>
+        // IntersectionObserver for reveal animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section:not(#hero), .stagger-children').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

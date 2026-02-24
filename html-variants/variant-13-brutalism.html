@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МЫ ДЕЛАЕМ ВЕЩИ - АГУ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Space Mono', 'Courier New', Courier, monospace;
+            overflow: hidden;
+            background: #000;
+            color: #000;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        #presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(100%);
+            /* Fast, harsh transition */
+            transition: transform 0.15s cubic-bezier(0, 0, 0.2, 1), opacity 0.15s;
+            z-index: 1;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            z-index: 10;
+        }
+
+        .slide.prev {
+            transform: translateY(-100%);
+        }
+
+        /* Brutalist UI Elements */
+        .brutal-box {
+            background: #fff;
+            border: 6px solid #000;
+            box-shadow: 16px 16px 0px #000;
+            padding: 3rem;
+            text-align: center;
+            margin: 1rem;
+            max-width: 90vw;
+        }
+
+        .brutal-text-huge {
+            font-size: 8vw;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            font-family: Impact, 'Arial Black', sans-serif;
+        }
+
+        .brutal-text-large {
+            font-size: 5vw;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            font-family: Impact, 'Arial Black', sans-serif;
+        }
+
+        .brutal-text-medium {
+            font-size: 3vw;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+
+        .brutal-tag {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            font-size: 2.5vw;
+            font-weight: bold;
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+            margin: 0.5rem;
+        }
+
+        .brutal-tag.yellow { background: #FFFF00; color: #000; box-shadow: 6px 6px 0px #000; }
+        .brutal-tag.blue { background: #0000FF; color: #fff; box-shadow: 6px 6px 0px #000; }
+        .brutal-tag.red { background: #FF0000; color: #fff; box-shadow: 6px 6px 0px #000; }
+        .brutal-tag.green { background: #00FF00; color: #000; box-shadow: 6px 6px 0px #000; }
+        .brutal-tag.white { background: #FFFFFF; color: #000; box-shadow: 6px 6px 0px #000; }
+
+        .grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            width: 80vw;
+            max-width: 1000px;
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background: #fff;
+            border: 8px solid #000;
+            box-shadow: 12px 12px 0px #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin: 2rem auto;
+            background-image: repeating-linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), repeating-linear-gradient(45deg, #ccc 25%, #fff 25%, #fff 75%, #ccc 75%, #ccc);
+            background-position: 0 0, 10px 10px;
+            background-size: 20px 20px;
+        }
+
+        .qr-placeholder span {
+            background: #000;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: 4px solid #fff;
+        }
+
+        /* Slide Number Indicator */
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 4rem;
+            font-weight: 900;
+            font-family: Impact, 'Arial Black', sans-serif;
+            background: #FFFF00;
+            color: #000;
+            border: 6px solid #000;
+            box-shadow: 10px 10px 0px #000;
+            padding: 0.5rem 1.5rem;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            width: 110vw;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top: 8px solid #000;
+            border-bottom: 8px solid #000;
+            background: #FFFF00;
+            padding: 1rem 0;
+            position: absolute;
+            left: -5vw;
+            z-index: 0;
+        }
+        .marquee-container.top { top: 15%; transform: rotate(-3deg); }
+        .marquee-container.bottom { bottom: 15%; transform: rotate(3deg); background: #00FF00; }
+        .marquee-container.center { top: 40%; transform: rotate(-10deg); background: #FF00FF; z-index: -1; }
+        
+        .marquee {
+            display: inline-block;
+            font-size: 6vw;
+            font-weight: 900;
+            font-family: Impact, 'Arial Black', sans-serif;
+            animation: marquee 15s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Background Colors */
+        .bg-yellow { background-color: #FFFF00; }
+        .bg-blue { background-color: #0000FF; }
+        .bg-red { background-color: #FF0000; }
+        .bg-green { background-color: #00FF00; }
+        .bg-white { background-color: #FFFFFF; }
+        .bg-black { background-color: #000000; color: #FFFFFF; }
+        .bg-magenta { background-color: #FF00FF; }
+        .bg-cyan { background-color: #00FFFF; }
+
+        /* Utility */
+        .text-white { color: #FFFFFF; }
+        .text-black { color: #000000; }
+        .text-red { color: #FF0000; text-shadow: 4px 4px 0px #000; }
+        .text-shadow-black { text-shadow: 6px 6px 0px #000; }
+        .text-shadow-white { text-shadow: 6px 6px 0px #fff; }
+        .border-white { border-color: #FFFFFF !important; }
+        .shadow-white { box-shadow: 16px 16px 0px #FFFFFF !important; }
+    </style>
+</head>
+<body>
+
+    <div id="presentation">
+        <!-- 1. Title -->
+        <div class="slide bg-yellow">
+            <div class="brutal-box">
+                <div class="brutal-text-huge">МЫ ДЕЛАЕМ ВЕЩИ</div>
+            </div>
+            <div class="brutal-tag blue" style="margin-top: 2rem; font-size: 3vw;">Артемий & Салим</div>
+        </div>
+
+        <!-- 2. Context -->
+        <div class="slide bg-blue">
+            <div class="brutal-box" style="background: #FF00FF;">
+                <div class="brutal-text-huge text-white text-shadow-black">АГУ. ПМ. 2 КУРС.</div>
+            </div>
+        </div>
+
+        <!-- 3. The Start -->
+        <div class="slide bg-white">
+            <div class="brutal-text-large text-red" style="text-align: center; max-width: 80vw;">
+                ГОД НАЗАД МЫ НИЧЕГО НЕ УМЕЛИ.
+            </div>
+        </div>
+
+        <!-- 4. The Catalyst -->
+        <div class="slide bg-red">
+            <div class="brutal-box" style="background: #000; border-color: #fff; box-shadow: 16px 16px 0px #fff;">
+                <div class="brutal-text-large text-white">АГУ ДАЛ НАМ ПИНОК И НАПРАВЛЕНИЕ.</div>
+            </div>
+        </div>
+
+        <!-- 5. The Action -->
+        <div class="slide bg-green">
+            <div class="brutal-text-huge text-shadow-white" style="text-align: center;">
+                МЫ ВЗЯЛИ И СДЕЛАЛИ.
+            </div>
+        </div>
+
+        <!-- 6. The Output -->
+        <div class="slide bg-magenta">
+            <div class="brutal-box" style="background: #FFFF00;">
+                <div class="brutal-text-large">ЧТО МЫ УСПЕЛИ ЗА ГОД?</div>
+            </div>
+        </div>
+
+        <!-- 7. Project 1 -->
+        <div class="slide bg-yellow">
+            <div class="brutal-text-huge">OBRAZZ</div>
+            <div class="brutal-box" style="padding: 1.5rem; margin: 2rem 0;">
+                <div class="brutal-text-medium">Умный гардероб. ИИ-стилист.</div>
+            </div>
+            <div>
+                <span class="brutal-tag blue">[REACT NATIVE]</span>
+                <span class="brutal-tag green">[SUPABASE]</span>
+            </div>
+        </div>
+
+        <!-- 8. Project 2 -->
+        <div class="slide bg-cyan">
+            <div class="brutal-text-huge">ADYGGIS</div>
+            <div class="brutal-box" style="padding: 1.5rem; margin: 2rem 0;">
+                <div class="brutal-text-medium">Карты Адыгеи. Оффлайн.</div>
+            </div>
+            <div>
+                <span class="brutal-tag red">[KOTLIN]</span>
+                <span class="brutal-tag white">[YANDEX MAPS]</span>
+            </div>
+        </div>
+
+        <!-- 9. More -->
+        <div class="slide bg-white">
+            <div class="marquee-container top">
+                <div class="marquee">БОТЫ. САЙТЫ. И ПРОЧЕЕ. БОТЫ. САЙТЫ. И ПРОЧЕЕ. БОТЫ. САЙТЫ. И ПРОЧЕЕ. </div>
+            </div>
+            <div class="marquee-container center">
+                <div class="marquee">БОТЫ. САЙТЫ. И ПРОЧЕЕ. БОТЫ. САЙТЫ. И ПРОЧЕЕ. БОТЫ. САЙТЫ. И ПРОЧЕЕ. </div>
+            </div>
+            <div class="marquee-container bottom">
+                <div class="marquee">БОТЫ. САЙТЫ. И ПРОЧЕЕ. БОТЫ. САЙТЫ. И ПРОЧЕЕ. БОТЫ. САЙТЫ. И ПРОЧЕЕ. </div>
+            </div>
+            <div class="brutal-box" style="z-index: 10;">
+                <div class="brutal-text-large">БОТЫ. САЙТЫ. И ПРОЧЕЕ.</div>
+            </div>
+        </div>
+
+        <!-- 10. The Truth -->
+        <div class="slide bg-black">
+            <div class="brutal-text-large text-white" style="text-align: center; max-width: 90vw;">
+                НИКТО НЕ СДЕЛАЕТ ЗА ТЕБЯ.
+            </div>
+        </div>
+
+        <!-- 11. The Truth 2 -->
+        <div class="slide bg-yellow">
+            <div class="brutal-box" style="background: #000; border-color: #FF0000; box-shadow: 16px 16px 0px #FF0000;">
+                <div class="brutal-text-large text-white">НО АГУ ДАСТ ТЕБЕ ВСЁ ДЛЯ СТАРТА.</div>
+            </div>
+        </div>
+
+        <!-- 12. Why AGU -->
+        <div class="slide bg-blue">
+            <div class="brutal-text-large text-white text-shadow-black" style="margin-bottom: 1rem;">ПОЧЕМУ АГУ?</div>
+            <div class="grid-2x2">
+                <div class="brutal-box" style="background: #FFFF00; padding: 2rem;"><div class="brutal-text-medium">[СООБЩЕСТВО]</div></div>
+                <div class="brutal-box" style="background: #FF00FF; padding: 2rem;"><div class="brutal-text-medium">[ХАКАТОНЫ]</div></div>
+                <div class="brutal-box" style="background: #00FF00; padding: 2rem;"><div class="brutal-text-medium">[ЖЕЛЕЗО]</div></div>
+                <div class="brutal-box" style="background: #FF0000; padding: 2rem;"><div class="brutal-text-medium text-white">[СТАЖИРОВКИ]</div></div>
+            </div>
+        </div>
+
+        <!-- 13. CTA -->
+        <div class="slide bg-red">
+            <div class="brutal-text-huge text-white text-shadow-black">СКАНИРУЙ.</div>
+            <div class="qr-placeholder">
+                <span>QR</span>
+            </div>
+            <div class="brutal-tag yellow" style="font-size: 4vw;">@MaykopTech</div>
+        </div>
+
+        <!-- 14. Final -->
+        <div class="slide bg-white">
+            <div class="brutal-box" style="background: #000; border-color: #00FF00; box-shadow: 16px 16px 0px #00FF00; margin-bottom: 2rem;">
+                <div class="brutal-text-huge text-white">ПОСТУПАЙ В АГУ.</div>
+            </div>
+            <div class="brutal-text-large text-red" style="text-shadow: 4px 4px 0px #000;">БУДЬ КРУТЫМ.</div>
+        </div>
+    </div>
+
+    <div class="slide-number" id="slide-number">1 / 14</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const slideNumberEl = document.getElementById('slide-number');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+            slideNumberEl.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Keyboard navigation
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown' || e.key === 'Enter') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'Backspace') {
+                prevSlide();
+            }
+        });
+
+        // Click navigation (right half = next, left half = prev)
+        window.addEventListener('click', (e) => {
+            if (e.clientX > window.innerWidth / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создаём будущее | АГУ 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg-color: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #e2e8f0; /* Background behind the cube */
+        }
+
+        /* 3D Scene Setup */
+        .scene {
+            width: 100vw;
+            height: 100vh;
+            perspective: 2000px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem;
+            box-sizing: border-box;
+            background-color: var(--bg-color);
+            
+            /* Modern Mesh Gradient */
+            background-image:
+                radial-gradient(at 20% 30%, hsla(228, 100%, 74%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 80% 10%, hsla(189, 100%, 56%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 10% 80%, hsla(355, 100%, 93%, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, hsla(280, 100%, 80%, 0.1) 0px, transparent 50%);
+            
+            backface-visibility: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .slide.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Typography & Content */
+        h1 {
+            font-size: clamp(3.5rem, 6vw, 6rem);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            color: var(--text-muted);
+            max-width: 800px;
+            line-height: 1.6;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 32px;
+            padding: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+            max-width: 900px;
+            width: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stack {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stack-item {
+            background: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--text-main);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background: white;
+            border: 3px dashed #cbd5e1;
+            border-radius: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2.5rem auto;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.2);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dot:hover {
+            background: rgba(15, 23, 42, 0.4);
+        }
+
+        .dot.active {
+            background: var(--accent);
+            transform: scale(1.4);
+        }
+
+        /* Controls hint */
+        .controls-hint {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 500;
+            z-index: 100;
+            opacity: 0.6;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scene">
+        <div class="cube" id="cube">
+            
+            <!-- Slide 1 -->
+            <div class="slide">
+                <h1>Создаём <span class="highlight">будущее</span></h1>
+                <p>Артемий Морозов & Салим Сокуров</p>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="badge">Контекст</div>
+                <h2>День открытых дверей АГУ 2026</h2>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide">
+                <div class="badge">Начало</div>
+                <h2>Год назад мы были обычными первокурсниками.</h2>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide">
+                <div class="badge">Катализатор</div>
+                <h2>Университет задал курс.<br>Мы подхватили инициативу.</h2>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide">
+                <div class="badge">Результат</div>
+                <h1>За один год мы создали...</h1>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide">
+                <div class="card">
+                    <div class="badge">Проект 1</div>
+                    <h2>Obrazz</h2>
+                    <p>Умный гардероб с ИИ.</p>
+                    <div class="stack">
+                        <span class="stack-item">React Native</span>
+                        <span class="stack-item">Expo</span>
+                        <span class="stack-item">Supabase</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="slide">
+                <div class="card">
+                    <div class="badge">Проект 2</div>
+                    <h2>adygGIS</h2>
+                    <p>Интерактивная карта Адыгеи.</p>
+                    <div class="stack">
+                        <span class="stack-item">Kotlin</span>
+                        <span class="stack-item">Jetpack Compose</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="slide">
+                <div class="badge">И это не всё</div>
+                <h2>Telegram-боты, веб-сайты<br>и многое другое.</h2>
+            </div>
+
+            <!-- Slide 9 -->
+            <div class="slide">
+                <div class="badge">Правда</div>
+                <h2>Никто за нас ничего не сделал.<br><span class="highlight">Но АГУ дал нам всё.</span></h2>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="slide">
+                <div class="badge">Почему АГУ?</div>
+                <div class="stack" style="max-width: 800px; margin: 0 auto; gap: 1.5rem;">
+                    <span class="stack-item" style="font-size: 1.5rem; padding: 1.25rem 2.5rem;">Сообщество</span>
+                    <span class="stack-item" style="font-size: 1.5rem; padding: 1.25rem 2.5rem;">Партнёры</span>
+                    <span class="stack-item" style="font-size: 1.5rem; padding: 1.25rem 2.5rem;">Хакатоны</span>
+                    <span class="stack-item" style="font-size: 1.5rem; padding: 1.25rem 2.5rem;">Оборудование</span>
+                </div>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="slide">
+                <h2>Присоединяйтесь.</h2>
+                <div class="qr-placeholder">QR Code<br>(250x250)</div>
+                <p class="highlight" style="font-weight: 600; font-size: 1.5rem;">@MaykopTech</p>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="slide">
+                <h1>Поступайте в АГУ 😎</h1>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="nav-dots" id="dots"></div>
+    <div class="controls-hint">Space / Arrows to navigate</div>
+
+    <script>
+        const cube = document.getElementById('cube');
+        const slides = document.querySelectorAll('.slide');
+        const dotsContainer = document.getElementById('dots');
+        
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // Initialize slides
+        slides.forEach((slide, index) => {
+            // Position each slide on a 3D cube face
+            // We rotate by 90 degrees for each slide and push it outward by 50vw
+            slide.style.transform = `rotateY(${index * 90}deg) translateZ(50vw)`;
+
+            // Create navigation dots
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            
+            dot.addEventListener('click', () => goToSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateSlides() {
+            // Rotate the entire cube container
+            // We push the container back by 50vw so the active face sits exactly at Z=0
+            cube.style.transform = `translateZ(-50vw) rotateY(${currentSlide * -90}deg)`;
+
+            // Manage visibility to prevent Z-fighting and improve performance
+            slides.forEach((slide, index) => {
+                // Only render the current slide and its immediate neighbors
+                if (Math.abs(index - currentSlide) <= 1) {
+                    slide.classList.add('visible');
+                } else {
+                    slide.classList.remove('visible');
+                }
+            });
+
+            // Update dots UI
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < totalSlides) {
+                currentSlide = index;
+                updateSlides();
+            }
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        }
+
+        // Keyboard Navigation
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initial render
+        updateSlides();
+    </script>
+</body>
+</html>

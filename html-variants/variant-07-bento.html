@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>День открытых дверей АГУ 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #FAFAFA;
+      color: #1A1A1A;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 250, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E5E7EB;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #3B82F6;
+      letter-spacing: -0.02em;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      text-decoration: none;
+      color: #6B7280;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav .nav-links a:hover {
+      color: #3B82F6;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 1.5rem 3rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    /* ── BENTO CARD BASE ── */
+    .bento-card {
+      background: #FFFFFF;
+      border: 1px solid #E5E7EB;
+      border-radius: 24px;
+      padding: 2rem;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .bento-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ── ANIMATION ── */
+    .bento-card {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .bento-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bento-card.visible:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ── HERO BENTO ── */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .hero-main {
+      grid-column: span 2;
+      grid-row: span 2;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 320px;
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .hero-main h1 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-main p {
+      font-size: 1.05rem;
+      opacity: 0.9;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .hero-event {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 150px;
+    }
+
+    .hero-event .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-event h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #1A1A1A;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 150px;
+    }
+
+    .hero-stat .number {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #3B82F6;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .hero-stat .stat-label {
+      font-size: 0.85rem;
+      color: #6B7280;
+      font-weight: 500;
+      margin-top: 0.4rem;
+    }
+
+    /* ── STORY BENTO ── */
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .story-main {
+      grid-column: span 2;
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem;
+    }
+
+    .story-main .section-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #3B82F6;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .story-main p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.65;
+      color: #374151;
+      letter-spacing: -0.01em;
+    }
+
+    .story-quote {
+      grid-column: span 2;
+      background: #F0F7FF;
+      border-color: #BFDBFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .story-quote blockquote {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1E40AF;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .story-quote blockquote::before {
+      content: '«';
+      font-size: 1.5rem;
+    }
+
+    .story-quote blockquote::after {
+      content: '»';
+      font-size: 1.5rem;
+    }
+
+    .story-stats {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .story-stats .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-right: 1px solid #E5E7EB;
+      border-bottom: 1px solid #E5E7EB;
+    }
+
+    .story-stats .stat-item:nth-child(2n) {
+      border-right: none;
+    }
+
+    .story-stats .stat-item:nth-child(n+3) {
+      border-bottom: none;
+    }
+
+    .story-stats .stat-item .number {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #3B82F6;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .story-stats .stat-item .stat-label {
+      font-size: 0.78rem;
+      color: #6B7280;
+      font-weight: 500;
+      margin-top: 0.3rem;
+    }
+
+    /* ── PROJECTS BENTO ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .project-card {
+      grid-column: span 2;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 260px;
+    }
+
+    .project-card .project-name {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card .project-desc {
+      font-size: 0.95rem;
+      color: #6B7280;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      max-width: 380px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #F3F4F6;
+      color: #374151;
+      border: 1px solid #E5E7EB;
+      white-space: nowrap;
+    }
+
+    .project-card.obrazz .project-name {
+      color: #7C3AED;
+    }
+
+    .project-card.obrazz .pill {
+      background: #F5F3FF;
+      color: #6D28D9;
+      border-color: #DDD6FE;
+    }
+
+    .project-card.adyggis .project-name {
+      color: #059669;
+    }
+
+    .project-card.adyggis .pill {
+      background: #ECFDF5;
+      color: #047857;
+      border-color: #A7F3D0;
+    }
+
+    .project-small {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 120px;
+    }
+
+    .project-small .emoji {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-small .small-label {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    /* ── UNIVERSITY BENTO ── */
+    .uni-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto auto;
+      gap: 1rem;
+    }
+
+    .uni-title {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem;
+    }
+
+    .uni-title .section-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #3B82F6;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .uni-title h2 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .uni-feature {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 140px;
+      padding: 1.5rem;
+    }
+
+    .uni-feature .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .uni-feature .feature-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #1A1A1A;
+    }
+
+    .uni-feature .feature-sub {
+      font-size: 0.78rem;
+      color: #9CA3AF;
+      font-weight: 500;
+      margin-top: 0.2rem;
+    }
+
+    .uni-quote {
+      grid-column: span 2;
+      background: linear-gradient(135deg, #3B82F6, #6366F1);
+      border-color: transparent;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .uni-quote p {
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    /* ── CTA BENTO ── */
+    .cta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .cta-main {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2.5rem;
+      min-height: 280px;
+      background: #1A1A1A;
+      border-color: transparent;
+      color: #fff;
+    }
+
+    .cta-main h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-main p {
+      font-size: 0.95rem;
+      color: #9CA3AF;
+      font-weight: 500;
+    }
+
+    .cta-qr {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .qr-placeholder {
+      width: 250px;
+      height: 250px;
+      border-radius: 20px;
+      background: #F3F4F6;
+      border: 2px dashed #D1D5DB;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .qr-placeholder .qr-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      color: #9CA3AF;
+    }
+
+    .qr-placeholder .qr-text {
+      font-size: 0.8rem;
+      color: #9CA3AF;
+      font-weight: 500;
+    }
+
+    .cta-qr .handle {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #3B82F6;
+    }
+
+    .cta-action {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: #3B82F6;
+      border-color: transparent;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    .cta-action .cta-emoji {
+      font-size: 3rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .cta-action h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem 3rem;
+      color: #9CA3AF;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ── ANIMATION DELAYS ── */
+    .delay-1 { transition-delay: 0.05s !important; }
+    .delay-2 { transition-delay: 0.1s !important; }
+    .delay-3 { transition-delay: 0.15s !important; }
+    .delay-4 { transition-delay: 0.2s !important; }
+    .delay-5 { transition-delay: 0.25s !important; }
+    .delay-6 { transition-delay: 0.3s !important; }
+    .delay-7 { transition-delay: 0.35s !important; }
+    .delay-8 { transition-delay: 0.4s !important; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .story-grid,
+      .projects-grid,
+      .uni-grid,
+      .cta-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-main {
+        grid-column: span 2;
+        min-height: 260px;
+      }
+
+      .hero-main h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-event {
+        grid-column: span 2;
+      }
+
+      .story-main {
+        grid-column: span 2;
+      }
+
+      .story-quote {
+        grid-column: span 2;
+      }
+
+      .story-stats {
+        grid-column: span 2;
+      }
+
+      .project-card {
+        grid-column: span 2;
+      }
+
+      .uni-title {
+        grid-column: span 2;
+      }
+
+      .uni-quote {
+        grid-column: span 2;
+      }
+
+      .cta-main {
+        grid-column: span 2;
+      }
+
+      .cta-qr {
+        grid-column: span 2;
+      }
+
+      .cta-action {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      html {
+        font-size: 15px;
+      }
+
+      nav {
+        padding: 0 1rem;
+      }
+
+      nav .nav-links {
+        gap: 1rem;
+      }
+
+      nav .nav-links a {
+        font-size: 0.78rem;
+      }
+
+      main {
+        padding: 72px 1rem 2rem;
+      }
+
+      section {
+        margin-bottom: 2rem;
+      }
+
+      .hero-grid,
+      .story-grid,
+      .projects-grid,
+      .uni-grid,
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main,
+      .hero-event,
+      .hero-stat,
+      .story-main,
+      .story-quote,
+      .story-stats,
+      .project-card,
+      .project-small,
+      .uni-title,
+      .uni-feature,
+      .uni-quote,
+      .cta-main,
+      .cta-qr,
+      .cta-action {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .hero-main {
+        min-height: 220px;
+        padding: 2rem;
+      }
+
+      .hero-main h1 {
+        font-size: 1.8rem;
+      }
+
+      .uni-title h2 {
+        font-size: 1.6rem;
+      }
+
+      .cta-main h2 {
+        font-size: 1.6rem;
+      }
+
+      .bento-card {
+        border-radius: 18px;
+        padding: 1.5rem;
+      }
+
+      .qr-placeholder {
+        width: 200px;
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">FrostmoonTech</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Главная</a></li>
+      <li><a href="#story">История</a></li>
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#university">АГУ</a></li>
+      <li><a href="#cta">Контакт</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ═══ HERO BENTO ═══ -->
+    <section id="hero">
+      <div class="hero-grid">
+
+        <div class="bento-card hero-main delay-1">
+          <h1>Мы создаём<br>будущее</h1>
+          <p>Артемий Морозов &amp; Салим Сокуров<br>2 курс, ПМ, АГУ</p>
+        </div>
+
+        <div class="bento-card hero-event delay-2">
+          <span class="label">Событие</span>
+          <h2>День открытых<br>дверей 2026</h2>
+        </div>
+
+        <div class="bento-card hero-stat delay-3">
+          <span class="number">2</span>
+          <span class="stat-label">приложения</span>
+        </div>
+
+        <div class="bento-card hero-stat delay-4">
+          <span class="number">10+</span>
+          <span class="stat-label">проектов</span>
+        </div>
+
+        <div class="bento-card hero-stat delay-5">
+          <span class="number">1</span>
+          <span class="stat-label">год пути</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ STORY BENTO ═══ -->
+    <section id="story">
+      <div class="story-grid">
+
+        <div class="bento-card story-main delay-1">
+          <span class="section-tag">Наша история</span>
+          <p>Год назад — обычные первокурсники. Сегодня — разработчики реальных продуктов. Университет дал направление, мы взяли инициативу.</p>
+        </div>
+
+        <div class="bento-card story-stats delay-2">
+          <div class="stat-item">
+            <span class="number">365+</span>
+            <span class="stat-label">дней работы</span>
+          </div>
+          <div class="stat-item">
+            <span class="number">2</span>
+            <span class="stat-label">человека</span>
+          </div>
+          <div class="stat-item">
+            <span class="number">∞</span>
+            <span class="stat-label">идей</span>
+          </div>
+          <div class="stat-item">
+            <span class="number">24/7</span>
+            <span class="stat-label">мотивация</span>
+          </div>
+        </div>
+
+        <div class="bento-card story-quote delay-3">
+          <blockquote>АГУ дал нам всё, чтобы мы смогли сделать это сами</blockquote>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ PROJECTS BENTO ═══ -->
+    <section id="projects">
+      <div class="projects-grid">
+
+        <div class="bento-card project-card obrazz delay-1">
+          <div>
+            <div class="project-name">Obrazz</div>
+            <p class="project-desc">Умный гардероб с ИИ. Цифровой гардероб, AI-подборка образов, автоудаление фона.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">React Native</span>
+            <span class="pill">Expo</span>
+            <span class="pill">Supabase</span>
+            <span class="pill">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="bento-card project-card adyggis delay-2">
+          <div>
+            <div class="project-name">adygGIS</div>
+            <p class="project-desc">Карты Адыгеи. Оффлайн-режим, умное кэширование, маршруты.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">Kotlin</span>
+            <span class="pill">Jetpack Compose</span>
+            <span class="pill">Yandex Maps</span>
+            <span class="pill">Room</span>
+          </div>
+        </div>
+
+        <div class="bento-card project-small delay-3">
+          <span class="emoji">🤖</span>
+          <span class="small-label">Telegram-боты</span>
+        </div>
+
+        <div class="bento-card project-small delay-4">
+          <span class="emoji">🌐</span>
+          <span class="small-label">Веб-сайты</span>
+        </div>
+
+        <div class="bento-card project-small delay-5">
+          <span class="emoji">🚀</span>
+          <span class="small-label">И другое</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ UNIVERSITY BENTO ═══ -->
+    <section id="university">
+      <div class="uni-grid">
+
+        <div class="bento-card uni-title delay-1">
+          <span class="section-tag">Образование</span>
+          <h2>Почему АГУ</h2>
+        </div>
+
+        <div class="bento-card uni-feature delay-2">
+          <span class="feature-icon">👥</span>
+          <span class="feature-name">Сообщество</span>
+          <span class="feature-sub">Единомышленники</span>
+        </div>
+
+        <div class="bento-card uni-feature delay-3">
+          <span class="feature-icon">🤝</span>
+          <span class="feature-name">IT-партнёры</span>
+          <span class="feature-sub">Связи с индустрией</span>
+        </div>
+
+        <div class="bento-card uni-feature delay-4">
+          <span class="feature-icon">⚡</span>
+          <span class="feature-name">Хакатоны</span>
+          <span class="feature-sub">Практика и драйв</span>
+        </div>
+
+        <div class="bento-card uni-feature delay-5">
+          <span class="feature-icon">🖥️</span>
+          <span class="feature-name">Оборудование</span>
+          <span class="feature-sub">Современная техника</span>
+        </div>
+
+        <div class="bento-card uni-feature delay-6">
+          <span class="feature-icon">💼</span>
+          <span class="feature-name">Стажировки</span>
+          <span class="feature-sub">Реальный опыт</span>
+        </div>
+
+        <div class="bento-card uni-feature delay-7">
+          <span class="feature-icon">🎓</span>
+          <span class="feature-name">Менторство</span>
+          <span class="feature-sub">Поддержка на каждом шаге</span>
+        </div>
+
+        <div class="bento-card uni-quote delay-8">
+          <p>Экосистема для реализации идей ✨</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══ CTA BENTO ═══ -->
+    <section id="cta">
+      <div class="cta-grid">
+
+        <div class="bento-card cta-main delay-1">
+          <h2>Присоединяйтесь<br>к нам</h2>
+          <p>Начните свой путь в IT вместе с нами в АГУ</p>
+        </div>
+
+        <div class="bento-card cta-qr delay-2">
+          <div class="qr-placeholder">
+            <span class="qr-icon">📱</span>
+            <span class="qr-text">QR-код</span>
+          </div>
+          <span class="handle">@MaykopTech</span>
+        </div>
+
+        <div class="bento-card cta-action delay-3">
+          <span class="cta-emoji">😎</span>
+          <h3>Поступайте в АГУ</h3>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    FrostmoonTech · АГУ · 2026
+  </footer>
+
+  <script>
+    // IntersectionObserver for reveal animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    document.querySelectorAll('.bento-card').forEach((card) => {
+      observer.observe(card);
+    });
+  </script>
+
+</body>
+</html>

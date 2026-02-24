@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СУПЕРГЕРОИ КОДА! - АГУ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow: #FFEB3B;
+            --cyan: #00E5FF;
+            --magenta: #FF007F;
+            --black: #111;
+            --white: #FFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Bangers', cursive;
+            background-color: var(--black);
+            color: var(--black);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #presentation {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(1.5) rotate(15deg);
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 0;
+            padding: 2rem;
+            text-align: center;
+            visibility: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            z-index: 10;
+            visibility: visible;
+        }
+
+        .slide.prev {
+            transform: translateX(-100vw) rotate(-20deg) scale(0.8);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .slide.next {
+            transform: translateX(100vw) rotate(20deg) scale(0.8);
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* Halftone Backgrounds */
+        .halftone-yellow {
+            background-color: var(--yellow);
+            background-image: radial-gradient(var(--black) 15%, transparent 16%), radial-gradient(var(--black) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .halftone-cyan {
+            background-color: var(--cyan);
+            background-image: radial-gradient(var(--black) 15%, transparent 16%), radial-gradient(var(--black) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        .halftone-magenta {
+            background-color: var(--magenta);
+            background-image: radial-gradient(var(--black) 15%, transparent 16%), radial-gradient(var(--black) 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        /* Comic Elements */
+        .angled-box {
+            position: relative;
+            background: var(--white);
+            padding: 3rem;
+            border: 8px solid var(--black);
+            box-shadow: 15px 15px 0px var(--black);
+            transform: skew(-5deg, -2deg);
+            max-width: 90%;
+        }
+
+        .speech-bubble {
+            position: relative;
+            background: var(--white);
+            border: 6px solid var(--black);
+            border-radius: 50%;
+            padding: 3rem 4rem;
+            box-shadow: 10px 10px 0px var(--black);
+            font-size: 3rem;
+            max-width: 80%;
+        }
+
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 20%;
+            border-width: 30px 30px 0;
+            border-style: solid;
+            border-color: var(--black) transparent transparent transparent;
+            display: block;
+            width: 0;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -18px;
+            left: 22%;
+            border-width: 22px 22px 0;
+            border-style: solid;
+            border-color: var(--white) transparent transparent transparent;
+            display: block;
+            width: 0;
+        }
+
+        .action-text {
+            font-size: 8rem;
+            color: var(--yellow);
+            text-transform: uppercase;
+            text-shadow: 
+                4px 4px 0 var(--black),
+                -2px -2px 0 var(--black),
+                2px -2px 0 var(--black),
+                -2px 2px 0 var(--black),
+                2px 2px 0 var(--black),
+                8px 8px 0 var(--magenta);
+            transform: rotate(-10deg);
+            line-height: 1;
+        }
+
+        .title-text {
+            font-size: 6rem;
+            color: var(--white);
+            text-transform: uppercase;
+            text-shadow: 
+                4px 4px 0 var(--black),
+                -2px -2px 0 var(--black),
+                2px -2px 0 var(--black),
+                -2px 2px 0 var(--black),
+                2px 2px 0 var(--black),
+                10px 10px 0 var(--cyan);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            background: var(--black);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            transform: rotate(2deg);
+            display: inline-block;
+            border: 4px solid var(--white);
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 8px solid var(--black);
+            box-shadow: 15px 15px 0px var(--magenta);
+            padding: 2rem;
+            width: 80%;
+            max-width: 800px;
+            transform: rotate(2deg);
+        }
+
+        .project-title {
+            font-size: 5rem;
+            color: var(--cyan);
+            text-shadow: 3px 3px 0 var(--black), -1px -1px 0 var(--black), 1px -1px 0 var(--black), -1px 1px 0 var(--black), 1px 1px 0 var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .tech-badge {
+            background: var(--yellow);
+            border: 4px solid var(--black);
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            box-shadow: 4px 4px 0 var(--black);
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background: var(--white);
+            border: 8px solid var(--black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            box-shadow: 10px 10px 0 var(--cyan);
+            margin: 2rem auto;
+            transform: rotate(-3deg);
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            background: var(--white);
+            border: 3px solid var(--black);
+            border-radius: 50%;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: var(--magenta);
+            transform: scale(1.5);
+        }
+        
+        .bam-pow {
+            position: absolute;
+            font-size: 4rem;
+            color: var(--white);
+            text-shadow: 3px 3px 0 var(--black), -1px -1px 0 var(--black), 1px -1px 0 var(--black), -1px 1px 0 var(--black), 1px 1px 0 var(--black);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="presentation">
+        <!-- Slide 1: Title -->
+        <section class="slide halftone-yellow">
+            <div class="angled-box" style="transform: skew(-2deg, -2deg) rotate(-2deg);">
+                <h1 class="title-text">СУПЕРГЕРОИ<br>КОДА!</h1>
+                <div class="subtitle">Артемий & Салим</div>
+            </div>
+        </section>
+
+        <!-- Slide 2: Context -->
+        <section class="slide halftone-cyan">
+            <div class="speech-bubble" style="border-radius: 20px; padding: 2rem 4rem;">
+                <h2 style="font-size: 4rem;">АГУ • ПМ • 2 КУРС</h2>
+            </div>
+        </section>
+
+        <!-- Slide 3: The Start -->
+        <section class="slide halftone-magenta">
+            <div class="speech-bubble">
+                ГОД НАЗАД...<br>МЫ БЫЛИ ОБЫЧНЫМИ СТУДЕНТАМИ!
+            </div>
+        </section>
+
+        <!-- Slide 4: The Catalyst -->
+        <section class="slide halftone-yellow">
+            <h1 class="action-text" style="font-size: 6rem; text-shadow: 4px 4px 0 #111, 8px 8px 0 #00E5FF;">
+                НО АГУ ДАЛ НАМ СУПЕРСИЛУ:<br><span style="color: var(--magenta);">ЗНАНИЯ!</span>
+            </h1>
+        </section>
+
+        <!-- Slide 5: The Output -->
+        <section class="slide halftone-cyan">
+            <div class="angled-box" style="transform: skew(5deg, 2deg) rotate(2deg); background: var(--yellow);">
+                <h1 class="title-text" style="color: var(--magenta); text-shadow: 4px 4px 0 var(--black), 8px 8px 0 var(--white);">
+                    И МЫ НАЧАЛИ ТВОРИТЬ!
+                </h1>
+            </div>
+        </section>
+
+        <!-- Slide 6: Project 1 -->
+        <section class="slide halftone-magenta">
+            <div class="project-card">
+                <h2 class="project-title">OBRAZZ!</h2>
+                <p class="project-desc">Умный гардероб с ИИ!</p>
+                <div class="tech-stack">
+                    <span class="tech-badge">React Native</span>
+                    <span class="tech-badge">Supabase</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Project 2 -->
+        <section class="slide halftone-yellow">
+            <div class="project-card" style="transform: rotate(-2deg); box-shadow: 15px 15px 0px var(--cyan);">
+                <h2 class="project-title" style="color: var(--magenta);">ADYGGIS!</h2>
+                <p class="project-desc">Карты Адыгеи! Оффлайн!</p>
+                <div class="tech-stack">
+                    <span class="tech-badge" style="background: var(--cyan); color: var(--white);">Kotlin</span>
+                    <span class="tech-badge" style="background: var(--cyan); color: var(--white);">Yandex Maps</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: More -->
+        <section class="slide halftone-cyan">
+            <div style="position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <h1 class="action-text" style="font-size: 7rem; z-index: 2;">БОТЫ! САЙТЫ!</h1>
+                <div class="bam-pow" style="top: 20%; left: 10%; transform: rotate(-20deg); font-size: 6rem; color: var(--yellow);">БАМ!</div>
+                <div class="bam-pow" style="bottom: 20%; right: 10%; transform: rotate(15deg); font-size: 8rem; color: var(--magenta);">ПАУ!</div>
+            </div>
+        </section>
+
+        <!-- Slide 9: The Truth -->
+        <section class="slide halftone-magenta">
+            <div class="angled-box" style="transform: skew(-3deg, 0deg); padding: 4rem;">
+                <h2 style="font-size: 4rem; line-height: 1.2;">
+                    АГУ ДАЛ НАМ ВСЁ,<br>ЧТОБЫ МЫ СМОГЛИ<br>СДЕЛАТЬ ЭТО САМИ!
+                </h2>
+            </div>
+        </section>
+
+        <!-- Slide 10: Why AGU -->
+        <section class="slide halftone-yellow">
+            <div class="speech-bubble" style="border-radius: 20px; text-align: left; padding: 3rem;">
+                <h2 style="font-size: 4.5rem; color: var(--cyan); text-shadow: 2px 2px 0 var(--black);">💥 СООБЩЕСТВО!</h2>
+                <h2 style="font-size: 4.5rem; color: var(--magenta); text-shadow: 2px 2px 0 var(--black);">🚀 ХАКАТОНЫ!</h2>
+                <h2 style="font-size: 4.5rem; color: var(--white); text-shadow: 2px 2px 0 var(--black);">💼 СТАЖИРОВКИ!</h2>
+            </div>
+        </section>
+
+        <!-- Slide 11: CTA -->
+        <section class="slide halftone-cyan">
+            <div class="angled-box" style="text-align: center;">
+                <h1 class="title-text" style="font-size: 4rem; color: var(--magenta); text-shadow: 3px 3px 0 var(--black);">ПРИСОЕДИНЯЙСЯ К ЛИГЕ!</h1>
+                <div class="qr-placeholder">
+                    QR CODE<br>250x250
+                </div>
+                <div class="subtitle" style="font-size: 3rem;">@MaykopTech</div>
+            </div>
+        </section>
+
+        <!-- Slide 12: Final -->
+        <section class="slide halftone-magenta">
+            <h1 class="action-text" style="font-size: 8rem; color: var(--yellow); text-shadow: 5px 5px 0 var(--black), 10px 10px 0 var(--cyan);">
+                ПОСТУПАЙ В АГУ! 😎
+            </h1>
+        </section>
+    </div>
+
+    <div class="progress-bar" id="progress"></div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progressContainer = document.getElementById('progress');
+        let currentSlide = 0;
+
+        // Create progress dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(index);
+            });
+            progressContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('next');
+                }
+            });
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+        }
+
+        // Event Listeners
+        window.addEventListener('keydown', (e) => {
+            if (['ArrowRight', 'ArrowDown', ' ', 'Enter'].includes(e.key)) {
+                e.preventDefault();
+                nextSlide();
+            } else if (['ArrowLeft', 'ArrowUp', 'Backspace'].includes(e.key)) {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        window.addEventListener('click', (e) => {
+            // Don't trigger if clicking on progress dots
+            if (!e.target.classList.contains('dot')) {
+                nextSlide();
+            }
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        window.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        window.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) prevSlide();
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>

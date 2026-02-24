@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наша история за один год — День открытых дверей АГУ 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #10B981;
+            --accent-light: #D1FAE5;
+            --accent-dark: #059669;
+            --bg: #FFFFFF;
+            --bg-soft: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --border: #E5E7EB;
+            --timeline-line: #D1FAE5;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.08);
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s;
+        }
+
+        nav.scrolled {
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--accent-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 8px;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-dark);
+            background: var(--accent-light);
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 80px;
+            background: linear-gradient(180deg, transparent, var(--accent));
+            border-radius: 2px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 100px;
+            margin-bottom: 32px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-badge::before {
+            content: '📅';
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 5.5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-names {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease forwards 0.8s;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 1.2s;
+        }
+
+        .hero-scroll span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .scroll-arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+        }
+
+        /* ── TIMELINE ── */
+        .timeline-section {
+            position: relative;
+            padding: 80px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Vertical line */
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            background: var(--timeline-line);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 0 48px 80px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 64px;
+            padding-left: 24px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+            padding-left: 64px;
+            padding-right: 24px;
+        }
+
+        /* Dot */
+        .timeline-dot {
+            position: absolute;
+            top: 6px;
+            width: 18px;
+            height: 18px;
+            background: var(--bg);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: 2;
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-item.visible .timeline-dot {
+            background: var(--accent);
+            box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        /* Connector line */
+        .timeline-connector {
+            position: absolute;
+            top: 14px;
+            height: 2px;
+            width: 32px;
+            background: var(--accent-light);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-connector {
+            right: 8px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-connector {
+            left: 8px;
+        }
+
+        .timeline-year {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-dark);
+            background: var(--accent-light);
+            padding: 4px 14px;
+            border-radius: 100px;
+            margin-bottom: 12px;
+            letter-spacing: 0.02em;
+        }
+
+        .timeline-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .timeline-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+        }
+
+        .tech-badges {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .timeline-item:nth-child(odd) .tech-badges {
+            justify-content: flex-end;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-dark);
+            background: var(--accent-light);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 4px 12px;
+            border-radius: 8px;
+            letter-spacing: 0.01em;
+        }
+
+        /* ── WHY AGU ── */
+        .why-section {
+            position: relative;
+            padding: 100px 24px;
+            background: var(--bg-soft);
+        }
+
+        .why-section::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 80px;
+            background: linear-gradient(180deg, var(--accent), transparent);
+            border-radius: 2px;
+        }
+
+        .why-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .why-quote {
+            font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.65;
+            margin-bottom: 56px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+
+        .why-quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .why-quote em {
+            color: var(--accent-dark);
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .why-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s, box-shadow 0.3s;
+        }
+
+        .why-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .why-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px) !important;
+        }
+
+        .why-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--accent-light);
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .why-card h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text);
+        }
+
+        .why-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 100px 24px 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(180deg, var(--timeline-line), var(--accent));
+            border-radius: 2px;
+        }
+
+        .cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s, transform 0.7s;
+        }
+
+        .cta-inner.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .cta-section h2 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+            color: var(--text);
+        }
+
+        .cta-section h2 span {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .qr-box {
+            width: 250px;
+            height: 250px;
+            background: var(--bg-soft);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        .qr-box:hover {
+            border-color: var(--accent);
+        }
+
+        .qr-box .qr-icon {
+            font-size: 3rem;
+            opacity: 0.4;
+        }
+
+        .qr-box .qr-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .cta-handle {
+            font-size: 0.9rem;
+            color: var(--accent-dark);
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .cta-tagline {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            padding: 32px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translateY(0); }
+            40% { transform: rotate(45deg) translateY(6px); }
+            60% { transform: rotate(45deg) translateY(3px); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .timeline-section::before {
+                left: 24px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                width: 100%;
+                left: 0;
+                text-align: left;
+                padding-left: 56px;
+                padding-right: 16px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 15px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-connector,
+            .timeline-item:nth-child(even) .timeline-connector {
+                left: 33px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(odd) .tech-badges {
+                justify-content: flex-start;
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .hero {
+                min-height: 90vh;
+                padding-top: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .qr-box {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+    <div class="nav-inner">
+        <div class="nav-brand">🟢 frostmoon</div>
+        <ul class="nav-links">
+            <li><a href="#timeline">История</a></li>
+            <li><a href="#why">Почему АГУ</a></li>
+            <li><a href="#cta">Контакт</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+    <div class="hero-badge">День открытых дверей 2026</div>
+    <h1>Наша история<br>за <span>один год</span></h1>
+    <p class="hero-names">Артемий Морозов и Салим Сокуров</p>
+    <p class="hero-sub">2 курс · Прикладная математика · АГУ</p>
+    <div class="hero-scroll">
+        <span>Листайте</span>
+        <div class="scroll-arrow"></div>
+    </div>
+</section>
+
+<!-- ── TIMELINE ── -->
+<section class="timeline-section" id="timeline">
+
+    <!-- Point 1 -->
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+        <span class="timeline-year">2024</span>
+        <h3 class="timeline-title">Начало</h3>
+        <p class="timeline-desc">Поступили в АГУ на Прикладную математику. Не знали, куда двигаться. Не разбирались в технологиях. Но были готовы учиться.</p>
+    </div>
+
+    <!-- Point 2 -->
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+        <span class="timeline-year">начало 2025</span>
+        <h3 class="timeline-title">Первые шаги</h3>
+        <p class="timeline-desc">Университет дал нам направление. Окружение из единомышленников. Полезные связи и менторы. Мы начали изучать программирование всерьёз.</p>
+    </div>
+
+    <!-- Point 3 -->
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+        <span class="timeline-year">середина 2025</span>
+        <h3 class="timeline-title">Первые проекты</h3>
+        <p class="timeline-desc">Telegram-боты, первые веб-сайты. Набивали шишки, учились на ошибках. Каждый проект делал нас сильнее.</p>
+    </div>
+
+    <!-- Point 4 -->
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+        <span class="timeline-year">конец 2025</span>
+        <h3 class="timeline-title">Obrazz</h3>
+        <p class="timeline-desc">Создали Obrazz — мобильное приложение, персональный стилист с ИИ. Цифровой гардероб, AI-подборка образов, автоудаление фона.</p>
+        <div class="tech-badges">
+            <span class="tech-badge">React Native</span>
+            <span class="tech-badge">Expo</span>
+            <span class="tech-badge">Supabase</span>
+            <span class="tech-badge">TypeScript</span>
+        </div>
+    </div>
+
+    <!-- Point 5 -->
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+        <span class="timeline-year">начало 2026</span>
+        <h3 class="timeline-title">adygGIS</h3>
+        <p class="timeline-desc">Запустили adygGIS — интерактивную карту достопримечательностей Адыгеи с оффлайн-режимом и умным кэшированием.</p>
+        <div class="tech-badges">
+            <span class="tech-badge">Kotlin</span>
+            <span class="tech-badge">Jetpack Compose</span>
+            <span class="tech-badge">Yandex Maps</span>
+            <span class="tech-badge">Room</span>
+        </div>
+    </div>
+
+    <!-- Point 6 -->
+    <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+        <span class="timeline-year">2026</span>
+        <h3 class="timeline-title">Сегодня</h3>
+        <p class="timeline-desc">Выступаем на Дне открытых дверей АГУ. За один год прошли путь от новичков до разработчиков реальных продуктов.</p>
+    </div>
+
+</section>
+
+<!-- ── WHY AGU ── -->
+<section class="why-section" id="why">
+    <div class="why-inner">
+        <p class="why-quote">
+            Никто за нас ничего не сделал. Но <em>АГУ дал нам всё</em>, чтобы мы смогли сделать это сами.
+        </p>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">🤝</div>
+                <h3>Сообщество</h3>
+                <p>Окружение, которое двигает вперёд</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎓</div>
+                <h3>Менторство</h3>
+                <p>Опытные преподаватели и наставники</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🖥️</div>
+                <h3>Оборудование</h3>
+                <p>Современная техника и лаборатории</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🏢</div>
+                <h3>IT-партнёры</h3>
+                <p>Связь с реальной индустрией</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🏆</div>
+                <h3>Хакатоны</h3>
+                <p>Соревнования и практика в команде</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🚀</div>
+                <h3>Карьера</h3>
+                <p>С первых курсов — к реальным проектам</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="cta">
+    <div class="cta-inner">
+        <h2>Ваша история<br>начинается <span>здесь</span></h2>
+        <div class="qr-box">
+            <div class="qr-icon">📱</div>
+            <div class="qr-label">QR → @MaykopTech</div>
+        </div>
+        <p class="cta-handle">@MaykopTech</p>
+        <p class="cta-tagline">Поступайте в АГУ — напишите свою историю 😎</p>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <p>frostmoon · День открытых дверей АГУ 2026</p>
+</footer>
+
+<script>
+    // ── Nav scroll effect ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // ── IntersectionObserver for timeline items ──
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -80px 0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe timeline items
+    document.querySelectorAll('.timeline-item').forEach((item, i) => {
+        item.style.transitionDelay = `${i * 0.05}s`;
+        observer.observe(item);
+    });
+
+    // Observe why-quote
+    document.querySelectorAll('.why-quote').forEach(el => observer.observe(el));
+
+    // Observe why-cards with stagger
+    document.querySelectorAll('.why-card').forEach((card, i) => {
+        card.style.transitionDelay = `${i * 0.08}s`;
+        observer.observe(card);
+    });
+
+    // Observe CTA
+    document.querySelectorAll('.cta-inner').forEach(el => observer.observe(el));
+
+    // ── Smooth scroll for nav links ──
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АГУ Open Doors - Pixel Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --primary: #ffcc00;
+            --secondary: #00ffcc;
+            --danger: #ff0044;
+            --pixel-border: 6px;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Press Start 2P', monospace;
+            overflow: hidden;
+            user-select: none;
+            image-rendering: pixelated;
+        }
+
+        #presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: pixelFade 0.3s steps(5, end);
+        }
+
+        @keyframes pixelFade {
+            0% { opacity: 0; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        h1 { font-size: 2.5rem; line-height: 1.5; margin: 1rem 0; text-shadow: 4px 4px 0px #000; }
+        h2 { font-size: 1.8rem; line-height: 1.5; margin: 1rem 0; text-shadow: 3px 3px 0px #000; }
+        h3 { font-size: 1.2rem; line-height: 1.5; margin: 1rem 0; }
+        p { font-size: 1rem; line-height: 1.8; }
+
+        .text-primary { color: var(--primary); }
+        .text-secondary { color: var(--secondary); }
+        .text-danger { color: var(--danger); }
+
+        .blink {
+            animation: blinker 1s step-start infinite;
+        }
+
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .pixel-box {
+            border: var(--pixel-border) solid #fff;
+            padding: 2rem 3rem;
+            background: #111;
+            position: relative;
+            max-width: 80%;
+        }
+
+        /* Chunky pixelated shadows */
+        .shadow-primary { box-shadow: 12px 12px 0px var(--primary); }
+        .shadow-secondary { box-shadow: 12px 12px 0px var(--secondary); }
+        .shadow-danger { box-shadow: 12px 12px 0px var(--danger); }
+        .shadow-white { box-shadow: 12px 12px 0px #fff; }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            background: #fff;
+            border: var(--pixel-border) solid #000;
+            outline: var(--pixel-border) solid #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            font-size: 0.8rem;
+            margin: 2rem auto;
+            box-shadow: 12px 12px 0px var(--secondary);
+        }
+
+        ul.pixel-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+        }
+
+        ul.pixel-list li {
+            margin: 1.5rem 0;
+            font-size: 1.2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        ul.pixel-list li::before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #333;
+            border: 2px solid #555;
+        }
+
+        .progress-dot.active {
+            background-color: var(--primary);
+            border-color: #fff;
+        }
+
+        /* Scanlines effect */
+        body::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.5rem; }
+            h2 { font-size: 1.2rem; }
+            .pixel-box { padding: 1.5rem; width: 90%; }
+            .qr-placeholder { width: 180px; height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="presentation">
+        <!-- Slide 1 -->
+        <div class="slide active">
+            <h1 class="text-danger">PLAYER 1: АРТЕМИЙ</h1>
+            <h1 class="text-secondary">PLAYER 2: САЛИМ</h1>
+            <div class="blink text-primary" style="margin-top: 4rem; font-size: 1.5rem;">PRESS START</div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="pixel-box shadow-secondary">
+                <h2 class="text-primary">LEVEL 1:</h2>
+                <p>АГУ • ПМ • 2 КУРС</p>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2 class="text-primary">ГОД НАЗАД:</h2>
+            <h1 style="font-size: 3.5rem; margin-top: 2rem;">НУБЫ.</h1>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="pixel-box shadow-danger">
+                <p style="line-height: 2; font-size: 1.2rem;">
+                    АГУ ДАЛ НАМ<br><br>
+                    <span class="text-primary blink" style="font-size: 2rem;">БАФФЫ</span><br><br>
+                    И НАПРАВЛЕНИЕ.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <h2>МЫ НАЧАЛИ</h2>
+            <h1 class="text-secondary blink" style="margin-top: 2rem;">ФАРМИТЬ ОПЫТ.</h1>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="pixel-box shadow-primary">
+                <h3 class="text-danger blink">ITEM ACQUIRED:</h3>
+                <h1 style="margin: 2rem 0;">OBRAZZ</h1>
+                <p>Умный гардероб с ИИ.</p>
+                <p class="text-secondary" style="font-size: 0.8rem; margin-top: 2rem;">Stack: React Native, Supabase</p>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="pixel-box shadow-secondary">
+                <h3 class="text-danger blink">ITEM ACQUIRED:</h3>
+                <h1 style="margin: 2rem 0;">ADYGGIS</h1>
+                <p>Карты Адыгеи. Оффлайн.</p>
+                <p class="text-primary" style="font-size: 0.8rem; margin-top: 2rem;">Stack: Kotlin, Yandex Maps</p>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h1 style="line-height: 2.5;">
+                <span class="text-primary">БОТЫ,</span><br>
+                <span class="text-secondary">САЙТЫ,</span><br>
+                <span class="text-danger">ПЕТ-ПРОЕКТЫ.</span>
+            </h1>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="pixel-box shadow-white" style="border-color: var(--danger);">
+                <p style="line-height: 2; font-size: 1.2rem;">АГУ НЕ ИГРАЕТ ЗА ТЕБЯ.</p>
+                <h2 class="text-primary" style="margin-top: 2rem; line-height: 1.5;">ОН ДАЁТ ДЖОЙСТИК.</h2>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <h2 class="text-secondary" style="margin-bottom: 3rem;">WHY AGU:</h2>
+            <ul class="pixel-list">
+                <li>СООБЩЕСТВО</li>
+                <li>ХАКАТОНЫ</li>
+                <li>ЖЕЛЕЗО</li>
+                <li>СТАЖИРОВКИ</li>
+            </ul>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <h2 class="text-primary blink">JOIN CO-OP MODE</h2>
+            <div class="qr-placeholder">
+                <div>[ QR CODE ]</div>
+                <div style="margin-top: 1rem; color: #666;">250x250</div>
+            </div>
+            <p class="text-secondary" style="margin-top: 1rem; font-size: 1.2rem;">@MaykopTech</p>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <h2>ПОСТУПАЙ В АГУ.</h2>
+            <h1 class="text-danger blink" style="margin-top: 3rem; font-size: 3.5rem;">GAME ON 😎</h1>
+        </div>
+    </div>
+
+    <div class="progress-bar" id="progressBar"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const progressBar = document.getElementById('progressBar');
+            let currentSlide = 0;
+
+            // Initialize progress bar
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('progress-dot');
+                if (index === 0) dot.classList.add('active');
+                progressBar.appendChild(dot);
+            });
+
+            const dots = document.querySelectorAll('.progress-dot');
+
+            function updateSlide(newIndex) {
+                if (newIndex < 0 || newIndex >= slides.length) return;
+                
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+                
+                currentSlide = newIndex;
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    updateSlide(currentSlide + 1);
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    updateSlide(currentSlide - 1);
+                }
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'Backspace') {
+                    e.preventDefault();
+                    prevSlide();
+                }
+            });
+
+            // Click navigation
+            document.addEventListener('click', (e) => {
+                // Click on left 30% of screen goes back, rest goes forward
+                if (e.clientX < window.innerWidth * 0.3) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

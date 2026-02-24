@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создаем будущее - АГУ 2026</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent-color: #4a90e2;
+            --glow-color: rgba(74, 144, 226, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .presentation {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            text-align: center;
+            transform: scale(0.95);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+            transform: scale(1);
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        p {
+            font-size: 1.8rem;
+            line-height: 1.5;
+            color: #a0a0a0;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .subtitle {
+            font-size: 2rem;
+            color: #888;
+            margin-bottom: 3rem;
+        }
+
+        .image-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px var(--glow-color);
+            margin-top: 2rem;
+        }
+
+        .image-container img {
+            display: block;
+            max-width: 100%;
+            max-height: 50vh;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.5s ease;
+        }
+
+        .slide.active .image-container img {
+            transform: scale(1.02);
+        }
+
+        .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(10px);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .grid-2 p {
+            margin-bottom: 1rem;
+        }
+
+        .tags {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .qr-container {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .qr-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .qr-box img {
+            width: 250px;
+            height: 250px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .qr-box span {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .controls:hover {
+            opacity: 1;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .list-items {
+            list-style: none;
+            text-align: left;
+            margin-top: 2rem;
+        }
+
+        .list-items li {
+            font-size: 1.8rem;
+            color: #a0a0a0;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .list-items li::before {
+            content: "→";
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .hero-slide {
+            background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0a 100%);
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../public/images/university_teamwork_1.jpeg') center/cover;
+            opacity: 0.15;
+            z-index: -1;
+            mix-blend-mode: luminosity;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="controls">
+        <button class="control-btn" id="prevBtn">←</button>
+        <button class="control-btn" id="nextBtn">→</button>
+    </div>
+
+    <div class="presentation" id="presentation">
+        
+        <!-- Slide 1 -->
+        <div class="slide active hero-slide">
+            <h1>Создаем будущее</h1>
+            <div class="subtitle">Артемий Морозов & Салим Сокуров</div>
+            <p style="color: #fff; font-weight: 500;">День открытых дверей АГУ 2026</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div>
+                    <h2>Кто мы такие?</h2>
+                    <p style="color: #fff; font-size: 2.2rem; font-weight: 600;">Студенты 2 курса, Прикладная математика, АГУ</p>
+                    <p>Мы не просто учимся, мы создаем реальные продукты. Наша цель — применять знания на практике с первого дня.</p>
+                </div>
+                <div class="image-container">
+                    <img src="../public/images/university_campus_collaboration_20251114_202320.png" alt="Студенты АГУ">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+            <h2>С чего всё началось</h2>
+            <p style="font-size: 2.5rem; color: #fff; max-width: 1000px; line-height: 1.4;">
+                Год назад мы были обычными первокурсниками. Не знали, куда двигаться, не разбирались в современных технологиях и фреймворках.
+            </p>
+            <p>Мы только начинали свой путь в IT, полные энтузиазма, но без четкого плана.</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <h2>Катализатор роста</h2>
+            <p style="font-size: 2.2rem; color: #fff; max-width: 900px;">
+                Университет задал курс. Мы подхватили инициативу.
+            </p>
+            <p style="max-width: 900px;">
+                Никто за нас ничего не сделал, но АГУ дал нам всё для старта: базу знаний, поддержку преподавателей и среду единомышленников.
+            </p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div class="image-container">
+                    <img src="../public/images/tech_innovation_1.jpeg" alt="Инновации">
+                </div>
+                <div>
+                    <h2>Результаты за год</h2>
+                    <p style="font-size: 2.2rem; color: #fff;">
+                        За один год мы создали 2 полноценных мобильных приложения, несколько Telegram-ботов и веб-сайтов.
+                    </p>
+                    <p>От идеи до релиза — мы прошли весь цикл разработки программного обеспечения.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div>
+                    <h2>Obrazz — Умный гардероб</h2>
+                    <p style="color: #fff; font-size: 1.8rem;">Персональный стилист с ИИ в вашем кармане.</p>
+                    <ul class="list-items">
+                        <li>Цифровой гардероб</li>
+                        <li>AI-подборка образов</li>
+                        <li>Автоудаление фона с фотографий</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Expo</span>
+                        <span class="tag">Supabase</span>
+                        <span class="tag">AI</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <div class="image-container" style="flex: 1;">
+                        <img src="../public/images/obrazz_app_screens_1.jpeg" alt="Obrazz Screen 1" style="max-height: 60vh;">
+                    </div>
+                    <div class="image-container" style="flex: 1;">
+                        <img src="../public/images/obrazz_app_screens_2.jpeg" alt="Obrazz Screen 2" style="max-height: 60vh;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div class="image-container">
+                    <img src="../public/images/adygyes_map_screens_1.png" alt="adygGIS Screen" style="max-height: 60vh;">
+                </div>
+                <div>
+                    <h2>adygGIS — Туристический гид</h2>
+                    <p style="color: #fff; font-size: 1.8rem;">Интерактивная карта Адыгеи для путешественников.</p>
+                    <ul class="list-items">
+                        <li>Оффлайн-режим работы</li>
+                        <li>Умное кэширование данных</li>
+                        <li>Построение туристических маршрутов</li>
+                    </ul>
+                    <div class="tags">
+                        <span class="tag">Kotlin</span>
+                        <span class="tag">Jetpack Compose</span>
+                        <span class="tag">Yandex Maps API</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <h2>Больше, чем просто учеба</h2>
+            <p style="font-size: 2.2rem; color: #fff; max-width: 900px;">
+                Telegram-боты, веб-сайты и пет-проекты.
+            </p>
+            <p style="max-width: 800px;">
+                Каждый проект — это новый опыт, новые ошибки и новые победы. Мы постоянно экспериментируем с новыми технологиями.
+            </p>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div>
+                    <h2>Почему АГУ?</h2>
+                    <p style="color: #fff; font-size: 2rem;">Это не просто ВУЗ, это экосистема.</p>
+                    <ul class="list-items">
+                        <li>Сильное IT-сообщество</li>
+                        <li>Партнёрства с IT-компаниями</li>
+                        <li>Регулярные Хакатоны</li>
+                        <li>Современное оборудование</li>
+                        <li>Реальные стажировки</li>
+                    </ul>
+                </div>
+                <div class="image-container">
+                    <img src="../public/images/university_teamwork_2.webp" alt="Командная работа в АГУ">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide">
+            <h2 style="font-size: 4rem; max-width: 1000px; line-height: 1.2;">
+                АГУ — это место, где ваши идеи становятся реальностью, <span style="color: var(--accent-color);">если вы готовы действовать.</span>
+            </h2>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <h2>Присоединяйтесь к нашему комьюнити!</h2>
+            <p>Сканируйте QR-коды, чтобы следить за нашими проектами и новостями IT-сообщества.</p>
+            
+            <div class="qr-container">
+                <div class="qr-box">
+                    <img src="../public/images/qr-maykoptech.png" alt="QR MaykopTech">
+                    <span>@MaykopTech</span>
+                </div>
+                <div class="qr-box">
+                    <img src="../public/images/qr-artfrost.jpeg" alt="QR ArtFrost">
+                    <span>@ArtFrost</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide">
+            <h1 style="font-size: 5rem; margin-bottom: 2rem;">Поступайте в АГУ.</h1>
+            <p style="font-size: 3rem; color: #fff;">Будете такими же крутыми 😎</p>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slides = document.querySelectorAll('.slide');
+            const progressBar = document.getElementById('progress');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            let currentSlide = 0;
+
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.classList.add('active');
+                    } else {
+                        slide.classList.remove('active');
+                    }
+                });
+
+                // Update progress bar
+                const progress = ((currentSlide) / (slides.length - 1)) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            function nextSlide() {
+                if (currentSlide < slides.length - 1) {
+                    currentSlide++;
+                    updateSlides();
+                }
+            }
+
+            function prevSlide() {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    updateSlides();
+                }
+            }
+
+            // Event Listeners
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                // Don't navigate if clicking on controls
+                if (e.target.closest('.controls')) return;
+                
+                const clickX = e.clientX;
+                const screenWidth = window.innerWidth;
+                
+                if (clickX > screenWidth / 2) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            });
+
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            // Initialize
+            updateSlides();
+        });
+    </script>
+</body>
+</html>

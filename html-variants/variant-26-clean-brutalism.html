@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>День открытых дверей АГУ 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&family=Manrope:wght@500;700;800&display=swap');
+
+        :root {
+            --bg: #f4f4f0;
+            --text: #0a0a0a;
+            --accent: #ff3e00;
+            --accent2: #0055ff;
+            --border: 6px solid var(--text);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            user-select: none;
+        }
+
+        .presentation {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vw;
+            background-color: var(--bg);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+            line-height: 0.85;
+            margin-bottom: 1rem;
+        }
+
+        .huge-text {
+            font-size: clamp(5rem, 12vw, 15rem);
+            letter-spacing: -0.04em;
+        }
+
+        .large-text {
+            font-size: clamp(3.5rem, 8vw, 10rem);
+            letter-spacing: -0.03em;
+        }
+
+        .medium-text {
+            font-size: clamp(2rem, 4vw, 5rem);
+            line-height: 1.1;
+        }
+
+        p {
+            font-size: clamp(1.2rem, 2vw, 2.5rem);
+            max-width: 900px;
+            line-height: 1.4;
+            font-weight: 700;
+        }
+
+        /* Brutalist Elements */
+        .brutal-box {
+            border: var(--border);
+            background: #fff;
+            padding: 2rem 3rem;
+            box-shadow: 16px 16px 0px var(--text);
+        }
+
+        .brutal-img {
+            border: var(--border);
+            box-shadow: 20px 20px 0px var(--text);
+            object-fit: cover;
+            background-color: #ccc;
+        }
+
+        .tag {
+            display: inline-block;
+            border: var(--border);
+            padding: 0.5rem 2rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--accent);
+            color: #fff;
+            text-transform: uppercase;
+            box-shadow: 8px 8px 0px var(--text);
+            margin-bottom: 2rem;
+        }
+
+        /* Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5vw;
+            align-items: center;
+            height: 100%;
+        }
+
+        .overlap-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlap-text {
+            position: absolute;
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .overlap-img {
+            width: 70vw;
+            height: 70vh;
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+            border: var(--border);
+            box-shadow: 24px 24px 0px var(--text);
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.3s;
+        }
+        
+        .overlap-container:hover .overlap-img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        /* Specific Slides */
+        .slide-1 {
+            background: var(--accent);
+            color: #fff;
+        }
+        .slide-1 .brutal-img {
+            position: absolute;
+            right: 5vw;
+            bottom: 5vh;
+            width: 45vw;
+            height: 65vh;
+            z-index: 0;
+            box-shadow: -20px -20px 0px var(--text);
+        }
+        .slide-1 .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-6-images {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .slide-6-images img {
+            width: 40%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: cover;
+        }
+
+        .qr-container {
+            display: flex;
+            gap: 5vw;
+            margin-top: 4rem;
+            justify-content: center;
+        }
+        .qr-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .qr-box img {
+            width: 300px;
+            height: 300px;
+            border: var(--border);
+            box-shadow: 16px 16px 0px var(--accent);
+            object-fit: cover;
+        }
+
+        .progress {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            z-index: 100;
+            background: #fff;
+            border: 4px solid var(--text);
+            padding: 0.5rem 1.5rem;
+            box-shadow: 6px 6px 0px var(--text);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            gap: 1rem;
+        }
+        .btn {
+            background: #fff;
+            border: 4px solid var(--text);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 6px 6px 0px var(--text);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+        .btn:active {
+            transform: translate(6px, 6px);
+            box-shadow: 0px 0px 0px var(--text);
+        }
+        
+        .highlight {
+            background: var(--text);
+            color: var(--bg);
+            padding: 0 1rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress" id="progress">1 / 12</div>
+    
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">←</button>
+        <button class="btn" onclick="nextSlide()">→</button>
+    </div>
+
+    <div class="presentation">
+        <!-- Slide 1 -->
+        <div class="slide slide-1 active">
+            <div class="content">
+                <div class="tag" style="background: #fff; color: var(--text);">День открытых дверей АГУ 2026</div>
+                <h1 class="huge-text">СОЗДАЕМ<br>БУДУЩЕЕ</h1>
+                <div class="brutal-box" style="display: inline-block; margin-top: 3rem; color: var(--text);">
+                    <p style="font-size: 2rem; font-family: 'Space Grotesk', sans-serif;">Артемий Морозов & Салим Сокуров</p>
+                </div>
+            </div>
+            <img src="../public/images/university_teamwork_1.jpeg" alt="Teamwork" class="brutal-img">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div>
+                    <h2 class="large-text">КТО МЫ<br>ТАКИЕ?</h2>
+                    <div class="brutal-box" style="margin-top: 3rem;">
+                        <p style="margin-bottom: 1.5rem; color: var(--accent); font-family: 'Space Grotesk', sans-serif; text-transform: uppercase;">Студенты 2 курса, Прикладная математика, АГУ</p>
+                        <p>Мы не просто учимся, мы создаем реальные продукты, которые работают и приносят пользу.</p>
+                    </div>
+                </div>
+                <img src="../public/images/university_campus_collaboration_20251114_202320.png" alt="Campus" class="brutal-img" style="width: 100%; height: 75vh;">
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" style="background: var(--text); color: var(--bg);">
+            <div style="max-width: 1400px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <h2 class="huge-text" style="color: var(--accent);">НАЧАЛО</h2>
+                <div class="brutal-box" style="background: var(--bg); color: var(--text); margin-top: 4rem; transform: rotate(-1deg);">
+                    <p class="medium-text" style="margin-bottom: 1rem;">Год назад мы были обычными первокурсниками.</p>
+                    <p class="medium-text" style="color: #666;">Не знали, куда двигаться, не разбирались в технологиях.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div class="brutal-box" style="background: var(--accent); color: #fff; border-color: var(--text); box-shadow: 20px 20px 0px var(--text);">
+                    <h2 class="large-text" style="margin-bottom: 2rem; color: #fff;">КАТАЛИЗАТОР</h2>
+                    <p style="font-size: 2.5rem;">Университет задал курс. Мы подхватили инициативу.</p>
+                </div>
+                <div style="padding-left: 2rem;">
+                    <p class="medium-text">Никто за нас ничего не сделал, но <span class="highlight" style="background: var(--accent); color: #fff;">АГУ дал нам всё</span> для мощного старта.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+            <div class="overlap-container">
+                <img src="../public/images/tech_innovation_1.jpeg" alt="Innovation" class="overlap-img">
+                <div class="overlap-text">
+                    <h2 class="huge-text" style="color: #fff; text-shadow: 4px 4px 0px var(--text), -4px -4px 0px var(--text), 4px -4px 0px var(--text), -4px 4px 0px var(--text);">РЕЗУЛЬТАТ</h2>
+                    <div style="margin-top: 2rem;">
+                        <p class="medium-text" style="margin: 0 auto; background: var(--accent); color: #fff; padding: 1.5rem 3rem; display: inline-block; border: var(--border); box-shadow: 12px 12px 0px var(--text);">За один год мы создали 2 мобильных приложения, Telegram-боты и сайты.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div>
+                    <div class="tag">Проект 01</div>
+                    <h2 class="large-text">OBRAZZ</h2>
+                    <h3 class="medium-text" style="color: var(--accent); margin-bottom: 2rem;">Умный гардероб</h3>
+                    <p class="brutal-box">Персональный стилист с ИИ. Цифровой гардероб, AI-подборка образов, автоудаление фона.</p>
+                    <div style="margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span class="tag" style="background: var(--text); font-size: 1.2rem; box-shadow: 4px 4px 0px var(--accent);">React Native</span>
+                        <span class="tag" style="background: var(--text); font-size: 1.2rem; box-shadow: 4px 4px 0px var(--accent);">Expo</span>
+                        <span class="tag" style="background: var(--text); font-size: 1.2rem; box-shadow: 4px 4px 0px var(--accent);">Supabase</span>
+                    </div>
+                </div>
+                <div class="slide-6-images">
+                    <img src="../public/images/obrazz_app_screens_1.jpeg" alt="Obrazz 1" class="brutal-img" style="transform: rotate(-2deg);">
+                    <img src="../public/images/obrazz_app_screens_2.jpeg" alt="Obrazz 2" class="brutal-img" style="transform: translateY(4rem) rotate(2deg);">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide" style="background: #e8e8e8;">
+            <div class="grid-2">
+                <img src="../public/images/adygyes_map_screens_1.png" alt="adygGIS" class="brutal-img" style="width: 100%; height: 75vh; object-position: top;">
+                <div>
+                    <div class="tag" style="background: var(--accent2);">Проект 02</div>
+                    <h2 class="large-text">adygGIS</h2>
+                    <h3 class="medium-text" style="color: var(--accent2); margin-bottom: 2rem;">Туристический гид</h3>
+                    <p class="brutal-box">Интерактивная карта Адыгеи. Оффлайн-режим, умное кэширование, авторские маршруты.</p>
+                    <div style="margin-top: 3rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <span class="tag" style="background: var(--text); font-size: 1.2rem; box-shadow: 4px 4px 0px var(--accent2);">Kotlin</span>
+                        <span class="tag" style="background: var(--text); font-size: 1.2rem; box-shadow: 4px 4px 0px var(--accent2);">Jetpack Compose</span>
+                        <span class="tag" style="background: var(--text); font-size: 1.2rem; box-shadow: 4px 4px 0px var(--accent2);">Yandex Maps</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+            <div style="text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+                <h2 class="huge-text" style="line-height: 0.9;">БОЛЬШЕ<br>ПРОЕКТОВ</h2>
+                <div class="brutal-box" style="margin-top: 5rem; max-width: 1000px; transform: rotate(1deg);">
+                    <p class="medium-text">Telegram-боты, веб-сайты и пет-проекты.</p>
+                    <p class="medium-text" style="color: var(--accent); margin-top: 1.5rem; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase;">Каждый проект — это новый опыт.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide">
+            <div class="grid-2">
+                <div>
+                    <h2 class="huge-text">ПОЧЕМУ<br><span style="color: var(--accent); text-shadow: 6px 6px 0px var(--text);">АГУ?</span></h2>
+                    <p class="medium-text" style="margin: 3rem 0; background: var(--text); color: var(--bg); display: inline-block; padding: 0.5rem 1rem;">Это мощная экосистема.</p>
+                    <ul style="list-style: none; font-size: 2.5rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; line-height: 1.8;">
+                        <li><span style="color: var(--accent);">→</span> СООБЩЕСТВО</li>
+                        <li><span style="color: var(--accent);">→</span> IT-ПАРТНЁРЫ</li>
+                        <li><span style="color: var(--accent);">→</span> ХАКАТОНЫ</li>
+                        <li><span style="color: var(--accent);">→</span> ОБОРУДОВАНИЕ</li>
+                        <li><span style="color: var(--accent);">→</span> СТАЖИРОВКИ</li>
+                    </ul>
+                </div>
+                <img src="../public/images/university_teamwork_2.webp" alt="AGU Ecosystem" class="brutal-img" style="width: 100%; height: 85vh;">
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide" style="background: var(--accent); color: #fff;">
+            <div style="display: flex; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 5vw;">
+                <h2 class="large-text" style="line-height: 1.1;">АГУ — ЭТО МЕСТО, ГДЕ ВАШИ ИДЕИ СТАНОВЯТСЯ РЕАЛЬНОСТЬЮ,<br><span class="highlight" style="margin-top: 2rem; box-shadow: 12px 12px 0px rgba(0,0,0,0.3);">ЕСЛИ ВЫ ГОТОВЫ ДЕЙСТВОВАТЬ.</span></h2>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide">
+            <div style="text-align: center; width: 100%; display: flex; flex-direction: column; justify-content: center; height: 100%;">
+                <h2 class="large-text">ПРИСОЕДИНЯЙТЕСЬ<br>К КОМЬЮНИТИ!</h2>
+                <div class="qr-container">
+                    <div class="qr-box">
+                        <img src="../public/images/qr-maykoptech.png" alt="MaykopTech QR">
+                        <p class="brutal-box" style="padding: 1rem 2rem; font-size: 2rem; font-family: 'Space Grotesk', sans-serif;">@MaykopTech</p>
+                    </div>
+                    <div class="qr-box">
+                        <img src="../public/images/qr-artfrost.jpeg" alt="ArtFrost QR">
+                        <p class="brutal-box" style="padding: 1rem 2rem; font-size: 2rem; font-family: 'Space Grotesk', sans-serif;">@ArtFrost</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide" style="background: var(--text); color: var(--bg);">
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+                <h2 class="huge-text" style="color: #fff;">ПОСТУПАЙТЕ<br>В <span style="color: var(--accent);">АГУ.</span></h2>
+                <div class="tag" style="margin-top: 5rem; font-size: 4rem; padding: 2rem 4rem; transform: rotate(-3deg); box-shadow: 16px 16px 0px var(--accent);">
+                    Будете такими же крутыми 😎
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progress = document.getElementById('progress');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            progress.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            // Ignore clicks on buttons
+            if (e.target.closest('.controls')) return;
+            
+            const clickX = e.clientX;
+            const width = window.innerWidth;
+            
+            if (clickX > width / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>

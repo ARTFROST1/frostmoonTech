@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>День открытых дверей АГУ 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ============ RESET & BASE ============ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      color: #2d2b3a;
+      background: #fafaff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ============ GRADIENT PALETTE ============ */
+    :root {
+      --g-start: #c7d2fe;   /* light indigo */
+      --g-mid: #ddd6fe;     /* light purple */
+      --g-end: #fbcfe8;     /* light pink */
+      --g-hero: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 40%, #fce7f3 100%);
+      --g-accent: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #f472b6 100%);
+      --g-accent-subtle: linear-gradient(135deg, #c7d2fe 0%, #ddd6fe 50%, #fbcfe8 100%);
+      --g-text: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+      --g-card: linear-gradient(160deg, rgba(255,255,255,0.85) 0%, rgba(245,243,255,0.75) 100%);
+      --shadow-sm: 0 2px 8px rgba(99,102,241,0.08);
+      --shadow-md: 0 8px 30px rgba(99,102,241,0.10);
+      --shadow-lg: 0 20px 60px rgba(99,102,241,0.12);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    /* ============ UTILITY ============ */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .gradient-text {
+      background: var(--g-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #6b6882;
+      max-width: 640px;
+      margin: 0 auto 3rem;
+      line-height: 1.7;
+    }
+
+    section {
+      padding: 100px 0;
+      position: relative;
+    }
+
+    /* ============ ANIMATIONS ============ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ============ NAVIGATION ============ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 20px rgba(99,102,241,0.08);
+      padding: 10px 0;
+    }
+
+    nav .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      background: var(--g-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      text-decoration: none;
+      color: #4b4868;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 10px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    nav .nav-links a:hover {
+      background: rgba(99,102,241,0.08);
+      color: #6366f1;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 22px;
+      height: 2.5px;
+      background: #4b4868;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ============ HERO ============ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--g-hero);
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(129,140,248,0.18) 0%, transparent 70%);
+      top: -120px;
+      right: -100px;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,114,182,0.14) 0%, transparent 70%);
+      bottom: -100px;
+      left: -80px;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #6366f1;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(99,102,241,0.15);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .hero-names {
+      font-size: clamp(1.15rem, 3vw, 1.6rem);
+      font-weight: 600;
+      color: #4b4868;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-info {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: #7c7a92;
+      animation: fadeUp 0.8s 0.45s ease both;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      animation: fadeIn 1s 1s ease both;
+    }
+
+    .hero-scroll-hint .arrow {
+      width: 28px;
+      height: 28px;
+      border-right: 2.5px solid rgba(99,102,241,0.4);
+      border-bottom: 2.5px solid rgba(99,102,241,0.4);
+      transform: rotate(45deg);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    /* ============ JOURNEY ============ */
+    #journey {
+      background: #fff;
+      text-align: center;
+    }
+
+    .journey-story {
+      max-width: 720px;
+      margin: 0 auto 3rem;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #4b4868;
+      line-height: 1.85;
+    }
+
+    .journey-quote {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 36px 40px;
+      border-radius: var(--radius);
+      background: var(--g-accent-subtle);
+      position: relative;
+    }
+
+    .journey-quote::before {
+      content: '"';
+      font-family: 'Plus Jakarta Sans', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      position: absolute;
+      top: -10px;
+      left: 24px;
+      background: var(--g-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .journey-quote p {
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      font-weight: 600;
+      color: #3b3754;
+      font-style: italic;
+      line-height: 1.7;
+    }
+
+    /* ============ PROJECTS ============ */
+    #projects {
+      background: linear-gradient(180deg, #fafaff 0%, #f0edff 50%, #fdf2f8 100%);
+      text-align: center;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-card {
+      background: var(--g-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: var(--radius);
+      padding: 40px 32px 36px;
+      text-align: left;
+      box-shadow: var(--shadow-md);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--g-accent);
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-card .card-tagline {
+      font-size: 0.95rem;
+      color: #6366f1;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .project-card p {
+      font-size: 0.98rem;
+      color: #5a5776;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tech-tag {
+      display: inline-block;
+      padding: 5px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(99,102,241,0.08);
+      color: #6366f1;
+    }
+
+    .projects-also {
+      font-size: 1.05rem;
+      color: #6b6882;
+      font-weight: 500;
+    }
+
+    .projects-also strong {
+      background: var(--g-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    /* ============ UNIVERSITY ============ */
+    #university {
+      background: #fff;
+      text-align: center;
+    }
+
+    .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .advantage-item {
+      padding: 32px 16px 28px;
+      border-radius: var(--radius-sm);
+      background: #fafaff;
+      border: 1px solid rgba(99,102,241,0.08);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s, border-color 0.4s;
+    }
+
+    .advantage-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(99,102,241,0.2);
+    }
+
+    .advantage-item .adv-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .advantage-item h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #3b3754;
+    }
+
+    .uni-quote {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 28px 36px;
+      border-radius: var(--radius);
+      background: var(--g-hero);
+      border: 1px solid rgba(99,102,241,0.1);
+    }
+
+    .uni-quote p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 700;
+      color: #3b3754;
+    }
+
+    /* ============ CTA ============ */
+    #cta {
+      background: linear-gradient(180deg, #fafaff 0%, #e0e7ff 50%, #ede9fe 100%);
+      text-align: center;
+      padding-bottom: 60px;
+    }
+
+    .cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-telegram {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: #4b4868;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .cta-telegram strong {
+      color: #6366f1;
+    }
+
+    .qr-placeholder {
+      width: 250px;
+      height: 250px;
+      margin: 0 auto 2.5rem;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #fff;
+      box-shadow: var(--shadow-md);
+    }
+
+    .qr-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: calc(var(--radius) + 3px);
+      background: var(--g-accent);
+      z-index: -1;
+      background-size: 200% 200%;
+      animation: gradientShift 4s ease infinite;
+    }
+
+    .qr-placeholder span {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      background: var(--g-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cta-closing {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      color: #3b3754;
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      color: #9896a8;
+      font-size: 0.85rem;
+      background: #fafaff;
+    }
+
+    /* ============ DECO SHAPES ============ */
+    .deco {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .deco-1 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(129,140,248,0.12) 0%, transparent 70%);
+      top: 60px; right: -80px;
+    }
+
+    .deco-2 {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(244,114,182,0.10) 0%, transparent 70%);
+      bottom: 40px; left: -60px;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 768px) {
+      section { padding: 72px 0; }
+
+      nav .nav-links { display: none; }
+      nav .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(20px);
+        padding: 12px 20px;
+        box-shadow: 0 8px 24px rgba(99,102,241,0.1);
+        border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      }
+
+      .mobile-toggle { display: flex; }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .journey-quote { padding: 28px 24px; }
+      .journey-quote::before { font-size: 3.5rem; left: 16px; top: -4px; }
+
+      .hero-title { margin-bottom: 1.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .advantage-item { padding: 22px 10px 18px; }
+
+      .project-card { padding: 28px 22px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="logo">FrostmoonTech</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#journey">История</a></li>
+        <li><a href="#projects">Проекты</a></li>
+        <li><a href="#university">АГУ</a></li>
+        <li><a href="#cta">Контакт</a></li>
+      </ul>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🎓 День открытых дверей 2026</div>
+      <h1 class="hero-title gradient-text">Создаём будущее<br>вместе</h1>
+      <p class="hero-names">Артемий Морозов &amp; Салим Сокуров</p>
+      <p class="hero-info">2 курс · Прикладная математика · АГУ</p>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="arrow"></div>
+    </div>
+  </section>
+
+  <!-- ============ JOURNEY ============ -->
+  <section id="journey">
+    <div class="container">
+      <h2 class="section-title gradient-text reveal">Как всё начиналось</h2>
+      <p class="journey-story reveal reveal-delay-1">
+        Год назад мы были обычными первокурсниками — не знали, куда двигаться, не разбирались в технологиях. Но университет дал нам направление и окружение. Мы подхватили инициативу — и за один год создали два мобильных приложения, несколько сайтов и&nbsp;Telegram-ботов.
+      </p>
+      <div class="journey-quote reveal reveal-delay-2">
+        <p>Никто за нас ничего не сделал. Но АГУ дал нам всё, чтобы мы смогли сделать это&nbsp;сами.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title gradient-text reveal">Наши проекты</h2>
+      <p class="section-subtitle reveal reveal-delay-1">Каждый проект — реальный продукт, созданный для реальных пользователей.</p>
+
+      <div class="projects-grid">
+        <!-- Obrazz -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="card-icon">👗</div>
+          <h3 class="gradient-text">Obrazz</h3>
+          <div class="card-tagline">Умный гардероб</div>
+          <p>Персональный стилист с ИИ. Цифровой гардероб, AI-подборка образов, автоудаление фона, drag&nbsp;&amp;&nbsp;drop&nbsp;редактор.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Expo</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">TypeScript</span>
+          </div>
+        </div>
+
+        <!-- adygGIS -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="card-icon">🗺️</div>
+          <h3 class="gradient-text">adygGIS</h3>
+          <div class="card-tagline">Карты Адыгеи</div>
+          <p>Интерактивная карта достопримечательностей Адыгеи с оффлайн-режимом и&nbsp;умным кэшированием.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Kotlin</span>
+            <span class="tech-tag">Jetpack Compose</span>
+            <span class="tech-tag">Yandex Maps</span>
+            <span class="tech-tag">Room</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="projects-also reveal reveal-delay-3">
+        <strong>А ещё:</strong> Telegram-боты, веб-сайты и другие проекты
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ UNIVERSITY ============ -->
+  <section id="university">
+    <div class="container" style="position:relative;">
+      <div class="deco deco-1"></div>
+      <div class="deco deco-2"></div>
+      <h2 class="section-title gradient-text reveal">Почему АГУ</h2>
+      <p class="section-subtitle reveal reveal-delay-1">Не просто университет, а платформа для роста.</p>
+
+      <div class="advantages-grid">
+        <div class="advantage-item reveal reveal-delay-1">
+          <div class="adv-icon">🤝</div>
+          <h4>Сообщество</h4>
+        </div>
+        <div class="advantage-item reveal reveal-delay-2">
+          <div class="adv-icon">🛡️</div>
+          <h4>Поддержка</h4>
+        </div>
+        <div class="advantage-item reveal reveal-delay-3">
+          <div class="adv-icon">🖥️</div>
+          <h4>Оборудование</h4>
+        </div>
+        <div class="advantage-item reveal reveal-delay-4">
+          <div class="adv-icon">🏢</div>
+          <h4>IT-партнёры</h4>
+        </div>
+        <div class="advantage-item reveal reveal-delay-5">
+          <div class="adv-icon">🏆</div>
+          <h4>Хакатоны</h4>
+        </div>
+        <div class="advantage-item reveal reveal-delay-5">
+          <div class="adv-icon">🚀</div>
+          <h4>Карьера</h4>
+        </div>
+      </div>
+
+      <div class="uni-quote reveal">
+        <p>«АГУ — экосистема для реализации идей.»</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section id="cta">
+    <div class="container cta-inner">
+      <h2 class="section-title gradient-text reveal">Вступайте в комьюнити</h2>
+      <p class="cta-telegram reveal reveal-delay-1">
+        Telegram-канал <strong>@MaykopTech</strong> — опыт, проекты, полезная информация
+      </p>
+
+      <div class="qr-placeholder reveal reveal-delay-2">
+        <span>QR</span>
+      </div>
+
+      <p class="cta-closing reveal reveal-delay-3">
+        Поступайте в АГУ — будете такими же крутыми 😎
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="container">
+      <p>© 2026 FrostmoonTech · Артемий Морозов &amp; Салим Сокуров</p>
+    </div>
+  </footer>
+
+  <!-- ============ JS ============ -->
+  <script>
+    // --- Scroll-triggered reveals ---
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // --- Navbar scroll effect ---
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // --- Mobile menu toggle ---
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

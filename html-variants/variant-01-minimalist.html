@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>День открытых дверей — АГУ 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1a1a1a;
+      background: #ffffff;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #4F7CFF;
+      color: #fff;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: #4F7CFF;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #666;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: color 0.25s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: #4F7CFF;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #1a1a1a;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 7rem 2rem;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #4F7CFF;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+      color: #0d0d0d;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1.5px;
+      background: #4F7CFF;
+      margin-bottom: 2.5rem;
+    }
+
+    .thin-line {
+      width: 100%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.08);
+      margin: 3rem 0;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(79, 124, 255, 0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -20%;
+      left: -15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(79, 124, 255, 0.03) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border: 1px solid rgba(79, 124, 255, 0.2);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #4F7CFF;
+      margin-bottom: 2.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      margin-bottom: 1.8rem;
+      color: #0d0d0d;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: #555;
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .hero-subtitle strong {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.4;
+      animation: floatDown 2s ease-in-out infinite;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 1.5px solid #1a1a1a;
+      border-bottom: 1.5px solid #1a1a1a;
+      transform: rotate(45deg);
+    }
+
+    @keyframes floatDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== JOURNEY ===== */
+    .journey {
+      background: #fafafa;
+    }
+
+    .journey-text {
+      font-size: clamp(1.05rem, 2vw, 1.2rem);
+      color: #444;
+      line-height: 1.85;
+      max-width: 700px;
+    }
+
+    .journey-quote {
+      margin-top: 2.5rem;
+      padding: 2rem 2.5rem;
+      border-left: 3px solid #4F7CFF;
+      background: #fff;
+      border-radius: 0 8px 8px 0;
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      font-weight: 500;
+      color: #2a2a2a;
+      line-height: 1.7;
+    }
+
+    /* ===== PROJECTS ===== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .project-card {
+      padding: 2.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.07);
+      border-radius: 12px;
+      background: #fff;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #4F7CFF, #7BA1FF);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover {
+      border-color: rgba(79, 124, 255, 0.15);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.04);
+      transform: translateY(-2px);
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .project-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+      color: #0d0d0d;
+    }
+
+    .project-tagline {
+      font-size: 0.9rem;
+      color: #4F7CFF;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-desc {
+      font-size: 0.92rem;
+      color: #555;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tech-tag {
+      padding: 0.3rem 0.75rem;
+      background: #f5f5f5;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #666;
+      letter-spacing: 0.01em;
+    }
+
+    .other-projects {
+      padding: 2rem 2.5rem;
+      background: #fafafa;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .other-projects h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .other-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .other-tag {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #444;
+      background: #fff;
+      transition: all 0.25s ease;
+    }
+
+    .other-tag:hover {
+      border-color: #4F7CFF;
+      color: #4F7CFF;
+    }
+
+    /* ===== UNIVERSITY ===== */
+    .university {
+      background: #fafafa;
+    }
+
+    .uni-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .uni-point {
+      padding: 2rem;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .uni-point:hover {
+      border-color: rgba(79, 124, 255, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    .uni-point-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(79, 124, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+    }
+
+    .uni-point h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      letter-spacing: -0.01em;
+    }
+
+    .uni-quote {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+      line-height: 1.5;
+    }
+
+    .uni-quote span {
+      color: #4F7CFF;
+    }
+
+    /* ===== CTA / JOIN ===== */
+    .join {
+      text-align: center;
+      padding-bottom: 5rem;
+    }
+
+    .join-text {
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      line-height: 1.75;
+    }
+
+    .qr-wrapper {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .qr-box {
+      width: 250px;
+      height: 250px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ccc;
+      letter-spacing: 0.05em;
+      background: #fafafa;
+      transition: all 0.3s ease;
+    }
+
+    .qr-box:hover {
+      border-color: #4F7CFF;
+      color: #4F7CFF;
+      background: rgba(79, 124, 255, 0.02);
+    }
+
+    .qr-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #4F7CFF;
+      letter-spacing: -0.01em;
+    }
+
+    .join-final {
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: #0d0d0d;
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: 400;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-content > * {
+      animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .uni-points {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-burger {
+        display: flex;
+      }
+
+      .nav-burger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .nav-burger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .nav-burger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .uni-points {
+        grid-template-columns: 1fr;
+      }
+
+      .project-card {
+        padding: 2rem;
+      }
+
+      .journey-quote {
+        padding: 1.5rem 1.8rem;
+      }
+
+      .qr-box {
+        width: 200px;
+        height: 200px;
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      html {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">frostmoon<span>Tech</span></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#journey" onclick="closeMenu()">Наш путь</a></li>
+        <li><a href="#projects" onclick="closeMenu()">Проекты</a></li>
+        <li><a href="#university" onclick="closeMenu()">Почему АГУ</a></li>
+        <li><a href="#join" onclick="closeMenu()">Контакты</a></li>
+      </ul>
+      <button class="nav-burger" id="navBurger" onclick="toggleMenu()" aria-label="Меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">День открытых дверей 2026</div>
+      <h1>Мы — студенты,<br>которые создают</h1>
+      <p class="hero-subtitle">
+        <strong>Артемий Морозов</strong> и <strong>Салим Сокуров</strong><br>
+        2 курс · Прикладная математика · АГУ
+      </p>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Листайте</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- OUR JOURNEY -->
+  <section class="journey" id="journey">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">О нас</div>
+        <h2 class="section-title">Наш путь</h2>
+        <div class="divider"></div>
+      </div>
+      <p class="journey-text reveal reveal-delay-1">
+        Год назад мы были обычными первокурсниками — не знали, куда двигаться, не разбирались в технологиях. Но университет дал нам направление и окружение. Мы подхватили инициативу — и за один год создали два мобильных приложения, несколько сайтов и Telegram-ботов.
+      </p>
+      <div class="journey-quote reveal reveal-delay-2">
+        Никто за нас ничего не сделал. Но АГУ дал нам всё, чтобы мы смогли сделать это сами.
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects" id="projects">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Портфолио</div>
+        <h2 class="section-title">Наши проекты</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="project-name">Obrazz</div>
+          <div class="project-tagline">Умный гардероб</div>
+          <p class="project-desc">
+            Мобильное приложение — персональный стилист с искусственным интеллектом. Цифровой гардероб, AI-подборка образов, автоудаление фона, drag&nbsp;&amp;&nbsp;drop редактор коллажей.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">React Native</span>
+            <span class="tech-tag">Expo</span>
+            <span class="tech-tag">Supabase</span>
+            <span class="tech-tag">TypeScript</span>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="project-name">adygGIS</div>
+          <div class="project-tagline">Карты Адыгеи</div>
+          <p class="project-desc">
+            Интерактивная карта достопримечательностей Республики Адыгея. Оффлайн-режим, умное кэширование, построение маршрутов.
+          </p>
+          <div class="project-tech">
+            <span class="tech-tag">Kotlin</span>
+            <span class="tech-tag">Jetpack Compose</span>
+            <span class="tech-tag">Yandex Maps</span>
+            <span class="tech-tag">Room</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="other-projects reveal reveal-delay-3">
+        <h3>А ещё…</h3>
+        <div class="other-tags">
+          <span class="other-tag">Telegram-боты</span>
+          <span class="other-tag">Веб-сайты</span>
+          <span class="other-tag">И многое другое</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIVERSITY -->
+  <section class="university" id="university">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Университет</div>
+        <h2 class="section-title">Почему АГУ</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="uni-points">
+        <div class="uni-point reveal reveal-delay-1">
+          <div class="uni-point-icon">👥</div>
+          <h3>Сообщество единомышленников</h3>
+        </div>
+        <div class="uni-point reveal reveal-delay-1">
+          <div class="uni-point-icon">🚀</div>
+          <h3>Поддержка инициатив</h3>
+        </div>
+        <div class="uni-point reveal reveal-delay-2">
+          <div class="uni-point-icon">💻</div>
+          <h3>Современное оборудование</h3>
+        </div>
+        <div class="uni-point reveal reveal-delay-2">
+          <div class="uni-point-icon">🤝</div>
+          <h3>Партнёры из IT-индустрии</h3>
+        </div>
+        <div class="uni-point reveal reveal-delay-3">
+          <div class="uni-point-icon">⚡</div>
+          <h3>Хакатоны и соревнования</h3>
+        </div>
+        <div class="uni-point reveal reveal-delay-3">
+          <div class="uni-point-icon">📈</div>
+          <h3>Стажировки и трудоустройство</h3>
+        </div>
+      </div>
+
+      <div class="thin-line"></div>
+
+      <p class="uni-quote reveal">
+        АГУ — это не просто учёба.<br>
+        Это <span>экосистема</span>, где ваши идеи становятся реальностью.
+      </p>
+    </div>
+  </section>
+
+  <!-- JOIN / CTA -->
+  <section class="join" id="join">
+    <div class="container">
+      <div class="reveal">
+        <div class="section-label">Будьте с нами</div>
+        <h2 class="section-title">Присоединяйтесь</h2>
+        <div class="divider" style="margin-left:auto;margin-right:auto;"></div>
+      </div>
+
+      <p class="join-text reveal reveal-delay-1">
+        Подписывайтесь на наш Telegram-канал — мы делимся опытом, проектами и полезной информацией.
+      </p>
+
+      <div class="qr-wrapper reveal reveal-delay-2">
+        <div class="qr-box">QR</div>
+        <div class="qr-label">@MaykopTech</div>
+      </div>
+
+      <div class="thin-line" style="max-width:200px;margin:2.5rem auto;"></div>
+
+      <p class="join-final reveal reveal-delay-3">
+        Поступайте в АГУ.<br>Будете такими же крутыми, как мы 😎
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 frostmoonTech · День открытых дверей АГУ</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Intersection Observer for reveal animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+      document.getElementById('navBurger').classList.toggle('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('navBurger').classList.remove('active');
+    }
+  </script>
+</body>
+</html>

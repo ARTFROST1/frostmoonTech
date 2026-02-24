@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>День открытых дверей АГУ 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F4F4F4;
+            --text-color: #111111;
+            --accent-color: #E63946; /* Swiss Red */
+            --grid-gap: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            line-height: 1.1;
+        }
+
+        .presentation {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            gap: var(--grid-gap);
+            padding: 4rem;
+            background-color: var(--bg-color);
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 8vw;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            grid-column: 1 / -1;
+            align-self: end;
+        }
+
+        h2 {
+            font-size: 5vw;
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 2vw;
+            font-weight: 400;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .accent {
+            color: var(--accent-color);
+        }
+
+        .bg-dark {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .bg-accent {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* Image Styles */
+        .img-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2);
+            transition: filter 0.3s ease;
+        }
+
+        .img-container:hover img {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .shape-circle {
+            border-radius: 50%;
+        }
+
+        .shape-rect {
+            border-radius: 0;
+        }
+
+        /* Slide Specific Layouts */
+        
+        /* Slide 1 */
+        #slide-1 {
+            grid-template-rows: auto 1fr auto;
+        }
+        #slide-1 .hero-img {
+            grid-column: 5 / 13;
+            grid-row: 1 / 12;
+            clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+        }
+        #slide-1 .title-block {
+            grid-column: 1 / 10;
+            grid-row: 8 / 13;
+            z-index: 2;
+            mix-blend-mode: difference;
+            color: white;
+        }
+        #slide-1 .meta {
+            grid-column: 1 / 5;
+            grid-row: 1 / 3;
+            font-weight: 700;
+            font-size: 1.5vw;
+            text-transform: uppercase;
+        }
+
+        /* Slide 2 */
+        #slide-2 .text-block {
+            grid-column: 1 / 7;
+            grid-row: 3 / 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+        #slide-2 .img-block {
+            grid-column: 7 / 13;
+            grid-row: 2 / 12;
+        }
+
+        /* Slide 3 */
+        #slide-3 {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        #slide-3 .huge-text {
+            grid-column: 2 / 12;
+            grid-row: 3 / 11;
+            font-size: 6vw;
+            font-weight: 900;
+            align-self: center;
+            line-height: 1;
+        }
+
+        /* Slide 4 */
+        #slide-4 .huge-text {
+            grid-column: 1 / 11;
+            grid-row: 2 / 12;
+            font-size: 5.5vw;
+            font-weight: 900;
+            align-self: center;
+            line-height: 1;
+        }
+        #slide-4 .huge-text span {
+            color: var(--accent-color);
+        }
+
+        /* Slide 5 */
+        #slide-5 .text-block {
+            grid-column: 6 / 13;
+            grid-row: 4 / 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #slide-5 .img-block {
+            grid-column: 1 / 6;
+            grid-row: 1 / 13;
+            border-radius: 50vw 50vw 0 0;
+        }
+
+        /* Slide 6 */
+        #slide-6 .title-block {
+            grid-column: 1 / 13;
+            grid-row: 1 / 3;
+        }
+        #slide-6 .desc-block {
+            grid-column: 1 / 5;
+            grid-row: 4 / 10;
+        }
+        #slide-6 .img-1 {
+            grid-column: 5 / 9;
+            grid-row: 3 / 12;
+        }
+        #slide-6 .img-2 {
+            grid-column: 9 / 13;
+            grid-row: 5 / 13;
+        }
+        .stack-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--text-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1vw;
+        }
+
+        /* Slide 7 */
+        #slide-7 {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+        #slide-7 .stack-tag {
+            border-color: var(--bg-color);
+        }
+        #slide-7 .title-block {
+            grid-column: 1 / 13;
+            grid-row: 1 / 3;
+        }
+        #slide-7 .desc-block {
+            grid-column: 8 / 13;
+            grid-row: 4 / 10;
+        }
+        #slide-7 .img-1 {
+            grid-column: 1 / 8;
+            grid-row: 3 / 13;
+            clip-path: polygon(0 0, 100% 10%, 100% 100%, 0% 100%);
+        }
+
+        /* Slide 8 */
+        #slide-8 .grid-text {
+            grid-column: 1 / 13;
+            grid-row: 1 / 13;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            align-items: center;
+        }
+        #slide-8 h2 {
+            font-size: 4vw;
+            grid-column: 1 / -1;
+        }
+        #slide-8 .big-number {
+            font-size: 15vw;
+            font-weight: 900;
+            color: var(--accent-color);
+            line-height: 0.8;
+        }
+
+        /* Slide 9 */
+        #slide-9 .title-block {
+            grid-column: 1 / 6;
+            grid-row: 1 / 4;
+        }
+        #slide-9 .list-block {
+            grid-column: 1 / 6;
+            grid-row: 4 / 12;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        #slide-9 .list-item {
+            font-size: 3vw;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 4px solid var(--text-color);
+            padding-bottom: 0.5rem;
+        }
+        #slide-9 .img-block {
+            grid-column: 6 / 13;
+            grid-row: 1 / 13;
+            border-radius: 50%;
+        }
+
+        /* Slide 10 */
+        #slide-10 {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+        }
+        #slide-10 .huge-text {
+            grid-column: 1 / 13;
+            grid-row: 3 / 11;
+            font-size: 7vw;
+            font-weight: 900;
+            text-align: center;
+            align-self: center;
+            text-transform: uppercase;
+        }
+
+        /* Slide 11 */
+        #slide-11 .title-block {
+            grid-column: 1 / 13;
+            grid-row: 1 / 3;
+            text-align: center;
+        }
+        #slide-11 .qr-container {
+            grid-column: 3 / 11;
+            grid-row: 4 / 11;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 4rem;
+        }
+        #slide-11 .qr-item {
+            text-align: center;
+            width: 100%;
+        }
+        #slide-11 .qr-item img {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border: 10px solid var(--text-color);
+            margin-bottom: 1rem;
+        }
+        #slide-11 .qr-item p {
+            font-weight: 900;
+            font-size: 2.5vw;
+        }
+
+        /* Slide 12 */
+        #slide-12 {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+        #slide-12 .huge-text {
+            grid-column: 1 / 13;
+            grid-row: 4 / 10;
+            font-size: 8vw;
+            font-weight: 900;
+            text-align: center;
+            align-self: center;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        /* Navigation Hint */
+        .nav-hint {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: white;
+            pointer-events: none;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 8px;
+            background-color: var(--accent-color);
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="nav-hint">Click / Space / Arrows</div>
+
+    <div class="presentation">
+        <!-- Slide 1 -->
+        <div class="slide active" id="slide-1">
+            <div class="meta">
+                День открытых дверей<br>АГУ 2026
+            </div>
+            <div class="img-container hero-img">
+                <img src="../public/images/university_teamwork_1.jpeg" alt="Teamwork">
+            </div>
+            <div class="title-block">
+                <h1>Создаем<br>будущее</h1>
+                <p style="font-size: 2.5vw; font-weight: 700; margin-top: 1rem;">Артемий Морозов & Салим Сокуров</p>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" id="slide-2">
+            <div class="text-block">
+                <h2>Студенты 2 курса</h2>
+                <p class="accent" style="font-size: 3vw; font-weight: 900; text-transform: uppercase;">Прикладная математика, АГУ</p>
+                <p>Мы не просто учимся, мы создаем реальные продукты, которые решают настоящие проблемы.</p>
+            </div>
+            <div class="img-container img-block shape-circle">
+                <img src="../public/images/university_campus_collaboration_20251114_202320.png" alt="Campus Collaboration">
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" id="slide-3">
+            <div class="huge-text">
+                Год назад мы были обычными первокурсниками.<br><br>
+                <span style="color: #666;">Не знали, куда двигаться, не разбирались в технологиях.</span>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" id="slide-4">
+            <div class="huge-text">
+                Университет задал курс.<br>
+                Мы подхватили инициативу.<br><br>
+                Никто за нас ничего не сделал, но <span>АГУ дал нам всё для старта.</span>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" id="slide-5">
+            <div class="img-container img-block">
+                <img src="../public/images/tech_innovation_1.jpeg" alt="Tech Innovation">
+            </div>
+            <div class="text-block">
+                <h2 style="font-size: 6vw; margin-bottom: 2rem;">За один год</h2>
+                <p style="font-size: 3vw; font-weight: 700;">мы создали 2 мобильных приложения, Telegram-боты и сайты.</p>
+            </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide" id="slide-6">
+            <div class="title-block">
+                <h2>Obrazz — Умный гардероб</h2>
+            </div>
+            <div class="desc-block">
+                <p style="font-size: 2.5vw; font-weight: 700; margin-bottom: 2rem;">Персональный стилист с ИИ.</p>
+                <p style="margin-bottom: 2rem;">Цифровой гардероб, AI-подборка образов, автоудаление фона.</p>
+                <div>
+                    <span class="stack-tag">React Native</span>
+                    <span class="stack-tag">Expo</span>
+                    <span class="stack-tag">Supabase</span>
+                </div>
+            </div>
+            <div class="img-container img-1 shape-rect">
+                <img src="../public/images/obrazz_app_screens_1.jpeg" alt="Obrazz Screen 1">
+            </div>
+            <div class="img-container img-2 shape-rect">
+                <img src="../public/images/obrazz_app_screens_2.jpeg" alt="Obrazz Screen 2">
+            </div>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide" id="slide-7">
+            <div class="title-block">
+                <h2>adygGIS — Туристический гид</h2>
+            </div>
+            <div class="img-container img-1">
+                <img src="../public/images/adygyes_map_screens_1.png" alt="adygGIS Screen">
+            </div>
+            <div class="desc-block">
+                <p style="font-size: 2.5vw; font-weight: 700; margin-bottom: 2rem;">Интерактивная карта Адыгеи.</p>
+                <p style="margin-bottom: 2rem;">Оффлайн-режим, умное кэширование, маршруты.</p>
+                <div>
+                    <span class="stack-tag">Kotlin</span>
+                    <span class="stack-tag">Jetpack Compose</span>
+                    <span class="stack-tag">Yandex Maps</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide" id="slide-8">
+            <div class="grid-text">
+                <h2>Telegram-боты, веб-сайты и пет-проекты.</h2>
+                <div>
+                    <div class="big-number">10+</div>
+                    <p style="font-weight: 700; text-transform: uppercase; margin-top: 1rem;">Проектов</p>
+                </div>
+                <div>
+                    <div class="big-number">∞</div>
+                    <p style="font-weight: 700; text-transform: uppercase; margin-top: 1rem;">Опыта</p>
+                </div>
+                <div style="grid-column: 1 / -1; margin-top: 4rem;">
+                    <p style="font-size: 4vw; font-weight: 900; text-transform: uppercase;">Каждый проект — это новый опыт.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9 -->
+        <div class="slide" id="slide-9">
+            <div class="title-block">
+                <h2 style="font-size: 6vw; line-height: 1;">Почему АГУ?<br><span class="accent">Это экосистема.</span></h2>
+            </div>
+            <div class="list-block">
+                <div class="list-item">Сообщество</div>
+                <div class="list-item">IT-партнёры</div>
+                <div class="list-item">Хакатоны</div>
+                <div class="list-item">Оборудование</div>
+                <div class="list-item">Стажировки</div>
+            </div>
+            <div class="img-container img-block">
+                <img src="../public/images/university_teamwork_2.webp" alt="Ecosystem">
+            </div>
+        </div>
+
+        <!-- Slide 10 -->
+        <div class="slide" id="slide-10">
+            <div class="huge-text">
+                АГУ — это место, где ваши идеи становятся реальностью,<br>
+                <span class="accent">если вы готовы действовать.</span>
+            </div>
+        </div>
+
+        <!-- Slide 11 -->
+        <div class="slide" id="slide-11">
+            <div class="title-block">
+                <h2 style="font-size: 6vw;">Присоединяйтесь к нашему комьюнити!</h2>
+            </div>
+            <div class="qr-container">
+                <div class="qr-item">
+                    <img src="../public/images/qr-maykoptech.png" alt="QR MaykopTech">
+                    <p>@MaykopTech</p>
+                </div>
+                <div class="qr-item">
+                    <img src="../public/images/qr-artfrost.jpeg" alt="QR ArtFrost">
+                    <p>@ArtFrost</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12 -->
+        <div class="slide" id="slide-12">
+            <div class="huge-text">
+                Поступайте в АГУ.<br>
+                Будете такими же крутыми 😎
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress');
+        let currentSlide = 0;
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                prevSlide();
+            }
+        });
+
+        // Click navigation
+        document.addEventListener('click', (e) => {
+            // Click on right half goes next, left half goes prev
+            if (e.clientX > window.innerWidth / 2) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateSlides();
+    </script>
+</body>
+</html>

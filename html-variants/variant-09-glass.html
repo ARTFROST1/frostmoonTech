@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>День открытых дверей АГУ 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #8B5CF6;
+            --accent-light: #A78BFA;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(31, 38, 135, 0.08);
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-muted: #7a7a9a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f3ff;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ── Background Blobs ── */
+        .blobs-container {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.55;
+            will-change: transform;
+        }
+
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: #c4b5fd;
+            top: -10%;
+            left: -8%;
+            animation: blobFloat1 18s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: #93c5fd;
+            top: 15%;
+            right: -10%;
+            animation: blobFloat2 22s ease-in-out infinite;
+        }
+
+        .blob-3 {
+            width: 450px;
+            height: 450px;
+            background: #f9a8d4;
+            top: 45%;
+            left: 10%;
+            animation: blobFloat3 20s ease-in-out infinite;
+        }
+
+        .blob-4 {
+            width: 550px;
+            height: 550px;
+            background: #86efac;
+            bottom: -5%;
+            right: 5%;
+            animation: blobFloat4 24s ease-in-out infinite;
+        }
+
+        .blob-5 {
+            width: 400px;
+            height: 400px;
+            background: #c084fc;
+            bottom: 20%;
+            left: -5%;
+            animation: blobFloat5 19s ease-in-out infinite;
+        }
+
+        .blob-6 {
+            width: 350px;
+            height: 350px;
+            background: #67e8f9;
+            top: 70%;
+            right: 25%;
+            animation: blobFloat2 16s ease-in-out infinite reverse;
+        }
+
+        @keyframes blobFloat1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, 40px) scale(1.05); }
+            66% { transform: translate(-30px, 70px) scale(0.95); }
+        }
+
+        @keyframes blobFloat2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-50px, 50px) scale(1.08); }
+            66% { transform: translate(40px, -30px) scale(0.96); }
+        }
+
+        @keyframes blobFloat3 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(70px, -40px) scale(0.97); }
+            66% { transform: translate(-40px, 60px) scale(1.04); }
+        }
+
+        @keyframes blobFloat4 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-60px, -50px) scale(1.06); }
+            66% { transform: translate(50px, 30px) scale(0.94); }
+        }
+
+        @keyframes blobFloat5 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, 60px) scale(1.03); }
+            66% { transform: translate(-50px, -20px) scale(0.98); }
+        }
+
+        /* ── Glass Utilities ── */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .glass-pill {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 100px;
+            box-shadow: 0 2px 12px rgba(31, 38, 135, 0.06);
+        }
+
+        /* ── Nav ── */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-inner {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 100px;
+            padding: 12px 36px;
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            box-shadow: 0 4px 24px rgba(31, 38, 135, 0.06);
+        }
+
+        .nav-inner a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav-inner a:hover {
+            color: var(--accent);
+        }
+
+        .nav-brand {
+            font-weight: 700 !important;
+            color: var(--accent) !important;
+            font-size: 15px !important;
+        }
+
+        /* ── Layout ── */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 100px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ── Animations ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* ── HERO ── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 80px;
+        }
+
+        .hero-card {
+            text-align: center;
+            padding: 64px 56px;
+            max-width: 680px;
+            width: 100%;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-card h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, var(--accent), #6366f1, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-names {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .hero-info {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .hero-year {
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ── JOURNEY ── */
+        #journey {
+            padding-bottom: 60px;
+        }
+
+        .journey-card {
+            padding: 56px 48px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .section-title .accent-dot {
+            color: var(--accent);
+        }
+
+        .journey-text {
+            font-size: 18px;
+            line-height: 1.75;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .journey-highlight {
+            padding: 24px 32px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--accent);
+            background: rgba(139, 92, 246, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 16px;
+        }
+
+        /* ── PROJECTS ── */
+        #projects { padding-top: 60px; }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            padding: 40px 36px;
+        }
+
+        .project-emoji {
+            font-size: 40px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .project-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .project-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .pill {
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .pill-accent {
+            color: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.2);
+        }
+
+        .other-projects {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+
+        .other-pill {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* ── UNIVERSITY ── */
+        .uni-card {
+            padding: 56px 48px;
+        }
+
+        .uni-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 36px 0;
+        }
+
+        .uni-item {
+            padding: 28px 20px;
+            text-align: center;
+            border-radius: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .uni-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.1);
+        }
+
+        .uni-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .uni-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .uni-quote {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent);
+            margin-top: 12px;
+            padding: 24px;
+            font-style: italic;
+        }
+
+        /* ── CTA ── */
+        #cta {
+            padding-bottom: 120px;
+        }
+
+        .cta-card {
+            padding: 56px 48px;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+
+        .qr-placeholder {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 28px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(139, 92, 246, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.08);
+        }
+
+        .qr-placeholder .qr-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qr-placeholder .qr-icon {
+            font-size: 48px;
+            opacity: 0.5;
+        }
+
+        .cta-handle {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .cta-slogan {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 8px;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 32px 24px 48px;
+            font-size: 13px;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-inner {
+                padding: 10px 20px;
+                gap: 16px;
+            }
+
+            .nav-inner a {
+                font-size: 12px;
+            }
+
+            section {
+                padding: 60px 16px;
+            }
+
+            .hero-card {
+                padding: 40px 28px;
+            }
+
+            .hero-card h1 {
+                font-size: 34px;
+            }
+
+            .hero-names {
+                font-size: 18px;
+            }
+
+            .journey-card,
+            .uni-card,
+            .cta-card {
+                padding: 36px 24px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .journey-text {
+                font-size: 16px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                padding: 32px 24px;
+            }
+
+            .uni-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .uni-item {
+                padding: 20px 12px;
+            }
+
+            .blob { opacity: 0.4; }
+            .blob-1 { width: 350px; height: 350px; }
+            .blob-2 { width: 300px; height: 300px; }
+            .blob-3 { width: 280px; height: 280px; }
+            .blob-4 { width: 320px; height: 320px; }
+        }
+
+        @media (max-width: 480px) {
+            .uni-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-card h1 {
+                font-size: 28px;
+            }
+
+            .nav-inner {
+                gap: 12px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background Blobs -->
+<div class="blobs-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+    <div class="blob blob-6"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-brand">FrostmoonTech</a>
+        <a href="#journey">Путь</a>
+        <a href="#projects">Проекты</a>
+        <a href="#university">АГУ</a>
+        <a href="#cta">Контакт</a>
+    </div>
+</nav>
+
+<div class="content">
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-card glass reveal">
+            <div class="hero-badge glass-pill">🎓 День открытых дверей</div>
+            <h1>Мы создаём будущее</h1>
+            <p class="hero-names">Артемий Морозов &amp; Салим Сокуров</p>
+            <p class="hero-info">2 курс • Прикладная математика • АГУ</p>
+            <p class="hero-year">День открытых дверей 2026</p>
+        </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey">
+        <div class="journey-card glass reveal">
+            <h2 class="section-title">Наш путь<span class="accent-dot">.</span></h2>
+            <p class="journey-text">
+                Год назад мы были обычными первокурсниками — не знали, куда двигаться, не разбирались в технологиях. Университет дал нам направление и окружение. Мы подхватили инициативу — за один год создали два мобильных приложения, сайты и Telegram-ботов.
+            </p>
+            <div class="journey-highlight reveal reveal-delay-2">
+                «АГУ дал нам всё, чтобы мы смогли сделать это сами»
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <h2 class="section-title reveal" style="text-align:center;">Наши проекты<span class="accent-dot">.</span></h2>
+
+        <div class="projects-grid">
+            <div class="project-card glass reveal reveal-delay-1">
+                <span class="project-emoji">👗</span>
+                <h3 class="project-name">Obrazz</h3>
+                <p class="project-desc">
+                    Умный гардероб с ИИ. Цифровой гардероб, AI-подборка образов, автоудаление фона.
+                </p>
+                <div class="pills">
+                    <span class="pill glass-pill pill-accent">React Native</span>
+                    <span class="pill glass-pill pill-accent">Expo</span>
+                    <span class="pill glass-pill pill-accent">Supabase</span>
+                    <span class="pill glass-pill pill-accent">TypeScript</span>
+                </div>
+            </div>
+
+            <div class="project-card glass reveal reveal-delay-2">
+                <span class="project-emoji">🗺️</span>
+                <h3 class="project-name">adygGIS</h3>
+                <p class="project-desc">
+                    Карты Адыгеи. Оффлайн-режим, кэширование, маршруты.
+                </p>
+                <div class="pills">
+                    <span class="pill glass-pill pill-accent">Kotlin</span>
+                    <span class="pill glass-pill pill-accent">Jetpack Compose</span>
+                    <span class="pill glass-pill pill-accent">Yandex Maps</span>
+                    <span class="pill glass-pill pill-accent">Room</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="other-projects reveal reveal-delay-3">
+            <span class="other-pill glass-pill">🤖 Telegram-боты</span>
+            <span class="other-pill glass-pill">🌐 Веб-сайты</span>
+            <span class="other-pill glass-pill">⚡ Другое</span>
+        </div>
+    </section>
+
+    <!-- UNIVERSITY -->
+    <section id="university">
+        <div class="uni-card glass reveal">
+            <h2 class="section-title" style="text-align:center;">Почему АГУ<span class="accent-dot">.</span></h2>
+
+            <div class="uni-grid">
+                <div class="uni-item glass reveal reveal-delay-1">
+                    <span class="uni-icon">👥</span>
+                    <span class="uni-label">Сообщество</span>
+                </div>
+                <div class="uni-item glass reveal reveal-delay-2">
+                    <span class="uni-icon">🤝</span>
+                    <span class="uni-label">IT-партнёры</span>
+                </div>
+                <div class="uni-item glass reveal reveal-delay-3">
+                    <span class="uni-icon">💡</span>
+                    <span class="uni-label">Хакатоны</span>
+                </div>
+                <div class="uni-item glass reveal reveal-delay-1">
+                    <span class="uni-icon">🖥️</span>
+                    <span class="uni-label">Оборудование</span>
+                </div>
+                <div class="uni-item glass reveal reveal-delay-2">
+                    <span class="uni-icon">🚀</span>
+                    <span class="uni-label">Стажировки</span>
+                </div>
+                <div class="uni-item glass reveal reveal-delay-3">
+                    <span class="uni-icon">🎯</span>
+                    <span class="uni-label">Менторство</span>
+                </div>
+            </div>
+
+            <p class="uni-quote reveal reveal-delay-4">«Экосистема для реализации идей»</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-card glass reveal">
+            <h2 class="cta-title">Присоединяйтесь</h2>
+
+            <div class="qr-placeholder">
+                <div class="qr-inner">
+                    <span class="qr-icon">📱</span>
+                    <span>QR-код</span>
+                </div>
+            </div>
+
+            <p class="cta-handle">@MaykopTech</p>
+            <p class="cta-slogan">Поступайте в АГУ 😎</p>
+        </div>
+    </section>
+</div>
+
+<footer class="footer">
+    FrostmoonTech · АГУ · 2026
+</footer>
+
+<script>
+    // IntersectionObserver for reveal animations
+    document.addEventListener('DOMContentLoaded', () => {
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-inner a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PS3Guide from "./pages/PS3Guide";
 import PS4Guide from "./pages/PS4Guide";
+import OpenDay from "./pages/OpenDay";
 
 const queryClient = new QueryClient();
 
@@ -17,9 +18,11 @@ const App = () => (
       <Sonner />
       <HashRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<OpenDay />} />
+          <Route path="/home" element={<Index />} />
           <Route path="/ps3-guide" element={<PS3Guide />} />
           <Route path="/ps4-guide" element={<PS4Guide />} />
+          <Route path="/open-day" element={<OpenDay />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создатели — День открытых дверей АГУ 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #FF6B6B;
+            --black: #111;
+            --white: #fff;
+            --gray: #888;
+            --light-gray: #f5f5f5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+        }
+
+        nav .logo {
+            font-weight: 900;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        nav .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--black);
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.2s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* ─── SECTIONS ─── */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: clamp(2rem, 5vw, 6rem) clamp(1.5rem, 5vw, 6rem);
+            position: relative;
+        }
+
+        /* ─── REVEAL ANIMATION ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+
+        /* ─── HERO ─── */
+        #hero {
+            align-items: center;
+            text-align: center;
+            padding-top: 6rem;
+        }
+
+        .hero-stroke {
+            font-size: clamp(4rem, 15vw, 16rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            color: transparent;
+            -webkit-text-stroke: clamp(1.5px, 0.25vw, 3px) var(--black);
+            text-stroke: clamp(1.5px, 0.25vw, 3px) var(--black);
+            user-select: none;
+            animation: heroIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes heroIn {
+            from {
+                opacity: 0;
+                transform: scale(0.92);
+                letter-spacing: 0.1em;
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+                letter-spacing: -0.02em;
+            }
+        }
+
+        .hero-names {
+            font-size: clamp(1.2rem, 2.5vw, 2.4rem);
+            font-weight: 300;
+            margin-top: clamp(1rem, 2vw, 2rem);
+            letter-spacing: 0.02em;
+        }
+
+        .hero-meta {
+            font-size: clamp(0.7rem, 1vw, 0.95rem);
+            font-weight: 400;
+            color: var(--gray);
+            margin-top: clamp(0.8rem, 1.5vw, 1.5rem);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .scroll-hint span {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        .scroll-hint .arrow {
+            width: 1px;
+            height: 40px;
+            background: var(--gray);
+            position: relative;
+        }
+
+        .scroll-hint .arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -3px;
+            width: 7px;
+            height: 7px;
+            border-right: 1px solid var(--gray);
+            border-bottom: 1px solid var(--gray);
+            transform: rotate(45deg);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ─── JOURNEY ─── */
+        #journey {
+            background: var(--white);
+        }
+
+        .journey-heading {
+            font-size: clamp(3.5rem, 10vw, 12rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+        }
+
+        .journey-heading .accent {
+            color: var(--accent);
+        }
+
+        .journey-body {
+            max-width: 480px;
+            margin-top: clamp(1.5rem, 3vw, 3rem);
+            font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+            font-weight: 300;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .pull-quote {
+            margin-top: clamp(2rem, 4vw, 5rem);
+            font-size: clamp(2rem, 5vw, 5rem);
+            font-weight: 100;
+            font-style: italic;
+            color: var(--black);
+            line-height: 1.1;
+        }
+
+        .pull-quote .accent-dot {
+            color: var(--accent);
+        }
+
+        /* ─── PROJECTS ─── */
+        #projects {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: clamp(5rem, 18vw, 22rem);
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(0,0,0,0.04);
+            text-stroke: 1px rgba(0,0,0,0.04);
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+            letter-spacing: -0.02em;
+        }
+
+        .project-item {
+            position: relative;
+            z-index: 1;
+            margin-bottom: clamp(3rem, 5vw, 5rem);
+        }
+
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-name {
+            font-size: clamp(3rem, 8vw, 9rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .project-name.outlined {
+            color: transparent;
+            -webkit-text-stroke: clamp(1px, 0.2vw, 2.5px) var(--black);
+            text-stroke: clamp(1px, 0.2vw, 2.5px) var(--black);
+        }
+
+        .project-desc {
+            font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+            font-weight: 300;
+            color: #555;
+            margin-top: 0.6rem;
+            line-height: 1.6;
+            max-width: 500px;
+        }
+
+        .project-tech {
+            margin-top: 0.6rem;
+            font-size: clamp(0.6rem, 0.8vw, 0.75rem);
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .project-extra {
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+            font-weight: 400;
+            color: var(--gray);
+            margin-top: clamp(2rem, 3vw, 3rem);
+        }
+
+        .project-divider {
+            width: clamp(40px, 5vw, 80px);
+            height: 2px;
+            background: var(--black);
+            margin: clamp(1.5rem, 2vw, 2rem) 0;
+        }
+
+        /* ─── UNIVERSITY ─── */
+        #university {
+            text-align: center;
+            align-items: center;
+        }
+
+        .uni-title {
+            font-size: clamp(5rem, 15vw, 18rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 0.85;
+            background: linear-gradient(135deg, var(--black) 40%, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .uni-reasons {
+            margin-top: clamp(2rem, 4vw, 4rem);
+            display: flex;
+            flex-direction: column;
+            gap: clamp(0.4rem, 0.8vw, 0.8rem);
+        }
+
+        .uni-reasons span {
+            font-size: clamp(1.1rem, 2.2vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .uni-reasons span:hover {
+            color: var(--accent);
+        }
+
+        .uni-reasons span .slash {
+            color: var(--accent);
+            font-weight: 300;
+            margin: 0 clamp(0.3rem, 0.8vw, 1rem);
+        }
+
+        .uni-quote {
+            margin-top: clamp(2rem, 4vw, 4rem);
+            font-size: clamp(1.2rem, 2vw, 2rem);
+            font-weight: 200;
+            font-style: italic;
+            color: var(--gray);
+        }
+
+        /* ─── CTA ─── */
+        #cta {
+            text-align: center;
+            align-items: center;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .cta-heading {
+            font-size: clamp(2.5rem, 8vw, 9rem);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .cta-qr {
+            margin-top: clamp(2rem, 3vw, 3rem);
+            width: 250px;
+            height: 250px;
+            background: var(--white);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-handle {
+            margin-top: clamp(1.2rem, 2vw, 2rem);
+            font-size: clamp(1.2rem, 2vw, 1.8rem);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--accent);
+        }
+
+        .cta-sub {
+            margin-top: clamp(0.6rem, 1vw, 1rem);
+            font-size: clamp(1rem, 1.5vw, 1.4rem);
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            section {
+                padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 4vw, 2rem);
+            }
+
+            .uni-reasons span {
+                display: block;
+            }
+
+            .uni-reasons span .slash {
+                display: none;
+            }
+        }
+
+        /* ─── SELECTION ─── */
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">Frost<span>Moon</span></div>
+        <ul>
+            <li><a href="#hero">Начало</a></li>
+            <li><a href="#journey">Путь</a></li>
+            <li><a href="#projects">Проекты</a></li>
+            <li><a href="#university">АГУ</a></li>
+            <li><a href="#cta">Контакт</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section id="hero">
+        <div class="hero-stroke">СОЗДАТЕЛИ</div>
+        <div class="hero-names reveal reveal-delay-1">Артемий Морозов &amp; Салим Сокуров</div>
+        <div class="hero-meta reveal reveal-delay-2">2 курс &bull; Прикладная математика &bull; АГУ &bull; День открытых дверей 2026</div>
+        <div class="scroll-hint">
+            <span>Scroll</span>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section id="journey">
+        <div class="journey-heading reveal">ОТ НУЛЯ</div>
+        <div class="journey-heading accent reveal reveal-delay-1">ДО ПРОДУКТА</div>
+        <p class="journey-body reveal reveal-delay-2">
+            Год назад — обычные первокурсники. Не знали, куда двигаться. Университет дал направление. 
+            Мы подхватили инициативу. Один год — два приложения, сайты, боты.
+        </p>
+        <div class="project-divider reveal reveal-delay-3"></div>
+        <div class="pull-quote reveal reveal-delay-3">
+            АГУ дал нам всё<span class="accent-dot">.</span>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="projects-watermark" aria-hidden="true">ПРОЕКТЫ</div>
+
+        <div class="project-item reveal">
+            <div class="project-name">Obrazz</div>
+            <div class="project-divider"></div>
+            <p class="project-desc">Умный гардероб с ИИ. Персональный стилист. Цифровой гардероб.</p>
+            <div class="project-tech">Flutter · Firebase · OpenAI · Computer Vision</div>
+        </div>
+
+        <div class="project-item reveal reveal-delay-1">
+            <div class="project-name outlined">adygGIS</div>
+            <div class="project-divider"></div>
+            <p class="project-desc">Карты Адыгеи. Оффлайн. Маршруты.</p>
+            <div class="project-tech">React Native · MapLibre · GeoJSON · Offline-first</div>
+        </div>
+
+        <div class="project-item reveal reveal-delay-2">
+            <p class="project-extra">+ Telegram-боты, сайты, и многое другое</p>
+        </div>
+    </section>
+
+    <!-- UNIVERSITY -->
+    <section id="university">
+        <div class="uni-title reveal">АГУ</div>
+        <div class="uni-reasons reveal reveal-delay-1">
+            <span>СООБЩЕСТВО <span class="slash">/</span></span>
+            <span>ПАРТНЁРЫ <span class="slash">/</span></span>
+            <span>ХАКАТОНЫ <span class="slash">/</span></span>
+            <span>ОБОРУДОВАНИЕ <span class="slash">/</span></span>
+            <span>СТАЖИРОВКИ <span class="slash">/</span></span>
+            <span>МЕНТОРСТВО</span>
+        </div>
+        <div class="uni-quote reveal reveal-delay-2">«Экосистема для ваших идей»</div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="cta-heading reveal">ПРИСОЕДИНЯЙТЕСЬ</div>
+        <div class="cta-qr reveal reveal-delay-1">QR-код</div>
+        <div class="cta-handle reveal reveal-delay-2">@MaykopTech</div>
+        <div class="cta-sub reveal reveal-delay-3">Поступайте в АГУ 😎</div>
+    </section>
+
+    <script>
+        // ─── IntersectionObserver for reveal animations ───
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // ─── Nav hide/show on scroll ───
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const current = window.scrollY;
+            if (current > lastScroll && current > 80) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = current;
+        }, { passive: true });
+    </script>
+</body>
+</html>
