@@ -47,7 +47,6 @@ export default function OpenDay() {
         fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
         cursor: "default", userSelect: "none",
       }}
-            filter: "invert(1)",
     >
       {/* Progress bar */}
       <div style={{
