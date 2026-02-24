@@ -47,6 +47,7 @@ export default function OpenDay() {
         fontFamily: "'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif",
         cursor: "default", userSelect: "none",
       }}
+            filter: "invert(1)",
     >
       {/* Progress bar */}
       <div style={{
@@ -454,6 +455,7 @@ function Slide04() {
       </div>
 
       {/* Right — phone mockup */}
+            filter: "invert(1)",
       <PhoneMockup
         src="/images/placeholders/2026-02-09%2018.37.47.jpg"
         alt="Obrazz App"
