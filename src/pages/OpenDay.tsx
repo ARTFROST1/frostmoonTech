@@ -68,7 +68,7 @@ export default function OpenDay() {
         <SlideWrapper key={s.id} active={i === current}>
           {i === 0 && <Slide01 />}
           {i === 1 && <Slide02 />}
-              filter: "none",
+          {i === 2 && <Slide03 />}
           {i === 3 && <Slide04 />}
           {i === 4 && <Slide05 />}
           {i === 5 && <Slide06 />}
@@ -454,7 +454,6 @@ function Slide04() {
       </div>
 
       {/* Right — phone mockup */}
-            filter: "invert(1)",
       <PhoneMockup
         src="/images/placeholders/2026-02-09%2018.37.47.jpg"
         alt="Obrazz App"
