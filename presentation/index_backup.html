@@ -1,0 +1,2894 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нейросети на практике — Мини-курс 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">🧠 Нейросети на практике</div>
+            <ul class="nav-links">
+                <li><a href="#section-1" data-section="1">Вступление</a></li>
+                <li><a href="#section-2" data-section="2">Модуль 1</a></li>
+                <li><a href="#section-3" data-section="3">Модуль 2</a></li>
+                <li><a href="#section-4" data-section="4">Модуль 3</a></li>
+                <li><a href="#section-5" data-section="5">Модуль 4</a></li>
+                <li><a href="#section-6" data-section="6">Модуль 5</a></li>
+                <li><a href="#section-7" data-section="7">Модуль 6</a></li>
+                <li><a href="#section-8" data-section="8">Бонус</a></li>
+                <li><a href="#section-9" data-section="9">Материалы</a></li>
+                <li><a href="#section-10" data-section="10">Итоги</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Меню">☰</button>
+        </div>
+        <div class="progress-bar"><div class="progress-fill"></div></div>
+    </nav>
+
+    <main class="presentation">
+        
+        <!-- ==================== СЕКЦИЯ 1: ТИТУЛЬНЫЙ БЛОК ==================== -->
+        <section id="section-1" class="section section-intro">
+            
+            <!-- Слайд 1 — Титульный -->
+            <article class="slide slide-title" id="slide-1">
+                <div class="slide-content">
+                    <div class="title-illustration">
+                        <svg viewBox="0 0 400 300" class="hero-svg">
+                            <defs>
+                                <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#EBF4FF"/>
+                                    <stop offset="100%" style="stop-color:#DBEAFE"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="400" height="300" fill="url(#bgGrad)" rx="20"/>
+                            <!-- Человек за ноутбуком -->
+                            <ellipse cx="200" cy="220" rx="60" ry="30" fill="#94A3B8" opacity="0.3"/>
+                            <rect x="160" y="140" width="80" height="50" rx="5" fill="#1E293B"/>
+                            <rect x="165" y="145" width="70" height="40" rx="3" fill="#3B82F6"/>
+                            <rect x="140" y="190" width="120" height="8" rx="2" fill="#475569"/>
+                            <circle cx="200" cy="110" r="25" fill="#FCD34D"/>
+                            <circle cx="192" cy="105" r="3" fill="#1E293B"/>
+                            <circle cx="208" cy="105" r="3" fill="#1E293B"/>
+                            <path d="M192 118 Q200 125 208 118" stroke="#1E293B" stroke-width="2" fill="none"/>
+                            <!-- Лучи к иконкам AI -->
+                            <line x1="200" y1="165" x2="80" y2="80" stroke="#3B82F6" stroke-width="2" opacity="0.5" class="ray"/>
+                            <line x1="200" y1="165" x2="320" y2="80" stroke="#3B82F6" stroke-width="2" opacity="0.5" class="ray"/>
+                            <line x1="200" y1="165" x2="60" y2="180" stroke="#3B82F6" stroke-width="2" opacity="0.5" class="ray"/>
+                            <line x1="200" y1="165" x2="340" y2="180" stroke="#3B82F6" stroke-width="2" opacity="0.5" class="ray"/>
+                            <!-- Иконки AI -->
+                            <image x="60" y="60" width="40" height="40" href="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" />
+                            <image x="300" y="60" width="40" height="40" href="https://github.com/anthropics.png" />
+                            <image x="40" y="160" width="40" height="40" href="https://upload.wikimedia.org/wikipedia/commons/e/e6/Midjourney_Emblem.png" />
+                            <image x="320" y="160" width="40" height="40" href="https://github.com/perplexity-ai.png" />
+                        </svg>
+                    </div>
+                    <h1 class="title-main">Нейросети на практике</h1>
+                    <p class="title-subtitle">Как реально использовать AI в повседневной жизни</p>
+                    <div class="title-meta">
+                        <span class="meta-item">📚 Мини-курс</span>
+                        <span class="meta-item">📦 6 модулей</span>
+                        <span class="meta-item">⏱ 2 часа практики</span>
+                    </div>
+                    <div class="title-year">2026</div>
+                </div>
+            </article>
+
+            <!-- Слайд 2 — Для кого этот курс -->
+            <article class="slide slide-list" id="slide-2">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Для кого этот курс?</h2>
+                    <div class="slide-illustration-side">
+                        <svg viewBox="0 0 200 200" class="illustration-svg">
+                            <circle cx="100" cy="100" r="50" fill="#FEF3C7"/>
+                            <circle cx="100" cy="90" r="30" fill="#FCD34D"/>
+                            <circle cx="90" cy="85" r="4" fill="#1E293B"/>
+                            <circle cx="110" cy="85" r="4" fill="#1E293B"/>
+                            <path d="M90 100 Q100 110 110 100" stroke="#1E293B" stroke-width="2" fill="none"/>
+                            <!-- Вопросы превращаются в лампочки -->
+                            <text x="60" y="50" font-size="20" class="float-icon">❓</text>
+                            <text x="100" y="40" font-size="20" class="float-icon delay-1">❓</text>
+                            <text x="140" y="50" font-size="20" class="float-icon delay-2">💡</text>
+                            <text x="80" y="160" font-size="20" class="float-icon delay-3">💡</text>
+                            <text x="120" y="165" font-size="20" class="float-icon delay-4">💡</text>
+                        </svg>
+                    </div>
+                    <ul class="check-list stagger-list">
+                        <li class="check-item">
+                            <span class="check-icon">🔍</span>
+                            <span>Вы уже пробовали ChatGPT, но используете его как умный Google</span>
+                        </li>
+                        <li class="check-item">
+                            <span class="check-icon">🎯</span>
+                            <span>Вы хотите понять весь функционал и научиться применять AI эффективно</span>
+                        </li>
+                        <li class="check-item">
+                            <span class="check-icon">🤔</span>
+                            <span>Вы не знаете, какой AI для какой задачи лучше</span>
+                        </li>
+                        <li class="check-item">
+                            <span class="check-icon">📋</span>
+                            <span>Вы хотите получить готовые шаблоны и промпты для немедленного применения</span>
+                        </li>
+                    </ul>
+                    <div class="profile-badge">
+                        <span class="badge-icon">👤</span>
+                        <span>Профиль ученика: новичок, уже установил основные инструменты</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 3 — Что вы получите -->
+            <article class="slide slide-list" id="slide-3">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Что вы получите</h2>
+                    <div class="timeline-roadmap">
+                        <svg viewBox="0 0 700 80" class="roadmap-svg">
+                            <line x1="50" y1="40" x2="650" y2="40" stroke="#E2E8F0" stroke-width="4"/>
+                            <circle cx="100" cy="40" r="20" fill="#22C55E" class="roadmap-point"/>
+                            <text x="100" y="45" text-anchor="middle" fill="white" font-size="14">🗺</text>
+                            <circle cx="200" cy="40" r="20" fill="#10A37F" class="roadmap-point"/>
+                            <text x="200" y="45" text-anchor="middle" fill="white" font-size="14">💬</text>
+                            <circle cx="300" cy="40" r="20" fill="#7C3AED" class="roadmap-point"/>
+                            <text x="300" y="45" text-anchor="middle" fill="white" font-size="14">🧠</text>
+                            <circle cx="400" cy="40" r="20" fill="#FBBC05" class="roadmap-point"/>
+                            <text x="400" y="45" text-anchor="middle" fill="white" font-size="14">📓</text>
+                            <circle cx="500" cy="40" r="20" fill="#F59E0B" class="roadmap-point"/>
+                            <text x="500" y="45" text-anchor="middle" fill="white" font-size="14">🔧</text>
+                            <circle cx="600" cy="40" r="20" fill="#EF4444" class="roadmap-point"/>
+                            <text x="600" y="45" text-anchor="middle" fill="white" font-size="14">✍️</text>
+                        </svg>
+                    </div>
+                    <ul class="benefits-list stagger-list">
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>Чёткую карту AI-инструментов 2026 — какой для чего</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>Полное владение ChatGPT (Custom Instructions, Projects, Canvas, Deep Research, Voice, GPT-боты)</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>Claude как «второй мозг» — Artifacts, сравнение с ChatGPT</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>NotebookLM — AI-библиотека без галлюцинаций</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>30+ полезных AI-инструментов с прямыми ссылками</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>Формулу идеального промпта + 24 готовых шаблона</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>Решение проблемы доступа из России</span>
+                        </li>
+                        <li class="benefit-item">
+                            <span class="benefit-check">✅</span>
+                            <span>Пакет материалов после курса (9 документов)</span>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 2: МОДУЛЬ 1 — Карта AI ==================== -->
+        <section id="section-2" class="section section-module-1">
+            
+            <!-- Слайд 4 — Обложка модуля 1 -->
+            <article class="slide slide-module-cover" id="slide-4" data-accent="module1">
+                <div class="slide-content">
+                    <div class="module-number">01</div>
+                    <h2 class="module-title">Карта AI-инструментов 2026</h2>
+                    <p class="module-subtitle">Что использовать и для чего · 15 мин</p>
+                    <div class="module-illustration">
+                        <svg viewBox="0 0 300 200" class="compass-svg">
+                            <circle cx="150" cy="100" r="80" fill="#ECFDF5" stroke="#22C55E" stroke-width="3"/>
+                            <circle cx="150" cy="100" r="60" fill="white"/>
+                            <polygon points="150,50 160,100 150,110 140,100" fill="#22C55E"/>
+                            <polygon points="150,150 160,100 150,90 140,100" fill="#94A3B8"/>
+                            <!-- AI платформы вокруг -->
+                            <image x="52" y="32" width="36" height="36" href="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" />
+                            <image x="212" y="32" width="36" height="36" href="https://github.com/anthropics.png" />
+                            <image x="32" y="122" width="36" height="36" href="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" />
+                            <image x="232" y="122" width="36" height="36" href="https://github.com/perplexity-ai.png" />
+                        </svg>
+                    </div>
+                    <blockquote class="module-quote">
+                        «Большинство людей используют ChatGPT как умный Google. Это примерно как купить MacBook и использовать его только как калькулятор.»
+                    </blockquote>
+                </div>
+            </article>
+
+            <!-- Слайд 5 — Категории AI-инструментов -->
+            <article class="slide slide-schema" id="slide-5">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Ландшафт AI в 2026 году</h2>
+                    <div class="categories-grid">
+                        <div class="category-card" data-color="green">
+                            <div class="category-icon">💬</div>
+                            <h3 class="category-title">Универсальные чат-ассистенты</h3>
+                            <ul class="category-items">
+                                <li>ChatGPT</li>
+                                <li>Claude</li>
+                                <li>Gemini</li>
+                                <li>DeepSeek</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="blue">
+                            <div class="category-icon">🔍</div>
+                            <h3 class="category-title">AI-поисковики</h3>
+                            <ul class="category-items">
+                                <li>Perplexity</li>
+                                <li>ChatGPT Search</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="orange">
+                            <div class="category-icon">🎯</div>
+                            <h3 class="category-title">Специализированные</h3>
+                            <ul class="category-items">
+                                <li>NotebookLM (документы)</li>
+                                <li>Midjourney (картинки)</li>
+                                <li>ElevenLabs (голос)</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="purple">
+                            <div class="category-icon">🔗</div>
+                            <h3 class="category-title">Агрегаторы</h3>
+                            <ul class="category-items">
+                                <li>Poe.com</li>
+                                <li>OpenRouter</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="insight-box">
+                        <span class="insight-icon">💡</span>
+                        <span>Для старта достаточно разобраться в 6 ключевых инструментах</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 6 — Большая шестёрка AI -->
+            <article class="slide slide-cards" id="slide-6">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Большая шестёрка: обзор ключевых AI</h2>
+                    <div class="ai-cards-grid">
+                        <div class="ai-card" data-ai="chatgpt">
+                            <div class="ai-card-header">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="ChatGPT">
+                                <h3>ChatGPT</h3>
+                                <span class="ai-company">OpenAI</span>
+                            </div>
+                            <p class="ai-desc">Универсальный помощник. GPT-4o, GPT-4.5. Поиск, картинки, голос, Deep Research, Canvas.</p>
+                            <div class="ai-price">Бесплатно / Plus $20/мес / Pro $200/мес</div>
+                            <a href="https://chat.openai.com" class="ai-link" target="_blank">chat.openai.com →</a>
+                        </div>
+                        <div class="ai-card" data-ai="claude">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/anthropics.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="Claude">
+                                <h3>Claude</h3>
+                                <span class="ai-company">Anthropic</span>
+                            </div>
+                            <p class="ai-desc">Длинные тексты, аналитика, код, Artifacts. Контекст 200K токенов.</p>
+                            <div class="ai-price">Бесплатно / Pro $20/мес</div>
+                            <a href="https://claude.ai" class="ai-link" target="_blank">claude.ai →</a>
+                        </div>
+                        <div class="ai-card" data-ai="gemini">
+                            <div class="ai-card-header">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="Gemini">
+                                <h3>Gemini</h3>
+                                <span class="ai-company">Google</span>
+                            </div>
+                            <p class="ai-desc">Интеграция с Google Workspace, видео, 1M токенов контекст.</p>
+                            <div class="ai-price">Бесплатно / AI Pro ~€22/мес</div>
+                            <a href="https://gemini.google.com" class="ai-link" target="_blank">gemini.google.com →</a>
+                        </div>
+                        <div class="ai-card" data-ai="perplexity">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/perplexity-ai.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="Perplexity">
+                                <h3>Perplexity</h3>
+                                <span class="ai-company">AI Search</span>
+                            </div>
+                            <p class="ai-desc">AI-поисковик с источниками. Spaces, Research.</p>
+                            <div class="ai-price">Бесплатно / Pro $20/мес</div>
+                            <a href="https://perplexity.ai" class="ai-link" target="_blank">perplexity.ai →</a>
+                        </div>
+                        <div class="ai-card" data-ai="deepseek">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/deepseek-ai.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="DeepSeek">
+                                <h3>DeepSeek</h3>
+                                <span class="ai-company">China AI</span>
+                            </div>
+                            <p class="ai-desc">Бесплатный, Deep Thinking, без VPN из России.</p>
+                            <div class="ai-price">Бесплатно</div>
+                            <a href="https://chat.deepseek.com" class="ai-link" target="_blank">chat.deepseek.com →</a>
+                        </div>
+                        <div class="ai-card" data-ai="notebooklm">
+                            <div class="ai-card-header">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/NotebookLM_logo.svg" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="NotebookLM">
+                                <h3>NotebookLM</h3>
+                                <span class="ai-company">Google</span>
+                            </div>
+                            <p class="ai-desc">Работает ТОЛЬКО с твоими источниками, без галлюцинаций, Audio Overview.</p>
+                            <div class="ai-price">Бесплатно</div>
+                            <a href="https://notebooklm.google" class="ai-link" target="_blank">notebooklm.google →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 7 — Таблица сравнения -->
+            <article class="slide slide-table" id="slide-7">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Какой AI для какой задачи</h2>
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Параметр</th>
+                                    <th><img class="th-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> ChatGPT</th>
+                                    <th><img class="th-icon" src="https://github.com/anthropics.png" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> Claude</th>
+                                    <th><img class="th-icon" src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> Gemini</th>
+                                    <th><img class="th-icon" src="https://github.com/perplexity-ai.png" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> Perplexity</th>
+                                    <th><img class="th-icon" src="https://github.com/deepseek-ai.png" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> DeepSeek</th>
+                                    <th><img class="th-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/57/NotebookLM_logo.svg" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> NotebookLM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Для чего лучше</strong></td>
+                                    <td>Универсал, голос, картинки, Deep Research</td>
+                                    <td>Длинные тексты, аналитика, код, артефакты</td>
+                                    <td>Google Workspace, видео</td>
+                                    <td>Поиск фактов с источниками</td>
+                                    <td>Логика, математика, бесплатно</td>
+                                    <td>Анализ документов, учёба</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Цена (платная)</strong></td>
+                                    <td>$20/мес</td>
+                                    <td>$20/мес</td>
+                                    <td>~€22/мес</td>
+                                    <td>$20/мес</td>
+                                    <td>Бесплатно</td>
+                                    <td>Бесплатно</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Бесплатная версия</strong></td>
+                                    <td>Да (лимиты)</td>
+                                    <td>Да (мало сообщ.)</td>
+                                    <td>Да (полноценная)</td>
+                                    <td>Да (5 Pro/день)</td>
+                                    <td>Да (полная)</td>
+                                    <td>Да (полная)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Доступ из РФ</strong></td>
+                                    <td><span class="status-no">❌ VPN</span></td>
+                                    <td><span class="status-no">❌ VPN</span></td>
+                                    <td><span class="status-warn">⚠️ VPN</span></td>
+                                    <td><span class="status-yes">✅ Без VPN</span></td>
+                                    <td><span class="status-yes">✅ Без VPN</span></td>
+                                    <td><span class="status-warn">⚠️ Google-аккаунт</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Генерация картинок</strong></td>
+                                    <td><span class="status-yes">✅</span> DALL-E</td>
+                                    <td><span class="status-no">❌</span></td>
+                                    <td><span class="status-yes">✅</span> Nano banana</td>
+                                    <td><span class="status-no">❌</span></td>
+                                    <td><span class="status-no">❌</span></td>
+                                    <td><span class="status-no">❌</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Голосовой режим</strong></td>
+                                    <td><span class="status-yes">✅</span> Advanced Voice</td>
+                                    <td><span class="status-warn">⚠️</span> Моб.</td>
+                                    <td><span class="status-yes">✅</span> Gemini Live</td>
+                                    <td><span class="status-no">❌</span></td>
+                                    <td><span class="status-no">❌</span></td>
+                                    <td><span class="status-yes">✅</span> Audio Overview</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ключевая фишка</strong></td>
+                                    <td>Экосистема + Deep Research</td>
+                                    <td>Качество текста + Artifacts</td>
+                                    <td>Google Workspace + видео</td>
+                                    <td>Ответы с источниками</td>
+                                    <td>Бесплатно + Deep Thinking</td>
+                                    <td>Без галлюцинаций</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 8 — VPN -->
+            <article class="slide slide-list" id="slide-8">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Доступ из России: какие VPN работают</h2>
+                    <div class="vpn-illustration">
+                        <svg viewBox="0 0 200 120" class="vpn-svg">
+                            <rect x="60" y="20" width="80" height="80" rx="10" fill="#DBEAFE" stroke="#3B82F6" stroke-width="2"/>
+                            <path d="M100 35 L100 55 M90 65 L100 55 L110 65" stroke="#3B82F6" stroke-width="3" fill="none"/>
+                            <circle cx="100" cy="75" r="15" fill="#3B82F6"/>
+                            <rect x="95" y="68" width="10" height="14" fill="white" rx="2"/>
+                            <!-- Флаги -->
+                            <rect x="20" y="45" width="25" height="15" fill="#000" rx="2"/>
+                            <rect x="20" y="50" width="25" height="5" fill="#DD0000"/>
+                            <rect x="20" y="55" width="25" height="5" fill="#FFCE00"/>
+                            <rect x="155" y="45" width="25" height="15" fill="#AE1C28" rx="2"/>
+                            <rect x="155" y="45" width="8" height="15" fill="#21468B"/>
+                            <rect x="163" y="45" width="8" height="15" fill="white"/>
+                            <text x="32" y="72" font-size="8" text-anchor="middle">DE</text>
+                            <text x="168" y="72" font-size="8" text-anchor="middle">NL</text>
+                        </svg>
+                    </div>
+                    <div class="vpn-cards">
+                        <div class="vpn-card recommended">
+                            <div class="vpn-badge">🏆 Лучший выбор</div>
+                            <h3>Outline VPN</h3>
+                            <p>Проект от Google Jigsaw. VPS за $3–5/мес. Собственный IP.</p>
+                            <a href="https://getoutline.org" target="_blank">getoutline.org →</a>
+                        </div>
+                        <div class="vpn-card recommended">
+                            <div class="vpn-badge">🇷🇺 Для России</div>
+                            <h3>Amnezia VPN</h3>
+                            <p>Open source, обход DPI. Лучший для России.</p>
+                            <a href="https://amnezia.org" target="_blank">amnezia.org →</a>
+                        </div>
+                        <div class="vpn-card">
+                            <h3>Mullvad VPN</h3>
+                            <p>$5/мес. Шведский, максимальная анонимность.</p>
+                            <a href="https://mullvad.net" target="_blank">mullvad.net →</a>
+                        </div>
+                        <div class="vpn-card">
+                            <h3>Surfshark</h3>
+                            <p>~$3/мес. Простой интерфейс, безлимит устройств.</p>
+                            <a href="https://surfshark.com" target="_blank">surfshark.com →</a>
+                        </div>
+                    </div>
+                    <div class="warning-box">
+                        <span class="warning-icon">⚠️</span>
+                        <span>Советы: не использовать бесплатные VPN · сервер в Европе (Германия, Нидерланды, Польша) · НЕ серверы в США</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 9 — Без VPN + оплата -->
+            <article class="slide slide-two-cols" id="slide-9">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Без VPN + Способы оплаты</h2>
+                    <div class="two-cols">
+                        <div class="col">
+                            <h3 class="col-title">✅ Работает БЕЗ VPN из РФ</h3>
+                            <ul class="check-list-compact">
+                                <li><span class="status-yes">✅</span> DeepSeek (deepseek.com) — бесплатный</li>
+                                <li><span class="status-yes">✅</span> Perplexity (perplexity.ai) — бесплатная версия</li>
+                                <li><span class="status-yes">✅</span> GigaChat (Сбер) — оплата в рублях</li>
+                                <li><span class="status-yes">✅</span> YandexGPT — встроен в Алису</li>
+                                <li><span class="status-yes">✅</span> Kandinsky (fusionbrain.ai) — генерация картинок</li>
+                            </ul>
+                        </div>
+                        <div class="col">
+                            <h3 class="col-title">💳 Оплата подписок из России</h3>
+                            <div class="payment-methods">
+                                <div class="payment-card highlight">
+                                    <span class="payment-badge">🏆 Самый простой</span>
+                                    <h4>Apple/Google Gift Cards</h4>
+                                    <p>Смена региона Apple ID → KZ/US + Gift Card с Plati.market / Eneba</p>
+                                </div>
+                                <div class="payment-card">
+                                    <span class="payment-badge">💳 Универсальный</span>
+                                    <h4>Крипто-карта RedotPay</h4>
+                                    <p>USDT → виртуальная Visa</p>
+                                </div>
+                                <div class="payment-card">
+                                    <span class="payment-badge">🏦 Надёжный</span>
+                                    <h4>Карта банка Грузии / Казахстана</h4>
+                                    <p>TBC Bank или Kaspi Gold</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 10 — Poe.com -->
+            <article class="slide slide-feature" id="slide-10">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Лайфхак: Poe.com — единая подписка на всё</h2>
+                    <div class="feature-layout">
+                        <div class="feature-illustration">
+                            <svg viewBox="0 0 200 150" class="poe-svg">
+                                <rect x="30" y="30" width="140" height="90" rx="10" fill="#8B5CF6"/>
+                                <text x="100" y="60" text-anchor="middle" fill="white" font-size="14" font-weight="bold">Poe.com</text>
+                                <!-- Лого под крышей -->
+                                <image x="45" y="80" width="30" height="30" href="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" />
+                                <image x="85" y="80" width="30" height="30" href="https://github.com/anthropics.png" />
+                                <image x="125" y="80" width="30" height="30" href="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" />
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <ul class="feature-list">
+                                <li>Агрегатор AI-моделей от создателей Quora</li>
+                                <li>Одна подписка (~$20/мес) → ChatGPT + Claude + Gemini + DALL-E + Stable Diffusion + десятки других</li>
+                                <li>Можно сравнивать ответы разных моделей в одном интерфейсе</li>
+                            </ul>
+                            <div class="savings-badge">
+                                <span class="savings-old">$60/мес</span>
+                                <span class="savings-arrow">→</span>
+                                <span class="savings-new">$20/мес</span>
+                                <span class="savings-percent">−67%</span>
+                            </div>
+                            <div class="nuances-box">
+                                <h4>Нюансы:</h4>
+                                <p>Ограничение «баллами», интерфейс проще оригинального, нужен VPN из России</p>
+                            </div>
+                            <a href="https://poe.com" class="cta-link" target="_blank">Открыть poe.com →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 3: МОДУЛЬ 2 — ChatGPT ==================== -->
+        <section id="section-3" class="section section-module-2">
+            
+            <!-- Слайд 11 — Обложка модуля 2 -->
+            <article class="slide slide-module-cover" id="slide-11" data-accent="module2">
+                <div class="slide-content">
+                    <div class="module-number">02</div>
+                    <h2 class="module-title">ChatGPT — от новичка к продвинутому</h2>
+                    <p class="module-subtitle">Все функции, о которых 95% людей не знают · 30 мин</p>
+                    <div class="module-illustration">
+                        <svg viewBox="0 0 300 180" class="knife-svg">
+                            <!-- Швейцарский нож -->
+                            <rect x="120" y="60" width="60" height="100" rx="10" fill="#EF4444"/>
+                            <rect x="125" y="65" width="50" height="90" rx="8" fill="#DC2626"/>
+                            <!-- Лезвия с фичами -->
+                            <rect x="60" y="70" width="60" height="8" rx="2" fill="#94A3B8" transform="rotate(-15 90 74)"/>
+                            <text x="40" y="60" font-size="7" fill="#475569">Custom Instructions</text>
+                            <rect x="60" y="90" width="55" height="8" rx="2" fill="#94A3B8" transform="rotate(-5 87 94)"/>
+                            <text x="25" y="88" font-size="7" fill="#475569">Canvas</text>
+                            <rect x="60" y="110" width="50" height="8" rx="2" fill="#94A3B8" transform="rotate(5 85 114)"/>
+                            <text x="20" y="120" font-size="7" fill="#475569">Deep Research</text>
+                            <rect x="180" y="70" width="60" height="8" rx="2" fill="#94A3B8" transform="rotate(15 210 74)"/>
+                            <text x="220" y="60" font-size="7" fill="#475569">Voice</text>
+                            <rect x="185" y="90" width="55" height="8" rx="2" fill="#94A3B8" transform="rotate(5 212 94)"/>
+                            <text x="230" y="88" font-size="7" fill="#475569">Projects</text>
+                            <rect x="190" y="110" width="50" height="8" rx="2" fill="#94A3B8" transform="rotate(-5 215 114)"/>
+                            <text x="238" y="120" font-size="7" fill="#475569">DALL-E</text>
+                        </svg>
+                    </div>
+                    <blockquote class="module-quote">
+                        «Ты купил Swiss Army Knife с 30 инструментами, но открываешь только одно лезвие. Сегодня мы откроем все 30.»
+                    </blockquote>
+                </div>
+            </article>
+
+            <!-- Слайд 12 — Custom Instructions -->
+            <article class="slide slide-comparison" id="slide-12">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Custom Instructions — научи ChatGPT, кто ты</h2>
+                    <p class="slide-desc">Два поля: «Что ChatGPT должен знать о тебе» + «Как ChatGPT должен отвечать»</p>
+                    <div class="before-after">
+                        <div class="ba-col ba-before">
+                            <div class="ba-header">❌ Без Custom Instructions</div>
+                            <ul class="ba-list">
+                                <li>«Конечно! Это отличный вопрос! Давайте рассмотрим несколько аспектов…»</li>
+                                <li>Ответ на английском при неоднозначном вопросе</li>
+                                <li>Формальный стиль из учебника</li>
+                                <li>Длинные вступления</li>
+                            </ul>
+                        </div>
+                        <div class="ba-arrow">→</div>
+                        <div class="ba-col ba-after">
+                            <div class="ba-header">✅ С Custom Instructions</div>
+                            <ul class="ba-list">
+                                <li>«Вот 3 шага для решения: 1. ...»</li>
+                                <li>Всегда на русском</li>
+                                <li>Живой язык, как друг</li>
+                                <li>Сразу к делу</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="code-example">
+                        <h4>Пример заполнения поля 2:</h4>
+                        <pre><code>Отвечай на русском. Пиши простым языком, без канцеляризмов.
+Будь конкретным — примеры, цифры, пошаговые инструкции.
+Не начинай с «Конечно!» — сразу к сути.
+Если не уверен — честно скажи.</code></pre>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 13 — Memory + горячие клавиши -->
+            <article class="slide slide-two-cols" id="slide-13">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Memory и горячие клавиши</h2>
+                        <div class="col">
+                            <div class="col-icon">🧠</div>
+                            <h3 class="col-title">Memory</h3>
+                            <ul class="feature-list-compact">
+                                <li>ChatGPT запоминает факты о тебе между чатами</li>
+                                <li>Можно явно сказать: «Запомни, что я вегетарианец»</li>
+                                <li>Управление: Settings → Personalization → Memory → Manage</li>
+                                <li>Совет: периодически чисти неактуальное</li>
+                            </ul>
+                        </div>
+                </div>
+            </article>
+
+            <!-- Слайд 14 — Projects -->
+            <article class="slide slide-cards" id="slide-14">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Projects — папки для AI с суперсилой</h2>
+                    <p class="slide-desc">Проект = папка с чатами + загруженные файлы + системный промпт. Все чаты внутри проекта автоматически «знают» контекст.</p>
+                    <div class="project-cards">
+                        <div class="project-card">
+                            <div class="project-icon">📚</div>
+                            <h3>English Learning</h3>
+                            <div class="project-details">
+                                <p><strong>Instructions:</strong> репетитор B2, IT-среда</p>
+                                <p><strong>Файлы:</strong> список слов</p>
+                                <p><strong>Чаты:</strong> Small talk, Email writing</p>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">📊</div>
+                            <h3>Q1 2026 Report</h3>
+                            <div class="project-details">
+                                <p><strong>Instructions:</strong> деловой стиль, аудитория CEO</p>
+                                <p><strong>Файлы:</strong> метрики, прошлый отчёт</p>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">✈️</div>
+                            <h3>Отпуск Турция 2026</h3>
+                            <div class="project-details">
+                                <p><strong>Instructions:</strong> 10 дней, июнь, 200K руб</p>
+                                <p><strong>Файлы:</strong> визовые правила</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 15 — Canvas -->
+            <article class="slide slide-comparison" id="slide-15">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Canvas — Google Docs + AI</h2>
+                    <p class="slide-desc">Режим совместного редактирования текста/кода рядом с чатом. Активация: «Открой в Canvas» или модель GPT-5.1 with Canvas</p>
+                    <div class="comparison-grid">
+                        <div class="comp-col">
+                            <h3>Обычный чат</h3>
+                            <ul>
+                                <li>Текст в потоке сообщений</li>
+                                <li>Каждая правка = переписанный текст</li>
+                                <li>Нельзя самому редактировать ответ</li>
+                            </ul>
+                        </div>
+                        <div class="comp-col highlight">
+                            <h3>Canvas</h3>
+                            <ul>
+                                <li>Отдельный редактор</li>
+                                <li>Точечные правки</li>
+                                <li>Полноценный редактор</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="canvas-mockup">
+                        <div class="mockup-chat">
+                            <div class="chat-bubble">Напиши пост для LinkedIn...</div>
+                        </div>
+                        <div class="mockup-editor">
+                            <div class="editor-toolbar">
+                                <span class="tool-btn">Edit</span>
+                                <span class="tool-btn">Shorter</span>
+                                <span class="tool-btn">Longer</span>
+                            </div>
+                            <div class="editor-content">
+                                <span class="highlight-text">выделенный абзац</span> → «сделай цепляющим»
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 16 — Deep Research -->
+            <article class="slide slide-feature" id="slide-16">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Deep Research — часы гугления за 15 минут</h2>
+                    <div class="feature-comparison">
+                        <div class="fc-col">
+                            <h3>Обычный запрос</h3>
+                            <ul>
+                                <li>⏱ Ответ за 5–15 секунд</li>
+                                <li>Данные из обучения</li>
+                                <li>1–2 страницы</li>
+                                <li>Без ссылок</li>
+                            </ul>
+                        </div>
+                        <div class="fc-col highlight">
+                            <h3>Deep Research</h3>
+                            <ul>
+                                <li>⏱ Ответ за 5–30 минут</li>
+                                <li>Активный поиск по интернету</li>
+                                <li>Отчёт на 5–20 страниц</li>
+                                <li>Десятки ссылок на источники</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="limits-box">
+                        <h4>Лимиты:</h4>
+                        <p>Plus ($20/мес) — 10 запросов/мес • Pro ($200/мес) — безлимит</p>
+                    </div>
+                    <div class="use-cases">
+                        <h4>Когда использовать:</h4>
+                        <div class="use-case-tags">
+                            <span class="tag">🛒 Крупная покупка</span>
+                            <span class="tag">💼 Рабочие исследования</span>
+                            <span class="tag">🏠 Важные решения</span>
+                            <span class="tag">📚 Учёба</span>
+                        </div>
+                    </div>
+                    <div class="example-box">
+                        <strong>Пример:</strong> «Сравни 6 стран для релокации IT-специалиста по визам, налогам, стоимости жизни» → отчёт с 30+ ссылками
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 17 — Кастомные GPT -->
+            <article class="slide slide-cards" id="slide-17">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Кастомные GPT — свой бот за 5 минут</h2>
+                    <p class="slide-desc">Конструктор: Explore GPTs → Create → Name, Instructions, Knowledge, Capabilities → Save</p>
+                    <div class="gpt-cards">
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">📧</div>
+                            <h3>Email-помощник</h3>
+                            <div class="gpt-prompt">
+                                «Пишешь деловое, но дружелюбное письмо. Без канцелярита. 2–3 варианта темы письма»
+                            </div>
+                        </div>
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">🗣</div>
+                            <h3>Разговорный английский</h3>
+                            <div class="gpt-prompt">
+                                «You are my English conversation partner. My level is B2. Gently point out grammar mistakes in Russian.»
+                            </div>
+                        </div>
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">📊</div>
+                            <h3>Помощник для презентаций</h3>
+                            <div class="gpt-prompt">
+                                «Структура + тезисы + заметки спикера + рекомендации по визуалу. Стиль минималистичный.»
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gpt-store-note">
+                        <strong>GPT Store:</strong> Canva, Consensus, Diagrams и другие готовые боты
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 18 — Advanced Voice + изображения -->
+            <article class="slide slide-two-cols" id="slide-18">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Голос и картинки в ChatGPT</h2>
+                    <div class="two-cols">
+                        <div class="col">
+                            <div class="col-icon">🎙</div>
+                            <h3 class="col-title">Advanced Voice</h3>
+                            <ul class="feature-list-compact">
+                                <li>Полноценный живой разговор, не просто голосовой ввод</li>
+                                <li>Меняет интонацию, смеётся, делает паузы</li>
+                                <li>Можно перебивать</li>
+                            </ul>
+                            <div class="scenarios">
+                                <h4>Сценарии:</h4>
+                                <span class="scenario-tag">🗣 Практика английского</span>
+                                <span class="scenario-tag">💡 Мозговой штурм на прогулке</span>
+                                <span class="scenario-tag">🌍 Перевод в путешествии</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="col-icon">🎨</div>
+                            <h3 class="col-title">Генерация изображений</h3>
+                            <p class="formula"><strong>Формула:</strong> Стиль + Объект + Детали + Композиция + Дополнительно</p>
+                            <div class="prompt-example bad">
+                                <span class="label">❌ Плохо:</span>
+                                <code>«Нарисуй кота»</code>
+                            </div>
+                            <div class="prompt-example good">
+                                <span class="label">✅ Хорошо:</span>
+                                <code>«Уютная акварельная иллюстрация: пушистый рыжий кот на подоконнике, зимний город за окном, кружка чая, книжная иллюстрация, тёплые тона»</code>
+                            </div>
+                            <div class="style-tags">
+                                <span>акварель</span>
+                                <span>фотореализм</span>
+                                <span>flat design</span>
+                                <span>3D рендер</span>
+                                <span>pixel art</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 19 — Практические сценарии ChatGPT -->
+            <article class="slide slide-grid" id="slide-19">
+                <div class="slide-content">
+                    <h2 class="slide-heading">ChatGPT на каждый день: 6 сценариев</h2>
+                    <div class="scenarios-grid">
+                        <div class="scenario-card">
+                            <div class="scenario-icon">✍️</div>
+                            <h3>Тексты</h3>
+                            <p>Сопроводительные письма, посты, резюме</p>
+                            <div class="scenario-prompt">«Напиши сопроводительное для PM в IT. Опыт 5 лет, Agile/Scrum, 3 продукта с нуля. Без банальностей. 150–200 слов.»</div>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📄</div>
+                            <h3>Анализ PDF</h3>
+                            <p>Загрузил договор → краткое содержание, подводные камни</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📊</div>
+                            <h3>Таблицы и данные</h3>
+                            <p>Code Interpreter строит графики, считает суммы, находит тренды</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">🗣</div>
+                            <h3>Изучение языков</h3>
+                            <p>Ролевые игры, разбор слов, «набор выживания» на турецком</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">✈️</div>
+                            <h3>Планирование путешествий</h3>
+                            <p>Маршрут по дням, бюджет, лайфхаки, рестораны</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📚</div>
+                            <h3>Суммаризация</h3>
+                            <p>Статья по ссылке → 5 тезисов + «стоит ли читать целиком?»</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 20 — Промпт-формулы ChatGPT -->
+            <article class="slide slide-formulas" id="slide-20">
+                <div class="slide-content">
+                    <h2 class="slide-heading">3 формулы промптов, которые работают всегда</h2>
+                    <div class="formulas-list">
+                        <div class="formula-card">
+                            <div class="formula-number">1</div>
+                            <h3>Роль + Задача + Формат + Ограничения</h3>
+                            <div class="formula-example">
+                                <code>«Ты — HR-менеджер. Напиши описание вакансии Python-разработчика для стартапа. Структурированное описание. Без корпоративного буллшита, 300 слов.»</code>
+                            </div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-number">2</div>
+                            <h3>Контекст + Конкретика + Результат</h3>
+                            <div class="formula-example">
+                                <code>«Контекст: еженедельный стендап, 6 разработчиков. Конкретика: стендапы 30 мин вместо 15. Результат: скрипт с таймингами для переговорки.»</code>
+                            </div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-number">3</div>
+                            <h3>«Сделай как…»</h3>
+                            <div class="formula-example">
+                                <code>«Напиши пост для Telegram в стиле Максима Ильяхова. Тема — почему надо перестать бояться AI. Аудитория: менеджеры 25-40 лет.»</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 4: МОДУЛЬ 3 — Claude ==================== -->
+        <section id="section-4" class="section section-module-3">
+            
+            <!-- Слайд 21 — Обложка модуля Claude -->
+            <article class="slide slide-module-cover" id="slide-21" data-accent="module3">
+                <div class="slide-content">
+                    <div class="module-number">03</div>
+                    <h2 class="module-title">Claude — ваш второй AI-ассистент</h2>
+                    <p class="module-subtitle">Когда использовать вместо ChatGPT · 20 мин</p>
+                    <div class="module-illustration">
+                        <svg viewBox="0 0 300 180" class="claude-svg">
+                            <!-- Два ноутбука: рабочий и iPad Pro -->
+                            <rect x="30" y="60" width="100" height="70" rx="8" fill="#1E293B"/>
+                            <rect x="35" y="65" width="90" height="55" rx="4" fill="#10A37F"/>
+                            <text x="80" y="98" text-anchor="middle" fill="white" font-size="10" font-weight="bold">ChatGPT</text>
+                            <rect x="25" y="130" width="110" height="8" rx="2" fill="#475569"/>
+                            <text x="80" y="155" font-size="9" fill="#64748B" text-anchor="middle">Рабочий ноутбук</text>
+                            
+                            <rect x="170" y="50" width="100" height="80" rx="10" fill="#1E293B"/>
+                            <rect x="175" y="55" width="90" height="70" rx="6" fill="#7C3AED"/>
+                            <text x="220" y="95" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Claude</text>
+                            <circle cx="220" cy="122" r="4" fill="#475569"/>
+                            <text x="220" y="155" font-size="9" fill="#64748B" text-anchor="middle">iPad Pro для задач</text>
+                            
+                            <!-- Стрелка между ними -->
+                            <path d="M135 95 L165 95" stroke="#94A3B8" stroke-width="2" stroke-dasharray="4"/>
+                        </svg>
+                    </div>
+                    <blockquote class="module-quote">
+                        «ChatGPT — рабочий ноутбук. Claude — iPad Pro для конкретных задач.»
+                    </blockquote>
+                </div>
+            </article>
+
+            <!-- Слайд 22 — 5 ситуаций Claude лучше ChatGPT -->
+            <article class="slide slide-cards" id="slide-22">
+                <div class="slide-content">
+                    <h2 class="slide-heading">5 ситуаций, когда Claude лучше ChatGPT</h2>
+                    <div class="categories-grid">
+                        <div class="category-card" data-color="purple">
+                            <div class="category-icon">📚</div>
+                            <h3 class="category-title">1. Длинные документы</h3>
+                            <ul class="category-items">
+                                <li>Контекст 200K токенов (≈ 500 стр.)</li>
+                                <li>Загрузить книгу целиком</li>
+                                <li>Анализ контрактов на 100+ страниц</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="purple">
+                            <div class="category-icon">✍️</div>
+                            <h3 class="category-title">2. Редактирование текстов</h3>
+                            <ul class="category-items">
+                                <li>Более человечный стиль</li>
+                                <li>Меньше «водянистости»</li>
+                                <li>Сохраняет авторский голос</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="purple">
+                            <div class="category-icon">🧩</div>
+                            <h3 class="category-title">3. Сложные инструкции</h3>
+                            <ul class="category-items">
+                                <li>Лучше следует многошаговым задачам</li>
+                                <li>Не «забывает» требования</li>
+                                <li>Точнее соблюдает формат</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="purple">
+                            <div class="category-icon">🎨</div>
+                            <h3 class="category-title">4. Artifacts</h3>
+                            <ul class="category-items">
+                                <li>Интерактивные приложения</li>
+                                <li>Визуализации и графики</li>
+                                <li>Мини-игры и калькуляторы</li>
+                            </ul>
+                        </div>
+                        <div class="category-card" data-color="purple">
+                            <div class="category-icon">💻</div>
+                            <h3 class="category-title">5. Код и рефакторинг</h3>
+                            <ul class="category-items">
+                                <li>Более чистый код</li>
+                                <li>Лучший рефакторинг</li>
+                                <li>Подробные объяснения</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 23 — Artifacts -->
+            <article class="slide slide-cards" id="slide-23">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Artifacts — интерактивные приложения в чате</h2>
+                    <p class="slide-desc">Claude создаёт работающие приложения прямо в браузере. Активация: «Создай artifact» или просто опиши задачу.</p>
+                    <div class="gpt-cards">
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">🔢</div>
+                            <h3>Калькулятор ремонта</h3>
+                            <div class="gpt-prompt">
+                                «Сделай калькулятор стоимости ремонта: вводишь площадь, тип работ, регион — получаешь смету»
+                            </div>
+                        </div>
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">📊</div>
+                            <h3>Дашборд бюджета</h3>
+                            <div class="gpt-prompt">
+                                «Интерактивная диаграмма моих расходов: ввожу категории и суммы, строит pie chart»
+                            </div>
+                        </div>
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">🎮</div>
+                            <h3>Игра «Угадай столицу»</h3>
+                            <div class="gpt-prompt">
+                                «Викторина: показывает страну, надо выбрать столицу из 4 вариантов, считает очки»
+                            </div>
+                        </div>
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">⏱</div>
+                            <h3>Pomodoro-таймер</h3>
+                            <div class="gpt-prompt">
+                                «Таймер по технике pomodoro: 25 мин работы, 5 мин отдых, звуковое оповещение»
+                            </div>
+                        </div>
+                        <div class="gpt-card">
+                            <div class="gpt-avatar">📅</div>
+                            <h3>Визуализация дня</h3>
+                            <div class="gpt-prompt">
+                                «Timeline моего рабочего дня: ввожу задачи и время — рисует красивый график»
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-box">
+                        <span class="insight-icon">💡</span>
+                        <span>Артефакты можно скачать, встроить на сайт или отправить ссылкой другим</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 24 — Projects + Стили ответов -->
+            <article class="slide slide-two-cols" id="slide-24">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Projects и стили ответов в Claude</h2>
+                    <div class="two-cols">
+                        <div class="col">
+                            <div class="col-icon">📁</div>
+                            <h3 class="col-title">Projects (как в ChatGPT)</h3>
+                            <ul class="feature-list-compact">
+                                <li><strong>Knowledge:</strong> загрузи файлы (до 200K токенов)</li>
+                                <li><strong>Instructions:</strong> системный промпт для проекта</li>
+                                <li><strong>Чаты:</strong> все беседы помнят контекст</li>
+                                <li><strong>Пример:</strong> проект «Книга» — загрузить главы, инструкция «стиль автора»</li>
+                            </ul>
+                            <div class="example-box" style="margin-top: 1rem;">
+                                <strong>Отличие от ChatGPT:</strong> Claude лучше работает с очень длинными документами внутри проекта
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="col-icon">🎭</div>
+                            <h3 class="col-title">4 стиля ответов</h3>
+                            <div class="payment-methods">
+                                <div class="payment-card">
+                                    <h4>📝 Normal</h4>
+                                    <p>Баланс между краткостью и полнотой</p>
+                                </div>
+                                <div class="payment-card">
+                                    <h4>⚡ Concise</h4>
+                                    <p>Минимум слов, сразу к сути</p>
+                                </div>
+                                <div class="payment-card">
+                                    <h4>📖 Explanatory</h4>
+                                    <p>Подробные объяснения с примерами</p>
+                                </div>
+                                <div class="payment-card highlight">
+                                    <h4>💬 Formal / Informal</h4>
+                                    <p>Деловой или дружеский тон</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 25 — Claude vs ChatGPT живое сравнение -->
+            <article class="slide slide-comparison" id="slide-25">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Один промпт — два AI: живое сравнение</h2>
+                    <p class="slide-desc">Промпт: «Напиши пост для LinkedIn о том, почему стоит изучать AI в 2026 году. 150-200 слов, живой язык.»</p>
+                    <div class="before-after">
+                        <div class="ba-col ba-before" style="border-color: #10A37F;">
+                            <div class="ba-header" style="color: #10A37F;">💬 ChatGPT</div>
+                            <ul class="ba-list">
+                                <li>Структурированный, с подзаголовками</li>
+                                <li>«Конечно! Вот пост...»</li>
+                                <li>Более «рекламный» тон</li>
+                                <li>Эмодзи в каждом абзаце</li>
+                                <li>Call-to-action в конце</li>
+                            </ul>
+                        </div>
+                        <div class="ba-arrow">⚔️</div>
+                        <div class="ba-col ba-after" style="border-color: #7C3AED;">
+                            <div class="ba-header" style="color: #7C3AED;">🧠 Claude</div>
+                            <ul class="ba-list">
+                                <li>Плавное повествование</li>
+                                <li>Сразу к тексту</li>
+                                <li>Более человечный, личный тон</li>
+                                <li>Минимум эмодзи</li>
+                                <li>Мягкое завершение</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="insight-box">
+                        <span class="insight-icon">🎯</span>
+                        <span><strong>Вывод:</strong> ChatGPT — когда нужна структура и энергия. Claude — когда нужен человечный, авторский текст.</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 26 — Шпаргалка ChatGPT или Claude -->
+            <article class="slide slide-table" id="slide-26">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Шпаргалка: ChatGPT или Claude?</h2>
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Задача</th>
+                                    <th><img class="th-icon" src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> ChatGPT лучше</th>
+                                    <th><img class="th-icon" src="https://github.com/anthropics.png" style="width:16px;height:16px;vertical-align:middle;margin-right:8px;" alt=""> Claude лучше</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Поиск актуальной информации</td>
+                                    <td><span class="status-yes">✅</span> Search + Deep Research</td>
+                                    <td><span class="status-no">❌</span> Нет поиска</td>
+                                </tr>
+                                <tr>
+                                    <td>Генерация картинок</td>
+                                    <td><span class="status-yes">✅</span> DALL-E встроен</td>
+                                    <td><span class="status-no">❌</span> Нет генерации</td>
+                                </tr>
+                                <tr>
+                                    <td>Голосовой диалог</td>
+                                    <td><span class="status-yes">✅</span> Advanced Voice</td>
+                                    <td><span class="status-warn">⚠️</span> Только моб.</td>
+                                </tr>
+                                <tr>
+                                    <td>Анализ книги на 500 страниц</td>
+                                    <td><span class="status-warn">⚠️</span> Частями</td>
+                                    <td><span class="status-yes">✅</span> Целиком (200K)</td>
+                                </tr>
+                                <tr>
+                                    <td>Редактирование резюме / статьи</td>
+                                    <td><span class="status-warn">⚠️</span> Хорошо</td>
+                                    <td><span class="status-yes">✅</span> Отлично</td>
+                                </tr>
+                                <tr>
+                                    <td>Интерактивные визуализации</td>
+                                    <td><span class="status-warn">⚠️</span> Canvas</td>
+                                    <td><span class="status-yes">✅</span> Artifacts</td>
+                                </tr>
+                                <tr>
+                                    <td>Рефакторинг большого кода</td>
+                                    <td><span class="status-warn">⚠️</span> Хорошо</td>
+                                    <td><span class="status-yes">✅</span> Отлично</td>
+                                </tr>
+                                <tr>
+                                    <td>Экосистема ботов</td>
+                                    <td><span class="status-yes">✅</span> GPT Store</td>
+                                    <td><span class="status-no">❌</span> Нет</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 27 — 5 промптов-победителей Claude -->
+            <article class="slide slide-cards" id="slide-27">
+                <div class="slide-content">
+                    <h2 class="slide-heading">5 промптов-победителей для Claude</h2>
+                    <div class="formulas-list">
+                        <div class="formula-card">
+                            <div class="formula-number" style="background: #7C3AED;">1</div>
+                            <div>
+                                <h3>Глубокий анализ документа</h3>
+                                <div class="formula-example">
+                                    <code>«Вот договор аренды [вставить]. Найди: 1) все обязательства арендатора, 2) штрафные санкции, 3) условия расторжения, 4) подводные камни. Формат: таблица.»</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-number" style="background: #7C3AED;">2</div>
+                            <div>
+                                <h3>Редактура с сохранением голоса</h3>
+                                <div class="formula-example">
+                                    <code>«Отредактируй текст: убери воду, сократи на 30%, сохрани мой авторский стиль. Не добавляй слова, которых не было. Покажи изменения.»</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-number" style="background: #7C3AED;">3</div>
+                            <div>
+                                <h3>Artifact-калькулятор</h3>
+                                <div class="formula-example">
+                                    <code>«Создай интерактивный калькулятор [тема]. Поля ввода: [перечислить]. Формулы: [описать]. Красивый дизайн, тёмная тема.»</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-number" style="background: #7C3AED;">4</div>
+                            <div>
+                                <h3>Код-ревью</h3>
+                                <div class="formula-example">
+                                    <code>«Сделай ревью кода: 1) баги и edge cases, 2) улучшения производительности, 3) читаемость, 4) предложи рефакторинг. Код: [вставить]»</code>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="formula-card">
+                            <div class="formula-number" style="background: #7C3AED;">5</div>
+                            <div>
+                                <h3>Суммаризация книги</h3>
+                                <div class="formula-example">
+                                    <code>«Прочитай книгу целиком. Дай: 1) суть в 3 предложениях, 2) 10 ключевых идей, 3) практические выводы, 4) кому читать / не читать.»</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 28 — Стратегия двух мозгов -->
+            <article class="slide slide-feature" id="slide-28">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Стратегия «двух мозгов»</h2>
+                    <p class="slide-desc">Используйте ChatGPT и Claude вместе для максимального результата</p>
+                    <div class="feature-layout">
+                        <div class="feature-illustration">
+                            <svg viewBox="0 0 250 300" class="flowchart-svg">
+                                <!-- Старт -->
+                                <rect x="75" y="10" width="100" height="40" rx="20" fill="#3B82F6"/>
+                                <text x="125" y="35" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Задача</text>
+                                
+                                <!-- Стрелка вниз -->
+                                <path d="M125 50 L125 70" stroke="#94A3B8" stroke-width="2" marker-end="url(#arrow)"/>
+                                
+                                <!-- Ромб решения -->
+                                <polygon points="125,75 175,110 125,145 75,110" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+                                <text x="125" y="115" text-anchor="middle" font-size="9" fill="#92400E">Нужен поиск?</text>
+                                
+                                <!-- Ветки -->
+                                <path d="M75 110 L40 110 L40 170" stroke="#10A37F" stroke-width="2"/>
+                                <path d="M175 110 L210 110 L210 170" stroke="#7C3AED" stroke-width="2"/>
+                                
+                                <!-- ChatGPT блок -->
+                                <rect x="10" y="170" width="60" height="50" rx="8" fill="#10A37F"/>
+                                <text x="40" y="190" text-anchor="middle" fill="white" font-size="8" font-weight="bold">ChatGPT</text>
+                                <text x="40" y="205" text-anchor="middle" fill="white" font-size="7">Поиск, факты</text>
+                                
+                                <!-- Claude блок -->
+                                <rect x="180" y="170" width="60" height="50" rx="8" fill="#7C3AED"/>
+                                <text x="210" y="190" text-anchor="middle" fill="white" font-size="8" font-weight="bold">Claude</text>
+                                <text x="210" y="205" text-anchor="middle" fill="white" font-size="7">Тексты, код</text>
+                                
+                                <!-- Сходятся -->
+                                <path d="M40 220 L40 250 L125 250" stroke="#10A37F" stroke-width="2"/>
+                                <path d="M210 220 L210 250 L125 250" stroke="#7C3AED" stroke-width="2"/>
+                                
+                                <!-- Финал -->
+                                <rect x="75" y="260" width="100" height="35" rx="8" fill="#22C55E"/>
+                                <text x="125" y="282" text-anchor="middle" fill="white" font-size="10" font-weight="bold">Результат</text>
+                                
+                                <defs>
+                                    <marker id="arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                        <path d="M0,0 L10,5 L0,10 Z" fill="#94A3B8"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <ul class="feature-list">
+                                <li><strong>Исследование →</strong> ChatGPT (Deep Research собирает данные)</li>
+                                <li><strong>Анализ →</strong> Claude (загружаешь собранное, глубокий анализ)</li>
+                                <li><strong>Черновик →</strong> ChatGPT (быстрая структура)</li>
+                                <li><strong>Редактура →</strong> Claude (полировка стиля)</li>
+                                <li><strong>Код →</strong> Claude пишет, ChatGPT тестирует с Code Interpreter</li>
+                            </ul>
+                            <div class="example-box">
+                                <strong>Пример:</strong> Пишу статью → ChatGPT ищет статистику → Claude пишет текст → ChatGPT генерирует иллюстрации
+                            </div>
+                            <div class="savings-badge" style="margin-top: 1rem;">
+                                <span class="savings-new" style="color: #7C3AED;">2 AI</span>
+                                <span class="savings-arrow">=</span>
+                                <span class="savings-new" style="color: #22C55E;">лучший результат</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 5: МОДУЛЬ 4 — NotebookLM ==================== -->
+        <section id="section-5" class="section section-module-4">
+            
+            <!-- Слайд 29 — Обложка NotebookLM -->
+            <article class="slide slide-module-cover" id="slide-29" data-accent="module4">
+                <div class="slide-content">
+                    <div class="module-number">04</div>
+                    <h2 class="module-title">NotebookLM — AI без галлюцинаций</h2>
+                    <p class="module-subtitle">Работает только с твоими документами · 15 мин</p>
+                    <div class="module-illustration">
+                        <svg viewBox="0 0 300 180" class="notebooklm-svg">
+                            <!-- Библиотека -->
+                            <rect x="50" y="40" width="200" height="120" rx="10" fill="#FEF3C7" stroke="#FBBC05" stroke-width="3"/>
+                            <!-- Полки с книгами -->
+                            <rect x="70" y="60" width="160" height="8" fill="#FBBC05"/>
+                            <rect x="70" y="100" width="160" height="8" fill="#FBBC05"/>
+                            <!-- Книги на полках -->
+                            <rect x="75" y="35" width="15" height="25" fill="#EF4444" rx="2"/>
+                            <rect x="95" y="40" width="12" height="20" fill="#3B82F6" rx="2"/>
+                            <rect x="112" y="38" width="18" height="22" fill="#22C55E" rx="2"/>
+                            <rect x="135" y="42" width="14" height="18" fill="#8B5CF6" rx="2"/>
+                            <rect x="155" y="36" width="16" height="24" fill="#F59E0B" rx="2"/>
+                            <rect x="176" y="40" width="13" height="20" fill="#EC4899" rx="2"/>
+                            <rect x="194" y="38" width="17" height="22" fill="#06B6D4" rx="2"/>
+                            <!-- Вторая полка -->
+                            <rect x="80" y="75" width="14" height="25" fill="#7C3AED" rx="2"/>
+                            <rect x="100" y="78" width="18" height="22" fill="#10B981" rx="2"/>
+                            <rect x="125" y="76" width="12" height="24" fill="#F43F5E" rx="2"/>
+                            <rect x="145" y="80" width="20" height="20" fill="#0EA5E9" rx="2"/>
+                            <rect x="172" y="77" width="15" height="23" fill="#A855F7" rx="2"/>
+                            <rect x="193" y="79" width="16" height="21" fill="#14B8A6" rx="2"/>
+                            <!-- Библиотекарь с лупой -->
+                            <circle cx="150" cy="140" r="20" fill="#FBBC05"/>
+                            <circle cx="143" cy="135" r="3" fill="#1E293B"/>
+                            <circle cx="157" cy="135" r="3" fill="#1E293B"/>
+                            <path d="M143 148 Q150 153 157 148" stroke="#1E293B" stroke-width="2" fill="none"/>
+                            <circle cx="175" cy="130" r="12" fill="none" stroke="#1E293B" stroke-width="3"/>
+                            <line x1="183" y1="138" x2="195" y2="150" stroke="#1E293B" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <blockquote class="module-quote">
+                        «ChatGPT — эрудированный друг, который иногда несёт чушь. NotebookLM — дотошный библиотекарь, который врать не умеет.»
+                    </blockquote>
+                </div>
+            </article>
+
+            <!-- Слайд 30 — NotebookLM ≠ ChatGPT -->
+            <article class="slide slide-comparison" id="slide-30">
+                <div class="slide-content">
+                    <h2 class="slide-heading">NotebookLM ≠ ChatGPT</h2>
+                    <p class="slide-desc">Это не замена ChatGPT, а совсем другой инструмент</p>
+                    <div class="before-after">
+                        <div class="ba-col ba-before" style="border-color: #10A37F;">
+                            <div class="ba-header" style="color: #10A37F;">💬 ChatGPT</div>
+                            <ul class="ba-list">
+                                <li>Знает «всё» (из обучения)</li>
+                                <li>Может выдумывать факты</li>
+                                <li>Ответы без источников</li>
+                                <li>Универсальный помощник</li>
+                                <li>Пишет, рисует, ищет</li>
+                            </ul>
+                        </div>
+                        <div class="ba-arrow">vs</div>
+                        <div class="ba-col ba-after" style="border-color: #FBBC05;">
+                            <div class="ba-header" style="color: #FBBC05;">📓 NotebookLM</div>
+                            <ul class="ba-list">
+                                <li>Знает ТОЛЬКО твои документы</li>
+                                <li>Не выдумывает — цитирует</li>
+                                <li>Каждый факт со ссылкой</li>
+                                <li>Только анализ источников</li>
+                                <li>Не пишет «от себя»</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="warning-box">
+                        <span class="warning-icon">⚠️</span>
+                        <span><strong>Главное отличие:</strong> NotebookLM физически не может галлюцинировать — он работает только с тем, что ты загрузил</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 31 — Audio Overview -->
+            <article class="slide slide-feature" id="slide-31">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Audio Overview — AI-подкаст из документов</h2>
+                    <div class="feature-layout">
+                        <div class="feature-illustration">
+                            <svg viewBox="0 0 200 180" class="audio-svg">
+                                <!-- Наушники -->
+                                <path d="M60 100 Q60 50 100 50 Q140 50 140 100" stroke="#FBBC05" stroke-width="8" fill="none"/>
+                                <rect x="45" y="90" width="30" height="50" rx="10" fill="#FBBC05"/>
+                                <rect x="125" y="90" width="30" height="50" rx="10" fill="#FBBC05"/>
+                                <!-- Звуковые волны -->
+                                <path d="M85 115 Q90 105 95 115 Q100 125 105 115 Q110 105 115 115" stroke="#1E293B" stroke-width="2" fill="none"/>
+                                <!-- Документ превращается в подкаст -->
+                                <rect x="30" y="150" width="40" height="25" fill="#E2E8F0" rx="3"/>
+                                <line x1="35" y1="158" x2="65" y2="158" stroke="#94A3B8" stroke-width="2"/>
+                                <line x1="35" y1="165" x2="55" y2="165" stroke="#94A3B8" stroke-width="2"/>
+                                <text x="95" y="167" font-size="20">→</text>
+                                <text x="125" y="170" font-size="30">🎙</text>
+                            </svg>
+                        </div>
+                        <div class="feature-content">
+                            <ul class="feature-list">
+                                <li><strong>Что это:</strong> два AI-ведущих обсуждают твои документы</li>
+                                <li><strong>Формат:</strong> живой диалог на 10-20 минут</li>
+                                <li><strong>Языки:</strong> английский (лучше), можно экспериментировать с другими</li>
+                                <li><strong>Кастомизация:</strong> можно указать фокус и аудиторию</li>
+                            </ul>
+                            <div class="use-cases">
+                                <h4>Когда использовать:</h4>
+                                <div class="use-case-tags">
+                                    <span class="tag">🚗 Слушать в дороге</span>
+                                    <span class="tag">📚 Подготовка к экзамену</span>
+                                    <span class="tag">💼 Брифинг перед встречей</span>
+                                    <span class="tag">📖 «Прочитать» книгу</span>
+                                </div>
+                            </div>
+                            <div class="example-box">
+                                <strong>Пример:</strong> Загрузил 5 статей по теме → получил подкаст с ключевыми идеями → слушаю на пробежке
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 32 — 8 сценариев NotebookLM -->
+            <article class="slide slide-grid" id="slide-32">
+                <div class="slide-content">
+                    <h2 class="slide-heading">8 сценариев использования NotebookLM</h2>
+                    <div class="scenarios-grid">
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📚</div>
+                            <h3>Подготовка к экзамену</h3>
+                            <p>Загрузи конспекты → NotebookLM создаст карточки, тесты, краткое содержание</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📄</div>
+                            <h3>Анализ договоров</h3>
+                            <p>Загрузи контракт → спроси про риски, обязательства, сроки со ссылками на пункты</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📊</div>
+                            <h3>Изучение отчётов</h3>
+                            <p>Годовой отчёт на 200 страниц → быстрые ответы с цитатами</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📖</div>
+                            <h3>Работа с книгами</h3>
+                            <p>Нон-фикшн книга → ключевые идеи, цитаты, конспект</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">🎓</div>
+                            <h3>Научные статьи</h3>
+                            <p>Несколько papers по теме → сравнение подходов, методологий</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">📝</div>
+                            <h3>Личная база знаний</h3>
+                            <p>Твои заметки и записи → AI-поиск по собственному архиву</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">💼</div>
+                            <h3>Онбординг</h3>
+                            <p>Документация проекта → быстрые ответы для новых сотрудников</p>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">🎙</div>
+                            <h3>Аудио-саммари</h3>
+                            <p>Любые материалы → подкаст для прослушивания в дороге</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 33 — NotebookLM итоги -->
+            <article class="slide slide-table" id="slide-33">
+                <div class="slide-content">
+                    <h2 class="slide-heading">NotebookLM: когда использовать</h2>
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Задача</th>
+                                    <th>NotebookLM?</th>
+                                    <th>Почему</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Нужен ответ с точными цитатами</td>
+                                    <td><span class="status-yes">✅ Да</span></td>
+                                    <td>Каждый факт со ссылкой на источник</td>
+                                </tr>
+                                <tr>
+                                    <td>Анализ конкретных документов</td>
+                                    <td><span class="status-yes">✅ Да</span></td>
+                                    <td>Работает только с твоими файлами</td>
+                                </tr>
+                                <tr>
+                                    <td>Подготовка к экзамену по материалам</td>
+                                    <td><span class="status-yes">✅ Да</span></td>
+                                    <td>Не выдумает «лишнего»</td>
+                                </tr>
+                                <tr>
+                                    <td>Нужна креативная идея</td>
+                                    <td><span class="status-no">❌ Нет</span></td>
+                                    <td>Используй ChatGPT/Claude</td>
+                                </tr>
+                                <tr>
+                                    <td>Написать текст «с нуля»</td>
+                                    <td><span class="status-no">❌ Нет</span></td>
+                                    <td>Используй ChatGPT/Claude</td>
+                                </tr>
+                                <tr>
+                                    <td>Актуальная информация из интернета</td>
+                                    <td><span class="status-no">❌ Нет</span></td>
+                                    <td>Используй Perplexity/ChatGPT</td>
+                                </tr>
+                                <tr>
+                                    <td>Послушать материалы в дороге</td>
+                                    <td><span class="status-yes">✅ Да</span></td>
+                                    <td>Audio Overview — уникальная фича</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="insight-box" style="margin-top: 2rem;">
+                        <span class="insight-icon">🎯</span>
+                        <span><strong>Правило:</strong> Если важна точность и источники — NotebookLM. Если нужно творчество — ChatGPT/Claude.</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 6: МОДУЛЬ 5 — Другие AI-инструменты ==================== -->
+        <section id="section-6" class="section section-module-5">
+            
+            <!-- Слайд 34 — Обложка модуля 5 -->
+            <article class="slide slide-module-cover" id="slide-34" data-accent="module5">
+                <div class="slide-content">
+                    <div class="module-number">05</div>
+                    <h2 class="module-title">Ещё полезные AI-инструменты</h2>
+                    <p class="module-subtitle">Поиск, картинки, голос и специальные задачи · 20 мин</p>
+                    <div class="module-illustration">
+                        <svg viewBox="0 0 300 180" class="tools-svg">
+                            <!-- Ящик с инструментами -->
+                            <rect x="75" y="80" width="150" height="80" rx="10" fill="#F59E0B"/>
+                            <rect x="75" y="70" width="150" height="20" rx="5" fill="#D97706"/>
+                            <rect x="135" y="60" width="30" height="15" rx="3" fill="#92400E"/>
+                            <!-- Инструменты торчат -->
+                            <rect x="95" y="50" width="8" height="35" fill="#3B82F6" rx="2"/>
+                            <circle cx="99" cy="45" r="8" fill="#3B82F6"/>
+                            <rect x="120" y="40" width="12" height="45" fill="#EF4444" rx="2"/>
+                            <polygon points="126,35 120,45 132,45" fill="#EF4444"/>
+                            <rect x="150" y="55" width="6" height="30" fill="#22C55E" rx="1"/>
+                            <rect x="145" y="50" width="16" height="8" fill="#22C55E" rx="2"/>
+                            <rect x="175" y="45" width="10" height="40" fill="#8B5CF6" rx="2"/>
+                            <circle cx="180" cy="40" r="6" fill="#8B5CF6"/>
+                            <rect x="200" y="55" width="8" height="30" fill="#EC4899" rx="2"/>
+                            <rect x="196" y="50" width="16" height="8" fill="#EC4899" rx="2"/>
+                        </svg>
+                    </div>
+                    <blockquote class="module-quote">
+                        «Не обязательно знать 100 инструментов. Достаточно знать 5-6 нужных для ваших задач.»
+                    </blockquote>
+                </div>
+            </article>
+
+            <!-- Слайд 35 — Perplexity -->
+            <article class="slide slide-feature" id="slide-35">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Perplexity — AI-поисковик с источниками</h2>
+                    <div class="feature-layout">
+                        <div class="feature-illustration" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 12px; padding: 2rem;">
+                            <img src="https://github.com/perplexity-ai.png" alt="Perplexity Logo" style="width: 150px; height: auto;" />
+                        </div>
+                        <div class="feature-content">
+                            <ul class="feature-list">
+                                <li><strong>Что это:</strong> поисковик, который читает интернет и отвечает с источниками</li>
+                                <li><strong>Доступ:</strong> работает без VPN из России</li>
+                                <li><strong>Бесплатно:</strong> 5 Pro-запросов в день</li>
+                                <li><strong>Pro:</strong> $20/мес — безлимит + разные модели</li>
+                            </ul>
+                            <div class="use-cases">
+                                <h4>Когда использовать:</h4>
+                                <div class="use-case-tags">
+                                    <span class="tag">📊 Проверка фактов</span>
+                                    <span class="tag">🔬 Научные вопросы</span>
+                                    <span class="tag">📰 Свежие новости</span>
+                                    <span class="tag">💰 Сравнение цен</span>
+                                </div>
+                            </div>
+                            <a href="https://perplexity.ai" class="cta-link" target="_blank">Открыть perplexity.ai →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 36 — DeepSeek -->
+            <article class="slide slide-feature" id="slide-36">
+                <div class="slide-content">
+                    <h2 class="slide-heading">DeepSeek — мощный и бесплатный</h2>
+                    <div class="feature-layout">
+                        <div class="feature-illustration" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 12px; padding: 2rem;">
+                            <img src="https://github.com/deepseek-ai.png" alt="DeepSeek Logo" style="width: 150px; height: auto; border-radius: 20px;" />
+                        </div>
+                        <div class="feature-content">
+                            <ul class="feature-list">
+                                <li><strong>Доступ:</strong> работает БЕЗ VPN из России</li>
+                                <li><strong>Цена:</strong> полностью бесплатно</li>
+                                <li><strong>Deep Thinking:</strong> показывает ход рассуждений (как o1)</li>
+                                <li><strong>Сила:</strong> математика, логика, программирование</li>
+                            </ul>
+                            <div class="comparison-grid" style="margin-top: 1rem;">
+                                <div class="comp-col">
+                                    <h3>✅ Плюсы</h3>
+                                    <ul style="list-style: none;">
+                                        <li>• Бесплатно без ограничений</li>
+                                        <li>• Без VPN</li>
+                                        <li>• Отличная логика</li>
+                                    </ul>
+                                </div>
+                                <div class="comp-col">
+                                    <h3>⚠️ Минусы</h3>
+                                    <ul style="list-style: none;">
+                                        <li>• Нет поиска в интернете</li>
+                                        <li>• Нет картинок</li>
+                                        <li>• Китайский сервис</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a href="https://chat.deepseek.com" class="cta-link" target="_blank">Открыть deepseek.com →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 37 — Генераторы изображений -->
+            <article class="slide slide-table" id="slide-37">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Генераторы изображений: сравнение</h2>
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Инструмент</th>
+                                    <th>Стиль</th>
+                                    <th>Цена</th>
+                                    <th>Доступ из РФ</th>
+                                    <th>Для чего лучше</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Midjourney</strong></td>
+                                    <td>Художественный, детализация</td>
+                                    <td>от $10/мес</td>
+                                    <td><span class="status-no">❌ VPN</span></td>
+                                    <td>Арт, концепты, красота</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>DALL-E 3</strong> (ChatGPT)</td>
+                                    <td>Универсальный</td>
+                                    <td>В подписке ChatGPT</td>
+                                    <td><span class="status-no">❌ VPN</span></td>
+                                    <td>Быстрые иллюстрации в чате</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ideogram</strong></td>
+                                    <td>Текст на картинках</td>
+                                    <td>Бесплатно / $7+</td>
+                                    <td><span class="status-warn">⚠️ VPN</span></td>
+                                    <td>Логотипы, постеры с текстом</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kandinsky</strong> (Сбер)</td>
+                                    <td>Хороший универсал</td>
+                                    <td>Бесплатно</td>
+                                    <td><span class="status-yes">✅ Без VPN</span></td>
+                                    <td>Бесплатно из России</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="insight-box" style="margin-top: 2rem;">
+                        <span class="insight-icon">💡</span>
+                        <span><strong>Совет:</strong> Для старта хватит DALL-E в ChatGPT. Midjourney — когда нужно «вау»-качество для арта.</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 38 — Gemini -->
+            <article class="slide slide-feature" id="slide-38">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Gemini — третий большой AI от Google</h2>
+                    <div class="feature-layout">
+                        <div class="feature-illustration" style="display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 12px; padding: 2rem;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" alt="Google Gemini Logo" style="width: 150px; height: auto;" />
+                        </div>
+                        <div class="feature-content">
+                            <ul class="feature-list">
+                                <li><strong>Интеграция:</strong> Gmail, Google Docs, Drive, YouTube</li>
+                                <li><strong>Видео:</strong> анализирует YouTube-ролики</li>
+                                <li><strong>Контекст:</strong> 1 миллион токенов (самый большой)</li>
+                                <li><strong>Gemini Live:</strong> голосовой режим</li>
+                            </ul>
+                            <div class="use-cases">
+                                <h4>Когда Gemini лучше:</h4>
+                                <div class="use-case-tags">
+                                    <span class="tag">📧 Работа с Gmail</span>
+                                    <span class="tag">📹 Анализ YouTube</span>
+                                    <span class="tag">📁 Google Workspace</span>
+                                    <span class="tag">📱 Android-интеграция</span>
+                                </div>
+                            </div>
+                            <div class="limits-box" style="margin-top: 1rem;">
+                                <h4>Цены:</h4>
+                                <p>Бесплатно (полноценная версия) • AI Pro ~€22/мес (2M контекст, Gems)</p>
+                            </div>
+                            <a href="https://gemini.google.com" class="cta-link" target="_blank">Открыть gemini.google.com →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 39 — ElevenLabs, Gamma, Suno -->
+            <article class="slide slide-cards" id="slide-39">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Ещё три полезных AI-инструмента</h2>
+                    <div class="ai-cards-grid">
+                        <div class="ai-card" data-ai="elevenlabs">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/elevenlabs.png" alt="ElevenLabs" style="width: 24px; height: 24px;">
+                                <h3>ElevenLabs</h3>
+                                <span class="ai-company">Voice AI</span>
+                            </div>
+                            <p class="ai-desc">Генерация голоса и озвучка. Клонирование голоса (с разрешения), 30+ языков, эмоции.</p>
+                            <div class="ai-price">Бесплатно 10 мин/мес · от $5/мес</div>
+                            <div class="use-case-tags" style="margin-top: 0.5rem;">
+                                <span class="tag" style="font-size: 0.75rem;">🎙 Озвучка видео</span>
+                                <span class="tag" style="font-size: 0.75rem;">📖 Аудиокниги</span>
+                            </div>
+                            <a href="https://elevenlabs.io" class="ai-link" target="_blank">elevenlabs.io →</a>
+                        </div>
+                        <div class="ai-card" data-ai="gamma">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/gammaai.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="Gamma">
+                                <h3>Gamma</h3>
+                                <span class="ai-company">AI Presentations</span>
+                            </div>
+                            <p class="ai-desc">Создание презентаций за минуту. Вводишь тему → готовые слайды с дизайном.</p>
+                            <div class="ai-price">Бесплатно 400 кредитов · от $8/мес</div>
+                            <div class="use-case-tags" style="margin-top: 0.5rem;">
+                                <span class="tag" style="font-size: 0.75rem;">📊 Презентации</span>
+                                <span class="tag" style="font-size: 0.75rem;">📄 Документы</span>
+                            </div>
+                            <a href="https://gamma.app" class="ai-link" target="_blank">gamma.app →</a>
+                        </div>
+                        <div class="ai-card" data-ai="suno">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/suno-ai.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="Suno">
+                                <h3>Suno</h3>
+                                <span class="ai-company">AI Music</span>
+                            </div>
+                            <p class="ai-desc">Генерация музыки и песен. Описываешь стиль → получаешь трек с вокалом.</p>
+                            <div class="ai-price">Бесплатно 50 песен/мес · от $8/мес</div>
+                            <div class="use-case-tags" style="margin-top: 0.5rem;">
+                                <span class="tag" style="font-size: 0.75rem;">🎵 Музыка для видео</span>
+                                <span class="tag" style="font-size: 0.75rem;">🎤 Jingles</span>
+                            </div>
+                            <a href="https://suno.com" class="ai-link" target="_blank">suno.com →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 40 — AI для разработки -->
+            <article class="slide slide-cards" id="slide-40">
+                <div class="slide-content">
+                    <h2 class="slide-heading">AI для разработки и дизайна</h2>
+                    <div class="ai-cards-grid">
+                        <div class="ai-card">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/vercel.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="GitHub">
+                                <h3>v0.dev</h3>
+                                <span class="ai-company">Vercel</span>
+                            </div>
+                            <p class="ai-desc">Генерация UI-компонентов. Описываешь интерфейс → получаешь код React/Tailwind.</p>
+                            <div class="ai-price">Бесплатно (лимиты) · от $20/мес</div>
+                            <a href="https://v0.dev" class="ai-link" target="_blank">v0.dev →</a>
+                        </div>
+                        <div class="ai-card">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/github.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="GitHub">
+                                <h3>GitHub Copilot</h3>
+                                <span class="ai-company">Microsoft</span>
+                            </div>
+                            <p class="ai-desc">AI-автодополнение кода прямо в редакторе. Понимает контекст проекта.</p>
+                            <div class="ai-price">$10/мес · бесплатно для студентов</div>
+                            <a href="https://github.com/features/copilot" class="ai-link" target="_blank">github.com/copilot →</a>
+                        </div>
+                        <div class="ai-card">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/getcursor.png" class="ai-dot" style="width: 20px; height: 20px; background: transparent; border-radius: 0;" alt="Cursor">
+                                <h3>Cursor</h3>
+                                <span class="ai-company">AI Code Editor</span>
+                            </div>
+                            <p class="ai-desc">Редактор кода с AI-чатом. Форк VS Code с глубокой интеграцией Claude/GPT.</p>
+                            <div class="ai-price">Бесплатно (лимиты) · $20/мес</div>
+                            <a href="https://cursor.com" class="ai-link" target="_blank">cursor.com →</a>
+                        </div>
+                        <div class="ai-card">
+                            <div class="ai-card-header">
+                                <img src="https://github.com/canva.png" alt="Canva AI" style="width: 24px; height: 24px;">
+                                <h3>Canva AI</h3>
+                                <span class="ai-company">Design</span>
+                            </div>
+                            <p class="ai-desc">AI-фичи в Canva: Magic Design, удаление фона, генерация картинок, текст.</p>
+                            <div class="ai-price">Бесплатно (базово) · Pro от $13/мес</div>
+                            <a href="https://canva.com" class="ai-link" target="_blank">canva.com →</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 41 — Итоговая шпаргалка -->
+            <article class="slide slide-table" id="slide-41">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Шпаргалка: какой AI для какой задачи</h2>
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Задача</th>
+                                    <th>Лучший инструмент</th>
+                                    <th>Альтернатива</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>🔍 Поиск с источниками</td>
+                                    <td><strong style="color:#20808D">Perplexity</strong></td>
+                                    <td>ChatGPT Search</td>
+                                </tr>
+                                <tr>
+                                    <td>✍️ Написать текст</td>
+                                    <td><strong style="color:#10A37F">ChatGPT</strong> / <strong style="color:#7C3AED">Claude</strong></td>
+                                    <td>DeepSeek</td>
+                                </tr>
+                                <tr>
+                                    <td>📄 Анализ документа с цитатами</td>
+                                    <td><strong style="color:#FBBC05">NotebookLM</strong></td>
+                                    <td>Claude (200K)</td>
+                                </tr>
+                                <tr>
+                                    <td>💻 Код и рефакторинг</td>
+                                    <td><strong style="color:#7C3AED">Claude</strong> / Cursor</td>
+                                    <td>ChatGPT, Copilot</td>
+                                </tr>
+                                <tr>
+                                    <td>🎨 Генерация картинок</td>
+                                    <td><strong>Midjourney</strong> (качество)</td>
+                                    <td>DALL-E, Kandinsky (бесплатно)</td>
+                                </tr>
+                                <tr>
+                                    <td>🎙 Озвучка / голос</td>
+                                    <td><strong style="color:#F59E0B">ElevenLabs</strong></td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>📊 Быстрая презентация</td>
+                                    <td><strong style="color:#8B5CF6">Gamma</strong></td>
+                                    <td>ChatGPT + Canva</td>
+                                </tr>
+                                <tr>
+                                    <td>📹 Анализ YouTube-видео</td>
+                                    <td><strong style="color:#4285F4">Gemini</strong></td>
+                                    <td>—</td>
+                                </tr>
+                                <tr>
+                                    <td>🆓 Бесплатно без VPN из РФ</td>
+                                    <td><strong style="color:#4D6BFE">DeepSeek</strong>, Perplexity</td>
+                                    <td>NotebookLM, Kandinsky</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="insight-box" style="margin-top: 2rem;">
+                        <span class="insight-icon">🎯</span>
+                        <span><strong>Главное правило:</strong> Для 80% задач хватит ChatGPT + Claude. Остальные инструменты — под конкретные задачи.</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 7: МОДУЛЬ 6 — Промпт-инжиниринг ==================== -->
+        <section id="section-7" class="section section-module-6">
+            
+            <!-- Слайд 42 — Обложка модуля 6 -->
+            <article class="slide slide-module-cover" id="slide-42" data-accent="module6">
+                <div class="slide-content">
+                    <div class="module-number">06</div>
+                    <h2 class="module-title">Промпт-инжиниринг</h2>
+                    <p class="module-subtitle">Как правильно разговаривать с AI · 20 мин</p>
+                    <div class="module-illustration">
+                        <svg viewBox="0 0 300 200" class="prompt-svg">
+                            <!-- Формула визуально -->
+                            <rect x="30" y="80" width="240" height="50" rx="10" fill="#FEE2E2" stroke="#EF4444" stroke-width="2"/>
+                            <text x="150" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#EF4444">Роль + Контекст + Задача + Формат + Ограничения</text>
+                            <!-- Иконки ингредиентов -->
+                            <circle cx="50" cy="50" r="20" fill="#10A37F"/>
+                            <text x="50" y="55" text-anchor="middle" fill="white" font-size="12">👤</text>
+                            <circle cx="110" cy="50" r="20" fill="#3B82F6"/>
+                            <text x="110" y="55" text-anchor="middle" fill="white" font-size="12">📋</text>
+                            <circle cx="170" cy="50" r="20" fill="#F59E0B"/>
+                            <text x="170" y="55" text-anchor="middle" fill="white" font-size="12">🎯</text>
+                            <circle cx="230" cy="50" r="20" fill="#7C3AED"/>
+                            <text x="230" y="55" text-anchor="middle" fill="white" font-size="12">📝</text>
+                            <!-- Стрелки -->
+                            <path d="M50 70 L50 80 M110 70 L110 80 M170 70 L170 80 M230 70 L230 80" stroke="#94A3B8" stroke-width="2"/>
+                            <!-- Результат -->
+                            <text x="150" y="160" text-anchor="middle" font-size="11" fill="#6B7280">= Идеальный результат</text>
+                            <text x="150" y="180" text-anchor="middle" font-size="16">✨</text>
+                        </svg>
+                    </div>
+                    <blockquote class="module-quote">
+                        «80% качества ответа AI зависит не от модели, а от того, как ты задал вопрос. Промпт — это не просто вопрос, это инструкция.»
+                    </blockquote>
+                </div>
+            </article>
+
+            <!-- Слайд 43 — Формула промпта -->
+            <article class="slide slide-schema" id="slide-43">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🔑 Формула идеального промпта</h2>
+                    <p class="slide-desc">5 элементов, которые превращают размытый запрос в точный результат</p>
+                    <div class="formula-blocks">
+                        <div class="formula-block" style="border-color: #10A37F; background: #ECFDF5;">
+                            <div class="fb-icon" style="background: #10A37F;">👤</div>
+                            <h3>1. Роль</h3>
+                            <p class="fb-question">«Кем ты должен быть»</p>
+                            <div class="fb-example">Ты — опытный копирайтер с 10-летним стажем в digital-маркетинге</div>
+                        </div>
+                        <div class="formula-block" style="border-color: #3B82F6; background: #EFF6FF;">
+                            <div class="fb-icon" style="background: #3B82F6;">📋</div>
+                            <h3>2. Контекст</h3>
+                            <p class="fb-question">«Вот моя ситуация»</p>
+                            <div class="fb-example">У меня интернет-магазин детской одежды, 50 заказов/мес, бюджет 30 000 ₽</div>
+                        </div>
+                        <div class="formula-block" style="border-color: #F59E0B; background: #FFFBEB;">
+                            <div class="fb-icon" style="background: #F59E0B;">🎯</div>
+                            <h3>3. Задача</h3>
+                            <p class="fb-question">«Что конкретно сделать»</p>
+                            <div class="fb-example">Напиши 5 вариантов заголовков для лендинга курса по кулинарии</div>
+                        </div>
+                        <div class="formula-block" style="border-color: #7C3AED; background: #F5F3FF;">
+                            <div class="fb-icon" style="background: #7C3AED;">📝</div>
+                            <h3>4. Формат</h3>
+                            <p class="fb-question">«В каком виде отдать»</p>
+                            <div class="fb-example">Таблица с колонками: Инструмент / Цена / Плюсы / Минусы</div>
+                        </div>
+                        <div class="formula-block" style="border-color: #EF4444; background: #FEF2F2;">
+                            <div class="fb-icon" style="background: #EF4444;">⛔</div>
+                            <h3>5. Ограничения</h3>
+                            <p class="fb-question">«Чего не делать»</p>
+                            <div class="fb-example">Не более 200 слов. Без сложных терминов. Только проверенные решения 2026</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 44 — Before/After сборка промпта -->
+            <article class="slide slide-steps" id="slide-44">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🔨 Собираем промпт: от плохого к идеальному</h2>
+                    <div class="steps-progression">
+                        <div class="step-item bad">
+                            <div class="step-badge">Шаг 0 — Плохо</div>
+                            <div class="step-content">
+                                <code>Напиши пост для инстаграм</code>
+                            </div>
+                            <div class="step-result">❌ Рандомный пост ни о чём</div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step-item">
+                            <div class="step-badge">+ Роль</div>
+                            <div class="step-content">
+                                <code><span class="highlight-green">Ты — SMM-специалист с опытом продвижения lifestyle-брендов.</span> Напиши пост для инстаграм.</code>
+                            </div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step-item">
+                            <div class="step-badge">+ Контекст</div>
+                            <div class="step-content">
+                                <code>Ты — SMM-специалист... <span class="highlight-blue">Я владею кофейней «Зерно» в Казани. Аудитория — девушки 22-35. Новый лавандовый латте.</span> Напиши пост...</code>
+                            </div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step-item">
+                            <div class="step-badge">+ Задача + Формат</div>
+                            <div class="step-content">
+                                <code>... <span class="highlight-orange">Напиши продающий пост, который мотивирует прийти на этой неделе. Структура: хук → история → описание → CTA. 5 хештегов.</span></code>
+                            </div>
+                        </div>
+                        <div class="step-arrow">↓</div>
+                        <div class="step-item good">
+                            <div class="step-badge">+ Ограничения = Идеал</div>
+                            <div class="step-content">
+                                <code>... <span class="highlight-red">До 900 символов. Тон тёплый. Без «уникальный», «лучший». Эмодзи — не более 3.</span></code>
+                            </div>
+                            <div class="step-result">✅ Точный пост в нужном стиле</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 45 — 5 ошибок новичков -->
+            <article class="slide slide-errors" id="slide-45">
+                <div class="slide-content">
+                    <h2 class="slide-heading">⚠️ 5 ошибок новичков</h2>
+                    <div class="errors-grid">
+                        <div class="error-card">
+                            <div class="error-number">1</div>
+                            <h3>Слишком общие запросы</h3>
+                            <div class="error-bad">❌ «Расскажи про бизнес»</div>
+                            <div class="error-good">✅ «Какие 5 способов привлечь первых клиентов в онлайн-школу с бюджетом до 20 000 ₽?»</div>
+                        </div>
+                        <div class="error-card">
+                            <div class="error-number">2</div>
+                            <h3>Нет контекста</h3>
+                            <div class="error-bad">❌ «Как увеличить конверсию?»</div>
+                            <div class="error-good">✅ «У меня лендинг, 2000 посетителей/мес, конверсия 1.2% (средняя по нише 3-5%). Что изменить?»</div>
+                        </div>
+                        <div class="error-card">
+                            <div class="error-number">3</div>
+                            <h3>Не указан формат</h3>
+                            <div class="error-bad">❌ «Проанализируй рынок кофеен»</div>
+                            <div class="error-good">✅ «Таблица: объём рынка, игроки, тренды, барьеры, возможности. Каждый раздел — 2-3 предложения»</div>
+                        </div>
+                        <div class="error-card">
+                            <div class="error-number">4</div>
+                            <h3>Просят всё сразу</h3>
+                            <div class="error-bad">❌ «Бизнес-план + маркетинг + финансы + контент-план»</div>
+                            <div class="error-good">✅ Разбей на шаги: «Сначала структура бизнес-плана → Затем раскрой маркетинг»</div>
+                        </div>
+                        <div class="error-card">
+                            <div class="error-number">5</div>
+                            <h3>Берут первый ответ</h3>
+                            <div class="error-bad">❌ Отправил → Скопировал → Ушёл</div>
+                            <div class="error-good">✅ «Хорошо, но сделай тон неформальнее» → «Добавь цифры» → «Разверни пункт 3»</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 46 — Техника Few-shot -->
+            <article class="slide slide-technique" id="slide-46">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🎯 Техника 1: Few-shot промптинг</h2>
+                    <p class="slide-desc">Покажи AI примеры — он поймёт паттерн</p>
+                    <div class="technique-demo">
+                        <div class="technique-prompt">
+                            <div class="prompt-label">Промпт с примерами:</div>
+                            <pre class="prompt-code"><code>Напиши отзыв на кофейню в стиле, как в примерах:
+
+<span class="example-text">Пример 1: «Зашла случайно — осталась на два часа. Капучино как в Италии, 
+а чизкейк я вообще молча съела, не успев сфоткать. Вернусь однозначно.»</span>
+
+<span class="example-text">Пример 2: «Ребята, это мой новый рабочий офис. Wi-Fi летает, розетки 
+у каждого стола, музыка не бесит. А фильтр V60 — лучший в районе.»</span>
+
+Теперь напиши похожий отзыв для кофейни, которая славится завтраками.</code></pre>
+                        </div>
+                        <div class="technique-why">
+                            <h4>Почему работает</h4>
+                            <p>AI считывает не только содержание, но и стиль: длину предложений, разговорный тон, личные детали, эмоцию.</p>
+                        </div>
+                        <div class="technique-use-cases">
+                            <h4>Когда использовать:</h4>
+                            <div class="use-case-list">
+                                <span class="tag">Деловые письма в твоём стиле</span>
+                                <span class="tag">Посты для Telegram-канала</span>
+                                <span class="tag">Отзывы и рекомендации</span>
+                                <span class="tag">Любой текст с уникальным тоном</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 47 — Техники: Chain-of-Thought, Итерации, Мета-промпт -->
+            <article class="slide slide-techniques-grid" id="slide-47">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🔗 Продвинутые техники (часть 1)</h2>
+                    <div class="techniques-grid">
+                        <div class="technique-card">
+                            <div class="tc-icon">🔗</div>
+                            <h3>Chain-of-Thought</h3>
+                            <p class="tc-subtitle">Цепочка рассуждений</p>
+                            <div class="tc-key">Ключ: <code>«Думай пошагово»</code></div>
+                            <div class="tc-example">
+                                <span class="tc-label">Пример:</span>
+                                «Сравни 2 варианта аренды. Думай пошагово: посчитай проходимость → оцени конкуренцию → сравни unit-экономику → дай рекомендацию»
+                            </div>
+                            <div class="tc-result">Качество сложных расчётов ↑50%</div>
+                        </div>
+                        <div class="technique-card">
+                            <div class="tc-icon">🔄</div>
+                            <h3>Итеративный подход</h3>
+                            <p class="tc-subtitle">Промпт → Оценка → Уточнение → Финал</p>
+                            <div class="tc-steps">
+                                <div class="tc-step">1️⃣ Стартовый промпт</div>
+                                <div class="tc-step">2️⃣ «Добавь метрики и примеры»</div>
+                                <div class="tc-step">3️⃣ «Сделай финал уверенным, не просительным»</div>
+                            </div>
+                            <div class="tc-result">Первый ответ = черновик, итерации = финал</div>
+                        </div>
+                        <div class="technique-card">
+                            <div class="tc-icon">🧠</div>
+                            <h3>Мета-промпт</h3>
+                            <p class="tc-subtitle">AI помогает составить промпт</p>
+                            <div class="tc-example">
+                                <span class="tc-label">Промпт:</span>
+                                «Я хочу попросить AI помочь с [задача]. Задай мне 5-7 уточняющих вопросов, чтобы составить эффективный промпт. После моих ответов — собери финальный промпт.»
+                            </div>
+                            <div class="tc-result">Не знаешь как спросить? Спроси AI!</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 48 — Техники: Критик, 12-летний, Песочница ролей -->
+            <article class="slide slide-techniques-grid" id="slide-48">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🎭 Продвинутые техники (часть 2)</h2>
+                    <div class="techniques-grid">
+                        <div class="technique-card">
+                            <div class="tc-icon">🔍</div>
+                            <h3>Промпт «Критик»</h3>
+                            <p class="tc-subtitle">AI как жёсткий рецензент</p>
+                            <div class="tc-example">
+                                <span class="tc-label">Промпт:</span>
+                                «Переключись в режим критика. Найди слабые места и логические ошибки в моём плане. Не хвали — только конструктивная критика. Для каждого: что не так → почему проблема → как исправить»
+                            </div>
+                            <div class="tc-when">Когда: перед запуском проекта, перед публикацией</div>
+                        </div>
+                        <div class="technique-card">
+                            <div class="tc-icon">👶</div>
+                            <h3>«Объясни как 12-летнему»</h3>
+                            <p class="tc-subtitle">Упрощение сложного</p>
+                            <div class="tc-example">
+                                <span class="tc-label">Промпт:</span>
+                                «Объясни [сложная тема] так, чтобы понял 12-летний ребёнок. Аналогии из жизни. Никаких терминов без объяснения. Максимум 200 слов.»
+                            </div>
+                            <div class="tc-when">Когда: изучаешь новое, объясняешь клиенту</div>
+                        </div>
+                        <div class="technique-card">
+                            <div class="tc-icon">🎭</div>
+                            <h3>Песочница ролей</h3>
+                            <p class="tc-subtitle">Обсуждение между экспертами</p>
+                            <div class="tc-example">
+                                <span class="tc-label">Промпт:</span>
+                                «Смоделируй обсуждение между: 1) Предприниматель (прагматик) 2) Финансист (консерватор) 3) Коуч (оптимист). Тема: стоит ли мне увольняться и запускать SaaS? Контекст: 30 лет, 150К зарплата, накопления на 6 мес.»
+                            </div>
+                            <div class="tc-when">Когда: нужен многогранный взгляд</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 49 — Библиотека промптов: работа -->
+            <article class="slide slide-prompts-library" id="slide-49">
+                <div class="slide-content">
+                    <h2 class="slide-heading">📚 Библиотека промптов: Работа</h2>
+                    <div class="prompts-grid">
+                        <div class="prompt-card" data-category="work">
+                            <div class="pc-header">
+                                <span class="pc-icon">📧</span>
+                                <h3>Email (формальный)</h3>
+                            </div>
+                            <div class="pc-prompt">
+                                <code>Ты — деловой коммуникатор. Напиши формальное письмо.
+Кому: [должность]. Тема: [тема]. Ключевое сообщение: [что донести].
+Формат: тема + приветствие + 2-3 абзаца + CTA + подпись.
+Тон: профессиональный, без канцелярита. До 150 слов.</code>
+                            </div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Копировать</button>
+                        </div>
+                        <div class="prompt-card" data-category="work">
+                            <div class="pc-header">
+                                <span class="pc-icon">🤝</span>
+                                <h3>Подготовка к переговорам</h3>
+                            </div>
+                            <div class="pc-prompt">
+                                <code>Ты — переговорщик с 15-летним опытом.
+Тип встречи: [переговоры/собеседование/презентация].
+Мои цели: [чего хочу]. Вторая сторона: [кто они].
+Дай: 1) Структуру встречи 2) 5 ключевых аргументов
+3) 3 возражения и ответы 4) Вопросы задать 5) «Красные линии»</code>
+                            </div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Копировать</button>
+                        </div>
+                        <div class="prompt-card" data-category="work">
+                            <div class="pc-header">
+                                <span class="pc-icon">📝</span>
+                                <h3>Резюме / CV</h3>
+                            </div>
+                            <div class="pc-prompt">
+                                <code>Ты — HR-консультант и карьерный коуч.
+Моя позиция сейчас: [должность]. Желаемая: [куда хочу].
+Опыт: [места, сроки, достижения]. Навыки: [список].
+Требования: достижения вместо обязанностей (формула «Сделал X → привело к Y»).
+Адаптируй под целевую позицию. 1 страница A4.</code>
+                            </div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Копировать</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 50 — Библиотека промптов: контент, обучение -->
+            <article class="slide slide-prompts-library" id="slide-50">
+                <div class="slide-content">
+                    <h2 class="slide-heading">📚 Библиотека промптов: Контент и обучение</h2>
+                    <div class="prompts-grid">
+                        <div class="prompt-card" data-category="content">
+                            <div class="pc-header">
+                                <span class="pc-icon">📱</span>
+                                <h3>Пост для соцсети</h3>
+                            </div>
+                            <div class="pc-prompt">
+                                <code>Ты — SMM-специалист. Напиши пост для [платформа].
+Тема: [о чём]. Цель: [вовлечение/продажа/информирование].
+ЦА: [кто читает]. Тон: [дружелюбный/экспертный/провокационный].
+Структура: хук + основная часть + CTA.
+До [X] символов. Эмодзи — не более [N].</code>
+                            </div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Копировать</button>
+                        </div>
+                        <div class="prompt-card" data-category="content">
+                            <div class="pc-header">
+                                <span class="pc-icon">📣</span>
+                                <h3>Рекламный текст</h3>
+                            </div>
+                            <div class="pc-prompt">
+                                <code>Ты — копирайтер прямого отклика.
+Продукт: [что продаём]. УТП: [чем отличаемся].
+ЦА: [кто покупает, их боли]. Оффер: [спецпредложение].
+CTA: [что должен сделать].
+Формат: заголовок (10 слов) + подзаголовок (20 слов) + 3-5 буллетов + CTA.</code>
+                            </div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Копировать</button>
+                        </div>
+                        <div class="prompt-card" data-category="learning">
+                            <div class="pc-header">
+                                <span class="pc-icon">🎓</span>
+                                <h3>Изучение темы</h3>
+                            </div>
+                            <div class="pc-prompt">
+                                <code>Я хочу изучить [тема] за [срок].
+Мой текущий уровень: [новичок/средний/продвинутый].
+Цель: [зачем мне это нужно].
+Составь план обучения: 1) Ключевые концепции
+2) Ресурсы (книги, курсы, каналы) 3) Практические задания
+4) Способы проверить, что я понял.</code>
+                            </div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">📋 Копировать</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 51 — Итоги промпт-инжиниринга -->
+            <article class="slide slide-summary" id="slide-51">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🏁 Итоги: Промпт-инжиниринг</h2>
+                    <div class="summary-grid">
+                        <div class="summary-block formula-summary">
+                            <h3>📐 Формула</h3>
+                            <div class="formula-visual">
+                                <span class="fv-part" style="background: #10A37F;">Роль</span>
+                                <span class="fv-plus">+</span>
+                                <span class="fv-part" style="background: #3B82F6;">Контекст</span>
+                                <span class="fv-plus">+</span>
+                                <span class="fv-part" style="background: #F59E0B;">Задача</span>
+                                <span class="fv-plus">+</span>
+                                <span class="fv-part" style="background: #7C3AED;">Формат</span>
+                                <span class="fv-plus">+</span>
+                                <span class="fv-part" style="background: #EF4444;">Ограничения</span>
+                            </div>
+                        </div>
+                        <div class="summary-block">
+                            <h3>🛠 7 техник</h3>
+                            <ol class="techniques-summary">
+                                <li><strong>Few-shot</strong> — покажи примеры</li>
+                                <li><strong>Chain-of-Thought</strong> — «думай пошагово»</li>
+                                <li><strong>Итерации</strong> — улучшай ответ</li>
+                                <li><strong>Мета-промпт</strong> — AI помогает составить промпт</li>
+                                <li><strong>Критик</strong> — найди слабые места</li>
+                                <li><strong>12-летний</strong> — упрости сложное</li>
+                                <li><strong>Песочница ролей</strong> — несколько экспертов</li>
+                            </ol>
+                        </div>
+                        <div class="summary-block rules-summary">
+                            <h3>📋 3 правила</h3>
+                            <div class="rules-list">
+                                <div class="rule-item">
+                                    <span class="rule-num">1</span>
+                                    <span>Конкретика > Абстракция</span>
+                                </div>
+                                <div class="rule-item">
+                                    <span class="rule-num">2</span>
+                                    <span>Итерации > Один запрос</span>
+                                </div>
+                                <div class="rule-item">
+                                    <span class="rule-num">3</span>
+                                    <span>Примеры > Описания</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 8: БОНУС — Лайфхаки ==================== -->
+        <section id="section-8" class="section section-bonus">
+            
+            <!-- Слайд 52 — Обложка Бонус -->
+            <article class="slide slide-bonus-cover" id="slide-52">
+                <div class="slide-content">
+                    <div class="bonus-badge">🎁 БОНУС</div>
+                    <h2 class="bonus-title">10 лайфхаков и фишек</h2>
+                    <p class="bonus-subtitle">Приёмы, которые отличают новичка от продвинутого пользователя</p>
+                    <div class="bonus-illustration">
+                        <svg viewBox="0 0 300 150" class="lifehacks-svg">
+                            <!-- Лампочки идей -->
+                            <circle cx="50" cy="70" r="25" fill="#FCD34D" class="bulb-glow"/>
+                            <path d="M50 45 L50 30 M35 50 L25 40 M65 50 L75 40 M35 90 L25 100 M65 90 L75 100" stroke="#F59E0B" stroke-width="2"/>
+                            <circle cx="50" cy="70" r="18" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
+                            <text x="50" y="75" text-anchor="middle" font-size="14">💡</text>
+                            
+                            <circle cx="150" cy="70" r="25" fill="#A78BFA" class="bulb-glow"/>
+                            <circle cx="150" cy="70" r="18" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2"/>
+                            <text x="150" y="75" text-anchor="middle" font-size="14">🚀</text>
+                            
+                            <circle cx="250" cy="70" r="25" fill="#6EE7B7" class="bulb-glow"/>
+                            <circle cx="250" cy="70" r="18" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/>
+                            <text x="250" y="75" text-anchor="middle" font-size="14">⚡</text>
+                            
+                            <text x="150" y="130" text-anchor="middle" font-size="12" fill="#6B7280">Практические приёмы для ежедневного использования</text>
+                        </svg>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 53 — Лайфхаки 1-5 -->
+            <article class="slide slide-lifehacks" id="slide-53">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Лайфхаки 1-5</h2>
+                    <div class="lifehacks-list">
+                        <div class="lifehack-item">
+                            <div class="lh-number">1</div>
+                            <div class="lh-content">
+                                <h3>«Критикуй меня»</h3>
+                                <p>Попроси AI жёстко раскритиковать твою идею. Он найдёт слабые места, которые ты не замечаешь.</p>
+                                <div class="lh-prompt">«Выступи в роли жёсткого критика. Найди все риски и проблемы. Не нужно хвалить.»</div>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">2</div>
+                            <div class="lh-content">
+                                <h3>«Объясни как 12-летнему»</h3>
+                                <p>Самый быстрый способ разобраться в сложной теме — попросить объяснить просто.</p>
+                                <div class="lh-prompt">«Объясни блокчейн/SEO/инвестиции так, будто мне 12 лет. Аналогии из жизни.»</div>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">3</div>
+                            <div class="lh-content">
+                                <h3>Несколько AI одновременно</h3>
+                                <p>Задай один вопрос в ChatGPT, Claude и Perplexity — сравни ответы. «Среднее» из трёх часто лучше одного.</p>
+                                <div class="lh-tip">💡 Потом: «Вот 3 варианта. Объедини лучшее в один финальный ответ.»</div>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">4</div>
+                            <div class="lh-content">
+                                <h3>AI как «второе мнение»</h3>
+                                <p>Написал текст — не отправляй сразу. Загрузи в AI: «Улучши, убери воду, исправь логические нестыковки».</p>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">5</div>
+                            <div class="lh-content">
+                                <h3>Голосовой ввод</h3>
+                                <p>Мы говорим в 3-4 раза быстрее, чем печатаем. Надиктуй поток мыслей → AI структурирует.</p>
+                                <div class="lh-tip">📱 ChatGPT и Claude в мобильных приложениях поддерживают голос</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 54 — Лайфхаки 6-10 -->
+            <article class="slide slide-lifehacks" id="slide-54">
+                <div class="slide-content">
+                    <h2 class="slide-heading">Лайфхаки 6-10</h2>
+                    <div class="lifehacks-list">
+                        <div class="lifehack-item">
+                            <div class="lh-number">6</div>
+                            <div class="lh-content">
+                                <h3>Ежедневный лог работы с AI</h3>
+                                <p>Фиксируй, для чего используешь AI. Через неделю увидишь паттерны и соберёшь личную библиотеку промптов.</p>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">7</div>
+                            <div class="lh-content">
+                                <h3>Poe.com и OpenRouter</h3>
+                                <p>Агрегаторы: одна подписка (~$20/мес) → доступ к ChatGPT + Claude + Gemini + десятки других моделей.</p>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">8</div>
+                            <div class="lh-content">
+                                <h3>«Сократ-режим»</h3>
+                                <p>Вместо готового ответа попроси AI задавать вопросы. Сам придёшь к решению — оно будет точнее.</p>
+                                <div class="lh-prompt">«Не давай готовый ответ. Задавай наводящие вопросы, чтобы я сам пришёл к решению.»</div>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">9</div>
+                            <div class="lh-content">
+                                <h3>«Переведи на язык X»</h3>
+                                <p>AI «переводит» с профессионального на простой и обратно. Юрист → простыми словами. Твоя мысль → язык инвестора.</p>
+                            </div>
+                        </div>
+                        <div class="lifehack-item">
+                            <div class="lh-number">10</div>
+                            <div class="lh-content">
+                                <h3>«Дай мне чек-лист»</h3>
+                                <p>Любую задачу можно превратить в пошаговый чек-лист. Снижает тревогу, предотвращает ошибки.</p>
+                                <div class="lh-prompt">«Составь подробный чек-лист для [задача]. Каждый пункт — конкретное действие + примерное время.»</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 55 — Главный секрет -->
+            <article class="slide slide-secret" id="slide-55">
+                <div class="slide-content">
+                    <div class="secret-container">
+                        <div class="secret-icon">🔑</div>
+                        <h2 class="secret-title">Главный секрет работы с AI</h2>
+                        <blockquote class="secret-quote">
+                            «Чем больше ты используешь — тем лучше получается. Это навык, и он прокачивается с практикой.»
+                        </blockquote>
+                        <div class="learning-curve">
+                            <svg viewBox="0 0 400 150" class="curve-svg">
+                                <defs>
+                                    <linearGradient id="curveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#EF4444"/>
+                                        <stop offset="50%" style="stop-color:#F59E0B"/>
+                                        <stop offset="100%" style="stop-color:#22C55E"/>
+                                    </linearGradient>
+                                </defs>
+                                <!-- Оси -->
+                                <line x1="50" y1="130" x2="380" y2="130" stroke="#E5E7EB" stroke-width="2"/>
+                                <line x1="50" y1="130" x2="50" y2="20" stroke="#E5E7EB" stroke-width="2"/>
+                                <!-- Кривая обучения -->
+                                <path d="M50 120 Q100 115 150 100 Q200 80 250 50 Q300 30 350 25" stroke="url(#curveGrad)" stroke-width="4" fill="none"/>
+                                <!-- Точки -->
+                                <circle cx="50" cy="120" r="6" fill="#EF4444"/>
+                                <circle cx="150" cy="100" r="6" fill="#F59E0B"/>
+                                <circle cx="250" cy="50" r="6" fill="#22C55E"/>
+                                <circle cx="350" cy="25" r="6" fill="#22C55E"/>
+                                <!-- Подписи -->
+                                <text x="50" y="145" text-anchor="middle" font-size="10" fill="#6B7280">День 1</text>
+                                <text x="150" y="145" text-anchor="middle" font-size="10" fill="#6B7280">Неделя</text>
+                                <text x="250" y="145" text-anchor="middle" font-size="10" fill="#6B7280">Месяц</text>
+                                <text x="350" y="145" text-anchor="middle" font-size="10" fill="#6B7280">3 месяца</text>
+                                <text x="30" y="75" text-anchor="middle" font-size="10" fill="#6B7280" transform="rotate(-90 30 75)">Эффективность</text>
+                            </svg>
+                        </div>
+                        <div class="secret-cta">
+                            <p>Не пытайся освоить все 10 лайфхаков сразу. Выбери 2-3 и попробуй <strong>сегодня</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 9: МАТЕРИАЛЫ ==================== -->
+        <section id="section-9" class="section section-materials">
+            
+            <!-- Слайд 56 — 30+ AI-инструментов -->
+            <article class="slide slide-catalog" id="slide-56">
+                <div class="slide-content">
+                    <h2 class="slide-heading">📦 30+ AI-инструментов: каталог</h2>
+                    <p class="slide-desc">Полная таблица в материалах курса. Здесь — ключевые категории.</p>
+                    <div class="catalog-grid">
+                        <div class="catalog-category">
+                            <h3>🗣 Чат-боты</h3>
+                            <ul>
+                                <li><strong>ChatGPT</strong> — универсал 🔑</li>
+                                <li><strong>Claude</strong> — аналитика, тексты 🔑</li>
+                                <li><strong>Gemini</strong> — Google Workspace 🔑</li>
+                                <li><strong>DeepSeek</strong> — бесплатный ✅</li>
+                            </ul>
+                        </div>
+                        <div class="catalog-category">
+                            <h3>🎨 Изображения</h3>
+                            <ul>
+                                <li><strong>Midjourney</strong> — топ качество 🔑</li>
+                                <li><strong>DALL-E 3</strong> — в ChatGPT 🔑</li>
+                                <li><strong>Ideogram</strong> — текст на картинках ✅</li>
+                                <li><strong>Kandinsky</strong> — русский, бесплатный ✅</li>
+                            </ul>
+                        </div>
+                        <div class="catalog-category">
+                            <h3>🎬 Видео и аудио</h3>
+                            <ul>
+                                <li><strong>Sora</strong> — генерация видео 🔑</li>
+                                <li><strong>ElevenLabs</strong> — синтез речи 🔑</li>
+                                <li><strong>Suno</strong> — музыка с вокалом ✅</li>
+                                <li><strong>Whisper</strong> — транскрибация ✅</li>
+                            </ul>
+                        </div>
+                        <div class="catalog-category">
+                            <h3>⚡ Продуктивность</h3>
+                            <ul>
+                                <li><strong>NotebookLM</strong> — AI-блокнот ✅</li>
+                                <li><strong>Perplexity</strong> — AI-поиск ✅</li>
+                                <li><strong>Gamma</strong> — AI-презентации ✅</li>
+                                <li><strong>Notion AI</strong> — в Notion ✅</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="catalog-legend">
+                        <span class="legend-item"><span class="legend-icon">✅</span> Работает из РФ</span>
+                        <span class="legend-item"><span class="legend-icon">🔑</span> Нужен VPN</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 57 — Сравнение ChatGPT vs Claude vs Gemini -->
+            <article class="slide slide-comparison-big" id="slide-57">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🔄 ChatGPT vs Claude vs Gemini</h2>
+                    <div class="table-wrapper">
+                        <table class="comparison-table big-table">
+                            <thead>
+                                <tr>
+                                    <th>Параметр</th>
+                                    <th><span style="color:#10A37F">●</span> ChatGPT</th>
+                                    <th><span style="color:#7C3AED">●</span> Claude</th>
+                                    <th><span style="color:#4285F4">●</span> Gemini</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Лучше всего для</strong></td>
+                                    <td>Универсал: тексты, код, картинки, голос</td>
+                                    <td>Глубокий анализ, длинные документы, качественные тексты</td>
+                                    <td>Мультимодальность, Google Workspace, видео/музыка</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Контекст</strong></td>
+                                    <td>128K–200K токенов</td>
+                                    <td>200K токенов</td>
+                                    <td>1 000 000 токенов 🏆</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Генерация картинок</strong></td>
+                                    <td><span class="status-yes">✅</span> DALL-E</td>
+                                    <td><span class="status-no">❌</span></td>
+                                    <td><span class="status-yes">✅</span> Imagen</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Голосовой режим</strong></td>
+                                    <td><span class="status-yes">✅</span> Advanced Voice</td>
+                                    <td><span class="status-warn">⚠️</span> Ограниченно</td>
+                                    <td><span class="status-yes">✅</span> Gemini Live</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Уникальная фишка</strong></td>
+                                    <td>GPT Store + Canvas + Deep Research</td>
+                                    <td>Artifacts + идеальное следование инструкциям</td>
+                                    <td>Veo (видео) + Lyria (музыка) + Workspace</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Доступ из РФ</strong></td>
+                                    <td><span class="status-no">❌</span> VPN</td>
+                                    <td><span class="status-no">❌</span> VPN</td>
+                                    <td><span class="status-warn">⚠️</span> Google-аккаунт</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Цена</strong></td>
+                                    <td>Бесплатно / $20 / $200</td>
+                                    <td>Бесплатно / $20</td>
+                                    <td>Бесплатно / €22</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="comparison-tip">
+                        💡 <strong>Главный принцип:</strong> комбинируйте! ChatGPT — универсал, Claude — аналитика и тексты, Gemini — мультимедиа и Google-экосистема.
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 58 — Custom Instructions шаблоны -->
+            <article class="slide slide-templates" id="slide-58">
+                <div class="slide-content">
+                    <h2 class="slide-heading">📋 Custom Instructions: 3 шаблона</h2>
+                    <p class="slide-desc">Заполни один раз — ChatGPT будет учитывать в каждом чате</p>
+                    <div class="templates-grid">
+                        <div class="template-card">
+                            <div class="tpl-badge">🎯 Универсальный</div>
+                            <div class="tpl-content">
+                                <div class="tpl-field">
+                                    <h4>Поле 1 — О себе:</h4>
+                                    <code>Живу в России, [город]. Работаю [профессия], [X] лет опыта. Использую ChatGPT для рабочих задач и саморазвития.</code>
+                                </div>
+                                <div class="tpl-field">
+                                    <h4>Поле 2 — Как отвечать:</h4>
+                                    <code>На русском. Конкретно, без воды. Списки и структура. Примеры из российского контекста. Не начинай с «Конечно!»</code>
+                                </div>
+                            </div>
+                            <button class="copy-btn" onclick="copyTemplate(this)">📋 Копировать</button>
+                        </div>
+                        <div class="template-card">
+                            <div class="tpl-badge">💼 Бизнес</div>
+                            <div class="tpl-content">
+                                <div class="tpl-field">
+                                    <h4>Поле 1:</h4>
+                                    <code>[Предприниматель/менеджер] в [сфера]. Команда [X] человек. ЦА: [кто]. Приоритеты: рост, оптимизация, делегирование.</code>
+                                </div>
+                                <div class="tpl-field">
+                                    <h4>Поле 2:</h4>
+                                    <code>Говори как бизнес-консультант. Российский рынок (рубли, VK, Telegram, WB). 2-3 варианта с плюсами/минусами. Не бойся указать риски.</code>
+                                </div>
+                            </div>
+                            <button class="copy-btn" onclick="copyTemplate(this)">📋 Копировать</button>
+                        </div>
+                        <div class="template-card">
+                            <div class="tpl-badge">🎨 Креативный</div>
+                            <div class="tpl-content">
+                                <div class="tpl-field">
+                                    <h4>Поле 1:</h4>
+                                    <code>[Блогер/SMM/копирайтер]. Площадки: [Telegram/VK/YouTube]. Тема: [тематика]. Стиль: [твой стиль].</code>
+                                </div>
+                                <div class="tpl-field">
+                                    <h4>Поле 2:</h4>
+                                    <code>Живой, разговорный язык. Цепляющие заголовки, короткие абзацы. Минимум 10 идей. Формат для чтения с телефона.</code>
+                                </div>
+                            </div>
+                            <button class="copy-btn" onclick="copyTemplate(this)">📋 Копировать</button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 59 — 9 материалов после курса -->
+            <article class="slide slide-materials-list" id="slide-59">
+                <div class="slide-content">
+                    <h2 class="slide-heading">📚 9 материалов после курса</h2>
+                    <p class="slide-desc">Все документы доступны в папке курса</p>
+                    <div class="materials-grid">
+                        <div class="material-item">
+                            <span class="mat-icon">📄</span>
+                            <div class="mat-content">
+                                <h3>КОНСПЕКТ_КУРСА.md</h3>
+                                <p>Полный конспект всех 6 модулей</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">📊</span>
+                            <div class="mat-content">
+                                <h3>30+ AI-инструментов</h3>
+                                <p>Каталог с описаниями и ссылками</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">⚖️</span>
+                            <div class="mat-content">
+                                <h3>Сравнение ChatGPT vs Claude vs Gemini</h3>
+                                <p>Большая таблица + когда что использовать</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">⚙️</span>
+                            <div class="mat-content">
+                                <h3>Шаблон Custom Instructions</h3>
+                                <p>3 готовых варианта для ChatGPT</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">🌐</span>
+                            <div class="mat-content">
+                                <h3>Доступ к AI из России</h3>
+                                <p>VPN, оплата, альтернативы без VPN</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">🎁</span>
+                            <div class="mat-content">
+                                <h3>10 лайфхаков и фишек</h3>
+                                <p>Практические приёмы для продвинутых</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">📝</span>
+                            <div class="mat-content">
+                                <h3>Гайды по модулям</h3>
+                                <p>ChatGPT, Claude, NotebookLM, Промпт-инжиниринг</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">📋</span>
+                            <div class="mat-content">
+                                <h3>План курса</h3>
+                                <p>Структура и навигация по материалам</p>
+                            </div>
+                        </div>
+                        <div class="material-item">
+                            <span class="mat-icon">🎬</span>
+                            <div class="mat-content">
+                                <h3>Презентация</h3>
+                                <p>Интерактивные слайды (эта презентация)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- ==================== СЕКЦИЯ 10: ФИНАЛ ==================== -->
+        <section id="section-10" class="section section-final">
+            
+            <!-- Слайд 60 — 7 ключевых выводов -->
+            <article class="slide slide-takeaways" id="slide-60">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🎯 7 ключевых выводов курса</h2>
+                    <div class="takeaways-list">
+                        <div class="takeaway-item">
+                            <div class="ta-number">1</div>
+                            <div class="ta-content">
+                                <strong>AI — это инструмент, не магия.</strong> Он умножает твои навыки, но не заменяет мышление.
+                            </div>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="ta-number">2</div>
+                            <div class="ta-content">
+                                <strong>80% результата — в промпте.</strong> Формула: Роль + Контекст + Задача + Формат + Ограничения.
+                            </div>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="ta-number">3</div>
+                            <div class="ta-content">
+                                <strong>Разные AI для разных задач.</strong> ChatGPT — универсал, Claude — аналитика, Gemini — мультимедиа, Perplexity — поиск.
+                            </div>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="ta-number">4</div>
+                            <div class="ta-content">
+                                <strong>NotebookLM — твой «второй мозг».</strong> Загрузи источники → получи ответы без галлюцинаций.
+                            </div>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="ta-number">5</div>
+                            <div class="ta-content">
+                                <strong>Custom Instructions экономят часы.</strong> Настрой один раз — ChatGPT будет понимать тебя лучше.
+                            </div>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="ta-number">6</div>
+                            <div class="ta-content">
+                                <strong>Итерации > Один запрос.</strong> Первый ответ — черновик. Уточняй, улучшай, дорабатывай.
+                            </div>
+                        </div>
+                        <div class="takeaway-item">
+                            <div class="ta-number">7</div>
+                            <div class="ta-content">
+                                <strong>Практика > Теория.</strong> Каждый день используй AI для реальных задач. Навык прокачивается только так.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 61 — Быстрый старт -->
+            <article class="slide slide-quickstart" id="slide-61">
+                <div class="slide-content">
+                    <h2 class="slide-heading">🚀 Быстрый старт: 5 действий на сегодня</h2>
+                    <div class="quickstart-actions">
+                        <div class="qs-action">
+                            <div class="qs-checkbox">☐</div>
+                            <div class="qs-content">
+                                <h3>1. Настрой Custom Instructions</h3>
+                                <p>Открой ChatGPT → Settings → Personalization → заполни 2 поля из шаблона</p>
+                                <a href="https://chat.openai.com" target="_blank" class="qs-link">Открыть ChatGPT →</a>
+                            </div>
+                        </div>
+                        <div class="qs-action">
+                            <div class="qs-checkbox">☐</div>
+                            <div class="qs-content">
+                                <h3>2. Создай первый Project</h3>
+                                <p>«English Learning» или «Работа» — папка с контекстом для повторяющихся задач</p>
+                            </div>
+                        </div>
+                        <div class="qs-action">
+                            <div class="qs-checkbox">☐</div>
+                            <div class="qs-content">
+                                <h3>3. Попробуй NotebookLM</h3>
+                                <p>Загрузи статью или документ → задай вопросы → послушай Audio Overview</p>
+                                <a href="https://notebooklm.google" target="_blank" class="qs-link">Открыть NotebookLM →</a>
+                            </div>
+                        </div>
+                        <div class="qs-action">
+                            <div class="qs-checkbox">☐</div>
+                            <div class="qs-content">
+                                <h3>4. Используй формулу промпта</h3>
+                                <p>Возьми реальную задачу → примени: Роль + Контекст + Задача + Формат + Ограничения</p>
+                            </div>
+                        </div>
+                        <div class="qs-action">
+                            <div class="qs-checkbox">☐</div>
+                            <div class="qs-content">
+                                <h3>5. Сохрани библиотеку промптов</h3>
+                                <p>Скопируй готовые промпты из материалов курса в свои заметки</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="qs-cta">
+                        <p>Потрать 30 минут сейчас — сэкономишь часы каждую неделю</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Слайд 62 — Финальный слайд -->
+            <article class="slide slide-final-thanks" id="slide-62">
+                <div class="slide-content">
+                    <div class="final-container">
+                        <div class="final-emoji">🙏</div>
+                        <h2 class="final-title">Спасибо!</h2>
+                        <p class="final-subtitle">Теперь ты знаешь, как использовать AI на практике</p>
+                        <div class="final-cta">
+                            <div class="cta-box">
+                                <span class="cta-icon">🚀</span>
+                                <span class="cta-text">Начни использовать AI сегодня</span>
+                            </div>
+                        </div>
+                        <div class="final-links">
+                            <a href="https://chat.openai.com" target="_blank" class="final-link chatgpt">
+                                <span class="fl-dot" style="background: #10A37F;"></span>
+                                ChatGPT
+                            </a>
+                            <a href="https://claude.ai" target="_blank" class="final-link claude">
+                                <span class="fl-dot" style="background: #7C3AED;"></span>
+                                Claude
+                            </a>
+                            <a href="https://notebooklm.google" target="_blank" class="final-link notebooklm">
+                                <span class="fl-dot" style="background: #FBBC05;"></span>
+                                NotebookLM
+                            </a>
+                            <a href="https://perplexity.ai" target="_blank" class="final-link perplexity">
+                                <span class="fl-dot" style="background: #20808D;"></span>
+                                Perplexity
+                            </a>
+                        </div>
+                        <div class="final-year">Нейросети на практике · 2026</div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        
+    </main>
+
+    <!-- Навигация внизу -->
+    <div class="bottom-nav">
+        <button class="nav-btn nav-prev" onclick="navigateSlide(-1)">← Назад</button>
+        <span class="slide-counter"><span id="current-slide">1</span> / <span id="total-slides">62</span></span>
+        <button class="nav-btn nav-next" onclick="navigateSlide(1)">Вперёд →</button>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
